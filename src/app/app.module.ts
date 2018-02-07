@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 
 
@@ -12,7 +12,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    RequestService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
