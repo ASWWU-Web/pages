@@ -9,7 +9,7 @@
     width:60px;
     border-radius: 0px;
     border-style:none;
-    position: fixed;
+    position: absolute;
     left:0px;
     top:0px;
   }
@@ -21,12 +21,12 @@
 
 /* mobile-nav-links */
   .mobile-nav-links li {
-    border-style:none !important;    
+    border-style:none !important;
     display: inline-block;
     float: none;
     padding: 0 16px 0 16px;
   }
-  
+
   .mobile-nav-links {
     font-size: 2rem;
     font-weight: 700;
@@ -44,9 +44,6 @@
     background-color: rgb(70, 70, 70);
 }
 
-.sub-mobile-nav-links {
-    
-}
 
 /* mobile-nav-menu */
   .mobile-scrollable-menu {
@@ -60,16 +57,16 @@
     display: block !important;
     transition: all .4s cubic-bezier(0, 1.03, 0.28, 0.99);
   }
-  
+
   .collapse.mobile-scrollable-menu{
    width: 0;
   }
-  
+
   .collapse.show {
     width: 100%;
     /* if we add swiping to open and close the menu this doesn't need to be 100% */
   }
-  
+
   @media only screen and (min-width:768px) {
     /* for desktop */
     .desktop-hide {
