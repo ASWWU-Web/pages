@@ -30,15 +30,20 @@
   border-radius: 0;
 }
 
-#dropdownMenu1 {
+.dropdown {
+  /* Sub navbar has z-index: 1030 and these should be above that. */
+  z-index: 1050;
+}
+.dropdown div button {
   all: initial;
   border:0px;
   font-family: 'Dosis', sans-serif;
   color: white;
   transition: color .2s, background-color .2s;
+  background-color: inherit;
 }
 
-#dropdownMenu1 :hover {
+.dropdown div button :hover {
   all: initial;
   color: grey;
   text-decoration: none;
