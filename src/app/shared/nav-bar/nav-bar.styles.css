@@ -41,6 +41,7 @@
   color: white;
   transition: color .2s, background-color .2s;
   background-color: inherit;
+  cursor: pointer;
 }
 
 .dropdown div button :hover {
