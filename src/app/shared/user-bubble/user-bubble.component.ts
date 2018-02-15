@@ -10,14 +10,14 @@ import { MEDIA_SM, DEFAULT_PHOTO, CURRENT_YEAR } from '../../config';
 @Component({
     selector: 'user-bubble',
     template: `<div *ngIf="isLoggedIn" class="contain">
-                    <div ngbDropdown id="bubble-popup">
+                    <div id="bubble-popup" ngbDropdown placement="bottom-right">
                         <button id="bubbleicon" ngbDropdownToggle>
                             <div *ngIf="(profile?.photo == 'images/mask_unknown.png' || profile?.photo == 'None' || !profile?.photo)" (click)="displayUserOptions()" class="btn btn-default btn-circle">{{profile?.username.charAt(0).toUpperCase()}}</div>
                             <img *ngIf="!(profile?.photo == 'images/mask_unknown.png' || profile?.photo == 'None' || !profile?.photo)" (click)="displayUserOptions()" class="btn btn-default btn-circle" src="{{getPhotoLink(profile.photo)}}">
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bubbleicon">
-                            <button class="btn btn-default dropdown-item" [routerLink]="['/profile/'+profile?.username]">View Profile</button>
-                            <button class="btn btn-default dropdown-item" [routerLink]="['/update']">Update Profile</button>
+                        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="bubbleicon">
+                            <a class="btn btn-default dropdown-item" href="https://aswwu.com/mask/profile/{{profile?.username}}">View Profile</a>
+                            <a class="btn btn-default dropdown-item" href="https://aswwu.com/mask/update">Update Profile</a>
                             <div class="dropdown-divider"></div>
                             <button class="btn btn-default dropdown-item" (click)="logout()" [routerLink]="'/'">Log Out</button>
                         </div>
