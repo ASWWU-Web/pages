@@ -129,6 +129,22 @@ export class RequestService {
         err => (catchError ? catchError(err) : console.error(err))
       );
   }
+  private jsonToFormData(jsonData: any): FormData {
+    let formData = new FormData();
+    for (var key in Object.keys(formData)) {
+      formData.append(key, jsonData[key]);
+    }
+    return formData;
+  }
+
+  postFormData(uri: string, jsonData: any, afterRequest, catchError): void {
+    let request = this.createRequest(uri, "multipart/form-data");
+    let body = this.jsonToFormData(jsonData);
+    this.http.post(request.url, body, request.options).subscribe(
+      data => afterRequest(data),
+      err => (catchError ? catchError(err) : console.error(err))
+    );
+  }
 
   getWithSub(uri: string, afterRequest, catchError): Subscription {
     let req = this.createRequest(uri);

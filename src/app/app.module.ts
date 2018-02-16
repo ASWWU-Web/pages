@@ -36,7 +36,7 @@ import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComp
         "path": 'page/:url',
         component: PageComponent
       },{
-        "path": "edit/:url",
+        "path": "admin/edit/:url",
         component: EditComponent
       },
     ])
