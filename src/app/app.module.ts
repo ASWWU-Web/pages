@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
-import { PageComponent, EditComponent } from './routes/routes';
+import { PageComponent, EditComponent, RevisionsComponent } from './routes/routes';
 import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComponent, MobileNavComponent, UnescapePipe, BypassSecurityPipe } from './shared/shared';
 
 
@@ -17,6 +17,7 @@ import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComp
     AppComponent,
     PageComponent,
     EditComponent,
+    RevisionsComponent,
     ProfileSmComponent,
     NavBarComponent,
     UserBubbleComponent,
@@ -33,12 +34,15 @@ import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComp
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
-        "path": 'page/:url',
-        component: PageComponent
+        "path": "admin/edit/:pageURL/revisions",
+        component: RevisionsComponent
       },{
-        "path": "admin/edit/:url",
+        "path": "admin/edit/:pageURL",
         component: EditComponent
-      },
+      },{
+        "path": ':pageURL',
+        component: PageComponent
+      }
     ])
 
   ],

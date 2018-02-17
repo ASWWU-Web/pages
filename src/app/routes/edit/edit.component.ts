@@ -1,33 +1,43 @@
 import { Component, OnInit, NgModule } from '@angular/core';
+import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { DEPARTMENTS, CATEGORIES } from '../../shared/shared';
+import { RequestService } from "../../RequestService/requests";
 
 @Component({
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-  page: any = {
-    'url': "test",
-    'title': "Title",
-    'content': "<h1>test!</h1>",
-    'owner': "ryan.rabello",
-    'editors': ["ryan.rabello", "stephen.ermshar"],
-    'is_visible': true,
-    'created': "some valid date string",
-    'tags': ["cool", "blue"],
-    'category': "Article",
-    'department': "Collegian",
-    'description': "This is the description.",
-    'current': true
-  };
-  departments: string[] = DEPARTMENTS;
-  categories: string[] = CATEGORIES;
+  page: any = {};
+  departments: string[] = [];
+  categories: string[] = [];
 
-  constructor() { }
+  constructor(private requestService: RequestService, private route: ActivatedRoute) {
+    this.route.params.subscribe( params => {
+      this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data,(error) => {
+        alert(error.message);
+      } );
+    });
+    this.requestService.get('/pages/category', (data)=> {
+      this.categories = data.categories;
+    }, null)
+    this.requestService.get('/pages/departments', (data)=> {
+      this.categories = data.departments;
+    }, null)
+  }
 
   ngOnInit() {
 
   }
 
+  save() {
+    this.requestService.postFormData('/pages/admin/edit', this.page, (data)=> {
+      // TODO: Redirect to the page if everything is okay.
+      // this.router.navigate([this.page.url])
+    }, (error) => {
+      alert(error.message);
+      console.log(error);
+    });
+  }
 }
