@@ -7,7 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 import { PageComponent } from './routes/routes';
-import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComponent, MobileNavComponent, UnescapePipe, BypassSecurityPipe } from './shared/shared';
+import {
+  ProfileSmComponent,
+  NavBarComponent,
+  UserBubbleComponent,
+  SubNavBarComponent,
+  MobileNavComponent,
+  UnescapePipe,
+  BypassSecurityPipe
+} from './shared/shared';
 
 
 
@@ -15,11 +23,11 @@ import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComp
   declarations: [
     AppComponent,
     PageComponent,
-    ProfileSmComponent, 
-    NavBarComponent, 
-    UserBubbleComponent, 
-    SubNavBarComponent, 
-    MobileNavComponent, 
+    ProfileSmComponent,
+    NavBarComponent,
+    UserBubbleComponent,
+    SubNavBarComponent,
+    MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe
   ],
@@ -29,7 +37,11 @@ import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComp
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
-        "path": 'page',
+        'path': 'page',
+        component: PageComponent
+      },
+      {
+        'path': 'page/:pageURL',
         component: PageComponent
       }
     ])
