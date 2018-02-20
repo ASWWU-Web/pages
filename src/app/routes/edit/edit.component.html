@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 offset-md-3 text-center">
+      <h1>Edit Page</h1>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input [(ngModel)]="page.title" type="text" class="form-control" id="title">
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="Owner">Owner</label>
+        <input [(ngModel)]="page.owner" type="text" class="form-control" id="Owner">
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="Editor">Editor(s)</label>
+        <input [(ngModel)]="page.editors" type="text" class="form-control" id="Editor">
+        <small class="form-text text-muted">A CSV of usernames.</small>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="tags">Tags</label>
+        <input [(ngModel)]="page.tags" type="text" class="form-control" id="tags">
+        <small class="form-text text-muted">A CSV of tagnames.</small>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="Department">Department</label>
+        <select class="form-control"[(ngModel)]="page.department">
+          <option *ngFor="let c of departments" [ngValue]="c">{{c}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select class="form-control"[(ngModel)]="page.category" id="category">
+          <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="isVisible">Visibility</label>
+        <select class="form-control"[(ngModel)]="page.is_visible" id="isVisible">
+          <option [ngValue]="true">Hidden (Not Published)</option>
+          <option [ngValue]="false">Visible (Published)</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <label for="coverImage">Cover Image</label>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="coverImage">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Description section -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea [(ngModel)]="page.description" type="text" class="form-control" id="description"></textarea>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Buttons -->
+  <div class="row">
+    <div class="col-sm-12 w-100">
+      <a [routerLink]="['/admin/edit', page.url, 'revisions']" class="btn btn-light">Revisions</a>
+      <button type="button" (click)="save()" class="btn btn-success float-right">Save</button>
+    </div>
+  </div>
+</div>
