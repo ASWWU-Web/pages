@@ -12,9 +12,9 @@ export class AdminEditComponent implements OnInit {
 
   constructor( private request: RequestService ) {
     this.request.get( ('/pages/admin'), (data) => {
-      this.admin = data;
+      this.admin = data.results;
       console.log(this.admin);
-    }, null );
+    }, (error) => alert('Something went wrong: \n' + error.message) );
   }
 
   ngOnInit() {
