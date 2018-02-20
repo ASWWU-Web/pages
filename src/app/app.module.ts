@@ -8,7 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 import { PageComponent, EditComponent, RevisionsComponent } from './routes/routes';
-import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComponent, MobileNavComponent, UnescapePipe, BypassSecurityPipe } from './shared/shared';
+import {
+  ProfileSmComponent,
+  NavBarComponent,
+  UserBubbleComponent,
+  SubNavBarComponent,
+  MobileNavComponent,
+  UnescapePipe,
+  BypassSecurityPipe
+} from './shared/shared';
 
 
 

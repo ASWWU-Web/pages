@@ -1,12 +1,12 @@
 <div *ngIf="page" class="container-fluid">
   <div> <!-- TITLE SECTION -->
     <h1>
-      {{page.title}}
+      {{ page.title }}
     </h1>
   </div>
   
-  <div> <!-- CONTENT SECTION -->
-    <span [innerHTML]=" page.content | bypassSecurity: 'html' "></span>
+  <div id="content" class="container"> <!-- CONTENT SECTION -->
+    {{ loadContent() }}
   </div>
   
 </div>
