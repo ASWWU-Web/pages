@@ -17,6 +17,9 @@ export class RequestService {
   authUser: User;
   private isLoggedIn: boolean = false;
 
+
+  constructor(private http: HttpClient) {}
+
   private setCurrentUser(user: any): void {
     if (user.hasOwnProperty("wwuid") && user.wwuid) {
       this.authUser = new User(user);
@@ -49,9 +52,6 @@ export class RequestService {
       this.isLoggedIn = false;
     }
   }
-
-
-  constructor(private http: HttpClient) { }
 
 
   private createRequest(uri: string, contentType: string = "application/json"): any {
