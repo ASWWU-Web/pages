@@ -13,7 +13,12 @@ export class PageComponent implements OnInit {
 
   constructor( private request: RequestService, private route: ActivatedRoute ) {
     this.route.params.subscribe( params => {
-      this.request.get( ('/pages/' + params.pageURL), (data) => this.page = data, null );
+      this.request.get( ('/pages/' + params.pageURL), (data) => this.page = data, (error) => {
+        this.page = {
+          'title': 'Something went wrong',
+          'content': '<h3> There was a problem getting that page for you 🤷 </h3> ' + error.message,
+        };
+      } );
     });
   }
 
