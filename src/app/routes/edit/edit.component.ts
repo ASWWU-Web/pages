@@ -13,13 +13,11 @@ export class EditComponent implements OnInit {
   departments: string[] = [];
   categories: string[] = [];
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute) {
+  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe( params => {
-      this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data,(error) => {
-        alert(error.message);
-      } );
+      this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data, null );
     });
-    this.requestService.get('/pages/category', (data)=> {
+    this.requestService.get('/pages/categories', (data)=> {
       this.categories = data.categories;
     }, null)
     this.requestService.get('/pages/departments', (data)=> {
@@ -32,9 +30,15 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.requestService.postFormData('/pages/admin/edit', this.page, (data)=> {
+    let ignoredKeys = ["updated_at", "is_current"];
+    let filteredPage = this.page;
+    for(let key in ignoredKeys){
+      delete filteredPage[key];
+    }
+    console.log(filteredPage);
+    this.requestService.post('/pages/admin/edit', this.page, (data)=> {
       // TODO: Redirect to the page if everything is okay.
-      // this.router.navigate([this.page.url])
+      this.router.navigate(['/pages/', this.page.url])
     }, (error) => {
       alert(error.message);
       console.log(error);
