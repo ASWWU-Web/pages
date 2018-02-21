@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../RequestService/requests';
 
 @Component({
-  selector: 'app-admin-edit',
-  templateUrl: './admin-edit.component.html',
-  styleUrls: ['./admin-edit.component.css']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class AdminEditComponent implements OnInit {
+export class AdminComponent implements OnInit {
 
   admin: any;
 

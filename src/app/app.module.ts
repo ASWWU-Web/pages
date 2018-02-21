@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
-import { PageComponent, AdminEditComponent } from './routes/routes';
+import { PageComponent, AdminComponent, AdminCreateComponent } from './routes/routes';
 import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComponent, MobileNavComponent, UnescapePipe, BypassSecurityPipe } from './shared/shared';
 
 
@@ -22,12 +23,14 @@ import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComp
     MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe,
-    AdminEditComponent
+    AdminComponent,
+    AdminCreateComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgbModule.forRoot(),
+    FormsModule,
     RouterModule.forRoot([
       {
         'path': 'page',
@@ -35,12 +38,12 @@ import { ProfileSmComponent, NavBarComponent, UserBubbleComponent, SubNavBarComp
       },
       {
         'path': 'admin',
-        component: AdminEditComponent
-      }// ,
-      // {
-      //   'path': 'admin/create',
-      //   component: AdminCreateComponent
-      // }
+        component: AdminComponent
+      },
+      {
+        'path': 'admin/create',
+        component: AdminCreateComponent
+      }
     ])
 
   ],

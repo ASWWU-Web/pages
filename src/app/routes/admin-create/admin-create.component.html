@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <form (ngSubmit)="onSubmit()">
+    <input [(ngModel)]="newPage.url" name="url">
+    <input [(ngModel)]="newPage.title" name="title">
+    <input [(ngModel)]="newPage.category" name="category">
+    <input [(ngModel)]="newPage.department" name="department">
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>
+
