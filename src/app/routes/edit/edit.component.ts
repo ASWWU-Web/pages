@@ -21,7 +21,7 @@ export class EditComponent implements OnInit {
       this.categories = data.categories;
     }, null)
     this.requestService.get('/pages/departments', (data)=> {
-      this.categories = data.departments;
+      this.departments = data.departments;
     }, null)
   }
 
@@ -29,19 +29,24 @@ export class EditComponent implements OnInit {
 
   }
 
-  save() {
-    let ignoredKeys = ["updated_at", "is_current"];
-    let filteredPage = this.page;
-    for(let key in ignoredKeys){
-      delete filteredPage[key];
+  save(onSucessfulSave) {
+    let ignoredKeys = ["updated_at", "current", "created", "url"];
+    let filteredPage = Object.assign({}, this.page);
+    for(let i in ignoredKeys){
+      delete filteredPage[ignoredKeys[i]];
     }
-    console.log(filteredPage);
-    this.requestService.post('/pages/admin/edit', this.page, (data)=> {
-      // TODO: Redirect to the page if everything is okay.
-      this.router.navigate(['/pages/', this.page.url])
+    this.requestService.post('/pages/admin/' + this.page.url, filteredPage, (data)=> {
+      if(onSucessfulSave && typeof(onSucessfulSave) == "function") {
+        onSucessfulSave()
+      }
     }, (error) => {
       alert(error.message);
-      console.log(error);
     });
+  }
+
+  preview() {
+    this.save(() => {
+      this.router.navigate([this.page.url]);
+    })
   }
 }

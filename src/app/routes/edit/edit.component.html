@@ -37,7 +37,7 @@
       <div class="form-group">
         <label for="Department">Department</label>
         <select class="form-control"[(ngModel)]="page.department">
-          <option *ngFor="let c of departments" [ngValue]="c">{{c}}</option>
+          <option *ngFor="let c of departments" [ngValue]="c.department">{{c.department}}</option>
         </select>
       </div>
     </div>
@@ -45,7 +45,7 @@
       <div class="form-group">
         <label for="category">Category</label>
         <select class="form-control"[(ngModel)]="page.category" id="category">
-          <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+          <option *ngFor="let c of categories" [ngValue]="c.category">{{c.category}}</option>
         </select>
       </div>
     </div>
@@ -82,6 +82,7 @@
   <div class="row">
     <div class="col-sm-12 w-100">
       <a [routerLink]="['/admin/edit', page.url, 'revisions']" class="btn btn-light">Revisions</a>
+      <button type="button" (click)="preview()" class="btn btn-secondary float-right">Preview</button>
       <button type="button" (click)="save()" class="btn btn-success float-right">Save</button>
     </div>
   </div>
