@@ -13,17 +13,15 @@ export class EditComponent implements OnInit {
   departments: string[] = [];
   categories: string[] = [];
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute) {
+  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe( params => {
-      this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data,(error) => {
-        alert(error.message);
-      } );
+      this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data, null );
     });
-    this.requestService.get('/pages/category', (data)=> {
+    this.requestService.get('/pages/categories', (data)=> {
       this.categories = data.categories;
     }, null)
     this.requestService.get('/pages/departments', (data)=> {
-      this.categories = data.departments;
+      this.departments = data.departments;
     }, null)
   }
 
@@ -31,13 +29,24 @@ export class EditComponent implements OnInit {
 
   }
 
-  save() {
-    this.requestService.postFormData('/pages/admin/edit', this.page, (data)=> {
-      // TODO: Redirect to the page if everything is okay.
-      // this.router.navigate([this.page.url])
+  save(onSucessfulSave) {
+    let ignoredKeys = ["updated_at", "current", "created", "url"];
+    let filteredPage = Object.assign({}, this.page);
+    for(let i in ignoredKeys){
+      delete filteredPage[ignoredKeys[i]];
+    }
+    this.requestService.post('/pages/admin/' + this.page.url, filteredPage, (data)=> {
+      if(onSucessfulSave && typeof(onSucessfulSave) == "function") {
+        onSucessfulSave()
+      }
     }, (error) => {
       alert(error.message);
-      console.log(error);
     });
+  }
+
+  preview() {
+    this.save(() => {
+      this.router.navigate([this.page.url]);
+    })
   }
 }
