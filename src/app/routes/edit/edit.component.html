@@ -88,8 +88,10 @@
   <div class="row">
     <div class="col-sm-12 w-100">
       <a [routerLink]="['/admin/edit', page.url, 'revisions']" class="btn btn-light">Revisions</a>
-      <button type="button" (click)="preview()" class="btn btn-secondary float-right">Preview</button>
-      <button type="button" (click)="save()" class="btn btn-success float-right">Save</button>
+      <div class="btn-group float-right" role="group" aria-label="Save Options">
+        <button type="button" (click)="preview()" class="btn btn-light">Preview</button>
+        <button type="button" (click)="save()" class="btn btn-success ">Save</button>
+      </div>
     </div>
   </div>
 </div>
