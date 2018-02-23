@@ -9,22 +9,31 @@ import { FormsModule } from '@angular/forms';
 })
 export class AdminCreateComponent implements OnInit {
 
-  // form contains:
-  // url: string,
-  // title: string,
-  // category: string,
-  // department: string,
-  // current: boolean
+  // data format:
+  // {
+  //   "url": "thatonepage",
+  //   "title": "yes, that one",
+  //   "category": "theCategory",
+  //   "department": "andDepartment"
+  // }
 
   newPage: any = {};
+  categories: any;
+  departments: any;
 
   constructor( private request: RequestService ) {  }
 
   onSubmit() {
-    this.request.post( ('/pages/admin'), this.newPage, (data) => alert(data.status), (error) => alert(error) );
+    this.request.post( ('/pages/admin'), this.newPage,
+      // (data) => alert(data.message),
+      (data) => alert((data.status !== undefined) ? data.status : 'Unable to connect'),
+      (error) => alert((error.error.status !== undefined) ? error.error.status : 'Unable to connect')
+    );
   }
 
   ngOnInit() {
+    this.request.get( ('/pages/category'), (data) => this.categories = data.categories, (error) => console.log(error) );
+    this.request.get( ('/pages/department'), (data) => this.departments = data.departments, (error) => console.log(error) );
   }
 
 }
