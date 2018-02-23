@@ -5,10 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-console.log(ClassicEditor);
-
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 import { PageComponent, EditComponent, RevisionsComponent } from './routes/routes';
