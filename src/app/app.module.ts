@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
+import { CKEditorModule } from 'ng2-ckeditor';
+
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 import { PageComponent, EditComponent, RevisionsComponent } from './routes/routes';
@@ -38,6 +40,7 @@ import {
   imports: [
     FormsModule,
     BrowserModule,
+    CKEditorModule,
     HttpClientModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([

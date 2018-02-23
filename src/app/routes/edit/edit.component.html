@@ -77,6 +77,17 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-sm-12 mb-3">
+      <ckeditor
+        [(ngModel)]="page.content"
+        (fileUploadRequest)="onFileUploadRequest($event)"
+        [config]="{skin: 'moono'}"
+        debounce="500">
+      </ckeditor>
+    </div>
+  </div>
+
 
   <!-- Buttons -->
   <div class="row">
