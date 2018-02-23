@@ -17,10 +17,10 @@ export class EditComponent implements OnInit {
     this.route.params.subscribe( params => {
       this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data, null );
     });
-    this.requestService.get('/pages/categories', (data)=> {
+    this.requestService.get('/pages/category', (data)=> {
       this.categories = data.categories;
     }, null)
-    this.requestService.get('/pages/departments', (data)=> {
+    this.requestService.get('/pages/department', (data)=> {
       this.departments = data.departments;
     }, null)
   }
