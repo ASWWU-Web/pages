@@ -36,7 +36,6 @@ import {
     BypassSecurityPipe,
     DashboardComponent,
     ScrollCardsComponent,
-
   ],
   imports: [
     FormsModule,
