@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { RequestService } from "../../RequestService/requests";
@@ -9,13 +9,14 @@ import { RequestService } from "../../RequestService/requests";
   styleUrls: ['./scroll-cards.component.css']
 })
 
-export class ScrollCardsComponent {
+export class ScrollCardsComponent implements OnInit {
   @Input() scrollType: string;
 
   page: any = {};
-  featureds: string[] = [];
-  categories: string[] = [];
-  departments: string[] = [];
+  featureds: any = [];
+  categories: any = [];
+  departments: any = [];
+  events: any = [];
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe( params => {
@@ -30,5 +31,9 @@ export class ScrollCardsComponent {
     this.requestService.get('/pages/departments', (data) => {
       this.departments = data.departments;
     }, null)
+  }
+
+  ngOnInit() {
+    
   }
 }
