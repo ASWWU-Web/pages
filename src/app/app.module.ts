@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
-import { PageComponent, EditComponent, RevisionsComponent } from './routes/routes';
+import { PageComponent, EditComponent, RevisionsComponent, DashboardComponent } from './routes/routes';
 import {
   ProfileSmComponent,
   NavBarComponent,
@@ -15,7 +15,8 @@ import {
   SubNavBarComponent,
   MobileNavComponent,
   UnescapePipe,
-  BypassSecurityPipe
+  BypassSecurityPipe,
+  ScrollCardsComponent
 } from './shared/shared';
 
 
@@ -33,6 +34,8 @@ import {
     MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe,
+    DashboardComponent,
+    ScrollCardsComponent,
 
   ],
   imports: [
@@ -50,6 +53,9 @@ import {
       },{
         "path": ':pageURL',
         component: PageComponent
+      },{
+        "path": '',
+        component: DashboardComponent
       }
     ])
 

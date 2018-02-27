@@ -7,3 +7,4 @@ export * from './mobile-nav/mobile-nav.component';
 export * from './unescape';
 export * from './bypassSecurityPipe';
 export * from './fields';
+export * from './scroll-cards';
