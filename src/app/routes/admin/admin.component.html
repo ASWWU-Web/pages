@@ -1,5 +1,5 @@
-<div *ngIf="admin" class="container-fluid">
-  <table class="table table-sm table-striped mt-3">
+<div class="container-fluid">
+  <table *ngIf="admin"  class="table table-sm table-striped mt-3">
     <thead class="thead-dark"><tr>
       <th>Title</th>
       <th>Category</th>
@@ -10,13 +10,16 @@
       <th>Created</th>
     </tr></thead>
     <tbody><tr *ngFor="let page of admin">
-      <td><a href="/page/{{ page.url }}">{{ shorten(page.title) }}</a></td>
+      <td title="{{ page.title }}"><a href="/page/{{ page.url }}">{{ shorten(page.title) }}</a></td>
       <td>{{ page.category }}</td>
       <td>{{ page.department }}</td>
-      <td>{{ shorten(page.description) }}</td>
-      <td>{{ page.tags }}</td>
+      <td title="{{ page.description }}">{{ shorten(page.description) }}</td>
+      <td title="{{ page.tags.toString() }}">{{ page.tags }}</td>
       <td>{{ page.owner }}</td>
-      <td>{{ page.created.slice(0, 10) }}</td>
+      <td title="{{ page.created }}">{{ page.created.slice(0, 10) }}</td>
     </tr></tbody>
   </table>
-<p> admin component is working </p>
+  <div class="row mx-auto mb-3">
+      <button (click)="createNew()" class="btn btn-primary">Create New Page</button>
+  </div>
+</div>

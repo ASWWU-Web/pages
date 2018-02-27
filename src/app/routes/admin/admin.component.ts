@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../RequestService/requests';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +11,7 @@ export class AdminComponent implements OnInit {
 
   admin: any = [];
 
-  constructor( private request: RequestService ) {  }
+  constructor( private request: RequestService, private router: Router ) {  }
 
   ngOnInit() {
     this.request.get( ('/pages/admin'), (data) => this.admin = data.results, null );
@@ -26,6 +27,10 @@ export class AdminComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  createNew() {
+    this.router.navigate(['admin/create']);
   }
 
 }
