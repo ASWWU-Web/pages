@@ -1,19 +1,22 @@
 <div *ngIf="admin" class="container-fluid">
-  <div>
-    <ul>
-      <li *ngFor="let page of admin">
-        <h3>{{ page.title }}</h3>
-        <ul>
-          <li>category: {{ page.category }}</li>
-          <li>owner: {{ page.owner }}</li>
-          <li>department: {{ page.department }}</li>
-          <li>description: {{ page.description }}</li>
-          <li>url: <a href="/page/{{ page.url }}">/page/{{ page.url }}</a></li>
-          <li>created: {{ page.created }}</li>
-          <li>tags: {{ page.tags }}</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</div>
-
+  <table class="table table-sm table-striped mt-3">
+    <thead class="thead-dark"><tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Department</th>
+      <th>Description</th>
+      <th>Tags</th>
+      <th>Owner</th>
+      <th>Created</th>
+    </tr></thead>
+    <tbody><tr *ngFor="let page of admin">
+      <td><a href="/page/{{ page.url }}">{{ shorten(page.title) }}</a></td>
+      <td>{{ page.category }}</td>
+      <td>{{ page.department }}</td>
+      <td>{{ shorten(page.description) }}</td>
+      <td>{{ page.tags }}</td>
+      <td>{{ page.owner }}</td>
+      <td>{{ page.created.slice(0, 10) }}</td>
+    </tr></tbody>
+  </table>
+<p> admin component is working </p>

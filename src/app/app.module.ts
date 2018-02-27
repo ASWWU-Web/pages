@@ -45,23 +45,22 @@ import {
     FormsModule,
     RouterModule.forRoot([
       {
-        'path': 'page',
-        component: PageComponent
-      }, {
-        'path': 'admin/edit/:pageURL/revisions',
-        component: RevisionsComponent
+        // MUST BE FIRST
+        'path': 'admin',
+        component: AdminComponent
       }, {
         'path': 'admin/edit/:pageURL',
         component: EditComponent
       }, {
-        'path': ':pageURL',
-        component: PageComponent
-      }, {
-        'path': 'admin',
-        component: AdminComponent
-      }, {
         'path': 'admin/create',
         component: AdminCreateComponent
+      }, {
+        'path': 'admin/edit/:pageURL/revisions',
+        component: RevisionsComponent
+      }, {
+        // MUST BE LAST
+        'path': ':pageURL',
+        component: PageComponent
       }
     ])
 
