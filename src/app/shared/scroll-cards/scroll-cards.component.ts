@@ -11,29 +11,13 @@ import { RequestService } from "../../RequestService/requests";
 
 export class ScrollCardsComponent implements OnInit {
   @Input() scrollType: string;
+  @Input() requestData: any;
 
-  page: any = {};
-  featureds: any = [];
-  categories: any = [];
-  departments: any = [];
-  events: any = [];
+  constructor() {
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
-    this.route.params.subscribe( params => {
-      this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data, null );
-    });
-    this.requestService.get('/pages/featureds', (data) => {
-      this.featureds = data.featureds;
-    }, null)
-    this.requestService.get('/pages/categories', (data) => {
-      this.categories = data.categories;
-    }, null)
-    this.requestService.get('/pages/departments', (data) => {
-      this.departments = data.departments;
-    }, null)
   }
 
   ngOnInit() {
-    
+
   }
 }
