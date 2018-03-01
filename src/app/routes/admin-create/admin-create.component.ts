@@ -9,14 +9,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class AdminCreateComponent implements OnInit {
 
-  // data format:
-  // {
-  //   "url": "thatonepage",
-  //   "title": "yes, that one",
-  //   "category": "theCategory",
-  //   "department": "andDepartment"
-  // }
-
   newPage: any = {};
   categories: any;
   departments: any;

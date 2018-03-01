@@ -42,7 +42,6 @@ import {
     BrowserModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    FormsModule,
     RouterModule.forRoot([
       {
         // MUST BE FIRST
