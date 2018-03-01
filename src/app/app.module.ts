@@ -18,7 +18,8 @@ import {
   MobileNavComponent,
   UnescapePipe,
   BypassSecurityPipe,
-  ScrollCardsComponent
+  PagesScrollCardsComponent,
+  SearchScrollCardsComponent
 } from './shared/shared';
 
 
@@ -37,7 +38,8 @@ import {
     UnescapePipe,
     BypassSecurityPipe,
     DashboardComponent,
-    ScrollCardsComponent,
+    PagesScrollCardsComponent,
+    SearchScrollCardsComponent
   ],
   imports: [
     FormsModule,

@@ -5,13 +5,13 @@
 <button>Search</button>
 
 <h2>Featured</h2>
-<scroll-cards scrollType="featureds" [requestData]=featureds></scroll-cards>
+<pages-scroll-cards [requestData]=featureds showMeta="true"></pages-scroll-cards>
 
 <h2>Categories</h2>
-<scroll-cards scrollType="categories" [requestData]=categories></scroll-cards>
+<search-scroll-cards [requestData]=categories searchTerm="category"></search-scroll-cards>
 
 <h2>Departments</h2>
-<scroll-cards scrollType="departments" [requestData]=departments></scroll-cards>
+<search-scroll-cards [requestData]=departments searchTerm="department"></search-scroll-cards>
 
 <h2>Events</h2>
-<scroll-cards scrollType="events" [requestData]=events></scroll-cards>
+<pages-scroll-cards [requestData]=events showMeta="false"></pages-scroll-cards>

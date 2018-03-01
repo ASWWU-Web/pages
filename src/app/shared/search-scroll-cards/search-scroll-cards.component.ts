@@ -4,14 +4,14 @@ import { Router, Routes, ActivatedRoute } from '@angular/router';
 import { RequestService } from "../../RequestService/requests";
 
 @Component({
-  selector: 'scroll-cards',
-  templateUrl: './scroll-cards.component.html',
-  styleUrls: ['./scroll-cards.component.css']
+  selector: 'search-scroll-cards',
+  templateUrl: './search-scroll-cards.component.html',
+  styleUrls: ['./search-scroll-cards.component.css']
 })
 
-export class ScrollCardsComponent implements OnInit {
-  @Input() scrollType: string;
+export class SearchScrollCardsComponent implements OnInit {
   @Input() requestData: any;
+  @Input() searchTerm: string;
 
   constructor() {
 

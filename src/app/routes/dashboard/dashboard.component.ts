@@ -19,16 +19,13 @@ export class DashboardComponent implements OnInit {
       this.featureds = data.featureds;
     }, null)
     this.requestService.get('/pages/categories', (data) => {
-      this.categories = data.categories;
-      for(let category in this.categories) {
-        if(this.categories[category]['category'] == 'Events') {
-          this.categories.splice(category, 1);
-          break;
-        }
-      }
+      this.categories = data.categories.filter((category) => category['category'] != 'Events');
     }, null)
     this.requestService.get('/pages/departments', (data) => {
       this.departments = data.departments;
+    }, null)
+    this.requestService.get('/pages/search?category=events', (data) => {
+      this.events = data.results;
     }, null)
   }
 
