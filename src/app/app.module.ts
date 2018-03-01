@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed for TagInputModule
+
+import { TagInputModule } from 'ngx-chips';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
@@ -40,7 +43,10 @@ import {
   imports: [
     FormsModule,
     BrowserModule,
+    TagInputModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     NgbModule.forRoot(),
