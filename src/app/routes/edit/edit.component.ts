@@ -12,6 +12,10 @@ export class EditComponent implements OnInit {
   page: any = {};
   departments: string[] = [];
   categories: string[] = [];
+  public options: Object = {
+    imageUploadURL: 'http://localhost:8888/pages/media/upload_image',
+    imageManagerLoadURL: 'http://localhost:8888/pages/media/load_images'
+  };
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe( params => {
