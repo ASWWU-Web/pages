@@ -13,6 +13,10 @@ export class EditComponent implements OnInit {
   page: any = {};
   departments: string[] = [];
   categories: string[] = [];
+
+  tags: string[] = [];
+  editors: string[] = [];
+
   public options: Object = {
     imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
     imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images'
@@ -20,7 +24,11 @@ export class EditComponent implements OnInit {
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe( params => {
-      this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data, null );
+      this.requestService.get( ('/pages/' + params.pageURL), (data) => {
+        this.page = data;
+        this.tags = data.tags;
+        this.editors = data.editors;
+      }, null );
     });
     this.requestService.get('/pages/category', (data)=> {
       this.categories = data.categories;

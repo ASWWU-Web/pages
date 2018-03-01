@@ -30,7 +30,11 @@
       <div class="form-group">
         <label for="tags">Tags</label>
         <!-- <input [(ngModel)]="page.tags" type="text" class="form-control" id="tags"> -->
-        <tag-input [(ngModel)]='page.tags' theme='bootstrap'></tag-input>
+        <tag-input [(ngModel)]='tags' theme='bootstrap'>
+          <tag-input-dropdown
+            [autocompleteItems]="['thing1', 'blah3', 'yeah']">
+          </tag-input-dropdown>
+        </tag-input>
         <small class="form-text text-muted">A CSV of tagnames.</small>
       </div>
     </div>
