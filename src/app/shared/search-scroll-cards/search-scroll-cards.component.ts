@@ -11,7 +11,7 @@ import { RequestService } from "../../RequestService/requests";
 
 export class SearchScrollCardsComponent implements OnInit {
   @Input() requestData: any;
-  @Input() searchTerm: string;
+  @Input() searchKey: string;
 
   constructor() {
 
