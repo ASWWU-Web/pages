@@ -2,22 +2,24 @@
   <div class="row mt-5">
     <div class="mx-auto col-sm-12 col-md-6">
       <form (ngSubmit)="onSubmit()">
-        <div class="form-group mb-3">
+        
+        <div class="form-group mb-3"> <!-- Title input -->
+          <label for="title">Title</label>
+          <input type="text" class="form-control" placeholder="title" aria-label="title" aria-describedby="basic-addon1" [(ngModel)]="newPage.title" (keyup)="titleEdit()" name="title">
+        </div>
+
+        <div class="form-group mb-3"> <!-- URL input -->
           <label for="title">URL</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">aswwu.com/page/</span>
             </div>
             <input type="text" class="form-control" placeholder="url" aria-label="url" aria-describedby="basic-addon1" [(ngModel)]="newPage.url" name="url">
+            <small class="form-text text-muted">The URL cannot be changed once the page is created.</small>
           </div>
         </div>
 
-        <div class="form-group mb-3">
-          <label for="title">Title</label>
-          <input type="text" class="form-control" placeholder="title" aria-label="title" aria-describedby="basic-addon1" [(ngModel)]="newPage.title" name="title">
-        </div>
-
-        <div class="form-group mb-3">
+        <div class="form-group mb-3"> <!-- Category dropdown -->
           <label for="title">Category</label>
           <!-- <input type="text" class="form-control" placeholder="category" aria-label="category" aria-describedby="basic-addon1" [(ngModel)]="newPage.category" name="category"> -->
           <select class="form-control"[(ngModel)]="newPage.category" name="category">
@@ -25,7 +27,7 @@
           </select>
         </div>
 
-        <div class="form-group mb-3">
+        <div class="form-group mb-3"> <!-- Department dropdown -->
           <label for="title">Department</label>
           <!-- <input type="text" class="form-control" placeholder="department" aria-label="department" aria-describedby="basic-addon1" [(ngModel)]="newPage.department" name="department"> -->
           <select class="form-control"[(ngModel)]="newPage.department" name="department">
@@ -33,7 +35,7 @@
           </select>
         </div>
         
-        <div class="row mx-auto">
+        <div class="row mx-auto"> <!-- Submit button -->
           <button type="submit" class="btn btn-primary">Create</button>
         </div>
       </form>
