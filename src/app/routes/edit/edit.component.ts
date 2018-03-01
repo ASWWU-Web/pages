@@ -1,6 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
+import { environment } from "../../../environments/environment";
 import { DEPARTMENTS, CATEGORIES } from '../../shared/shared';
 import { RequestService } from "../../RequestService/requests";
 
@@ -13,8 +14,8 @@ export class EditComponent implements OnInit {
   departments: string[] = [];
   categories: string[] = [];
   public options: Object = {
-    imageUploadURL: 'http://localhost:8888/pages/media/upload_image',
-    imageManagerLoadURL: 'http://localhost:8888/pages/media/load_images'
+    imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
+    imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images'
   };
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
