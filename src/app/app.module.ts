@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 import { PageComponent, EditComponent, RevisionsComponent } from './routes/routes';
@@ -39,6 +41,8 @@ import {
     FormsModule,
     BrowserModule,
     HttpClientModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
