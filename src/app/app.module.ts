@@ -19,7 +19,8 @@ import {
   UnescapePipe,
   BypassSecurityPipe,
   PagesScrollCardsComponent,
-  SearchScrollCardsComponent
+  SearchScrollCardsComponent,
+  PageCardComponent
 } from './shared/shared';
 
 
@@ -39,7 +40,8 @@ import {
     BypassSecurityPipe,
     DashboardComponent,
     PagesScrollCardsComponent,
-    SearchScrollCardsComponent
+    SearchScrollCardsComponent,
+    PageCardComponent
   ],
   imports: [
     FormsModule,
