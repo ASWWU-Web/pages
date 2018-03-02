@@ -1,0 +1,24 @@
+<div>
+  <h1>Search</h1>
+  <div *ngFor="let criterion of criteria; let i = index;">
+    <!-- searchable fields -->
+    <select [(ngModel)]="criteria[i][0]">
+      <option *ngFor="let field of searchableFields" value="{{field}}">{{field}}</option>
+    </select>
+
+    <!-- input field -->
+    <input *ngIf="criteria[i][0] != 'category' && criteria[i][0] != 'department'" [(ngModel)]="criteria[i][1]" />
+    <select *ngIf="criteria[i][0] == 'category'" [(ngModel)]="criteria[i][1]">
+      <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+    </select>
+    <select *ngIf="criteria[i][0] == 'department'" [(ngModel)]="criteria[i][1]">
+      <option *ngFor="let department of departments" value="{{department}}">{{department}}</option>
+    </select>
+
+    <!-- removal button -->
+    <button (click)="removeField(i)">Remove Field</button>
+  </div>
+  
+  <button>Search</button>
+  <button (click)="addField()">Add Field</button>
+</div>
