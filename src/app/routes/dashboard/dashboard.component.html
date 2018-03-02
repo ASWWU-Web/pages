@@ -4,14 +4,18 @@
 <input />
 <button>Search</button>
 
-<h2>Featured</h2>
-<pages-scroll-cards [requestData]=featureds showMeta="true"></pages-scroll-cards>
+<div *ngIf="featureds.length > 0">
+  <h2>Featured</h2>
+  <pages-scroll-cards [requestData]=featureds showMeta="1"></pages-scroll-cards>
+</div>
+
+<div *ngIf="events.length > 0">
+  <h2>Events</h2>
+  <pages-scroll-cards [requestData]=events showMeta="0"></pages-scroll-cards>
+</div>
 
 <h2>Categories</h2>
 <search-scroll-cards [requestData]=categories searchKey="category"></search-scroll-cards>
 
 <h2>Departments</h2>
 <search-scroll-cards [requestData]=departments searchKey="department"></search-scroll-cards>
-
-<h2>Events</h2>
-<pages-scroll-cards [requestData]=events showMeta="false"></pages-scroll-cards>
