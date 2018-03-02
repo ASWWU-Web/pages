@@ -18,7 +18,11 @@
     <!-- removal button -->
     <button (click)="removeField(i)">Remove Field</button>
   </div>
-  
-  <button>Search</button>
+
+  <button (click)="search()">Search</button>
   <button (click)="addField()">Add Field</button>
+
+  <!-- results -->
+  <page-results query="query"></page-results>
+
 </div>

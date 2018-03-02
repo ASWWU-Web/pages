@@ -14,6 +14,7 @@ export class SearchComponent {
   criteria: string[][] = [['','']];
   categories: string[] = [];
   departments: string[] = [];
+  query: string;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
   this.requestService.get('/pages/categories', (data) => {
@@ -30,10 +31,18 @@ export class SearchComponent {
 
   addField() {
     this.criteria.push(['', '']);
-    console.log(this.criteria);
   }
 
   removeField(i) {
     this.criteria.splice(i, 1);
+  }
+
+  search() {
+    // TODO: there is probably a better way to assemble query strings
+    let newQuery = '';
+    for(let criterion of this.criteria) {
+      newQuery = newQuery.concat(criterion[0].replace(/ /g, '+'), '=', criterion[1].replace(/ /g, '+').replace(' ', '+'), '&');
+    }
+    this.query = newQuery;
   }
 }

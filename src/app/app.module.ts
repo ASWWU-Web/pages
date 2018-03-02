@@ -17,7 +17,8 @@ import {
   SubNavBarComponent,
   MobileNavComponent,
   UnescapePipe,
-  BypassSecurityPipe
+  BypassSecurityPipe,
+  PageResultsComponent
 } from './shared/shared';
 
 
@@ -36,6 +37,7 @@ import {
     UnescapePipe,
     BypassSecurityPipe,
     SearchComponent,
+    PageResultsComponent,
 
   ],
   imports: [

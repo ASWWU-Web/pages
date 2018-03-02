@@ -4,6 +4,7 @@ export * from './nav-bar/nav-bar.component';
 export * from './sub-nav-bar/sub-nav-bar.component';
 export * from './user-bubble/user-bubble.component';
 export * from './mobile-nav/mobile-nav.component';
+export * from './page-results/page-results.component';
 export * from './unescape';
 export * from './bypassSecurityPipe';
 export * from './fields';
