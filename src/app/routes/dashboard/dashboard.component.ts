@@ -19,12 +19,12 @@ export class DashboardComponent {
       this.featureds = data.featureds;
     }, null)
     // get events data
-    this.requestService.get('/pages/search?category=events', (data) => {
+    this.requestService.get('/pages/search?category=Event', (data) => {
       this.events = data.results;
     }, null)
     // get categories data
     this.requestService.get('/pages/categories', (data) => {
-      this.categories = data.categories.filter((category) => category['category'] != 'Events');
+      this.categories = data.categories.filter((category) => category['category'] != 'Event');
     }, null)
     // get departments data
     this.requestService.get('/pages/departments', (data) => {
