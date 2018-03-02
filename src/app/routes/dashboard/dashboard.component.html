@@ -1,0 +1,22 @@
+<h1>Dashboard</h1>
+<!-- search -->
+<h2>Search</h2>
+<input />
+<button>Search</button>
+
+<!-- featureds -->
+<div *ngIf="featureds.length > 0">
+  <h2>Featured</h2>
+  <pages-scroll-cards [requestData]=featureds showMeta="1"></pages-scroll-cards>
+</div>
+<!-- events -->
+<div *ngIf="events.length > 0">
+  <h2>Events</h2>
+  <pages-scroll-cards [requestData]=events showMeta="0"></pages-scroll-cards>
+</div>
+<!-- categories -->
+<h2>Categories</h2>
+<search-scroll-cards [requestData]=categories searchKey="category"></search-scroll-cards>
+<!-- departments -->
+<h2>Departments</h2>
+<search-scroll-cards [requestData]=departments searchKey="department"></search-scroll-cards>
