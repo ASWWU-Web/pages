@@ -1,7 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, Routes, ActivatedRoute } from '@angular/router';
-
-import { RequestService } from "../../RequestService/requests";
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'pages-scroll-cards',
@@ -9,15 +6,7 @@ import { RequestService } from "../../RequestService/requests";
   styleUrls: ['./pages-scroll-cards.component.css']
 })
 
-export class PagesScrollCardsComponent implements OnInit {
+export class PagesScrollCardsComponent {
   @Input() requestData: any;
   @Input() showMeta: boolean;
-
-  constructor() {
-
-  }
-
-  ngOnInit() {
-
-  }
 }

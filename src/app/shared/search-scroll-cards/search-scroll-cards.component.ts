@@ -1,7 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, Routes, ActivatedRoute } from '@angular/router';
-
-import { RequestService } from "../../RequestService/requests";
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'search-scroll-cards',
@@ -9,15 +6,7 @@ import { RequestService } from "../../RequestService/requests";
   styleUrls: ['./search-scroll-cards.component.css']
 })
 
-export class SearchScrollCardsComponent implements OnInit {
+export class SearchScrollCardsComponent {
   @Input() requestData: any;
   @Input() searchKey: string;
-
-  constructor() {
-
-  }
-
-  ngOnInit() {
-
-  }
 }
