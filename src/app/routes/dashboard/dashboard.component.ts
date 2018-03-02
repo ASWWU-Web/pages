@@ -4,7 +4,6 @@ import { Router, Routes, ActivatedRoute } from '@angular/router';
 import { RequestService } from "../../RequestService/requests";
 
 @Component({
-  selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
