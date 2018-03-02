@@ -9,7 +9,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
-import { PageComponent, EditComponent, RevisionsComponent } from './routes/routes';
+import { PageComponent, EditComponent, RevisionsComponent, DashboardComponent } from './routes/routes';
 import {
   ProfileSmComponent,
   NavBarComponent,
@@ -17,7 +17,10 @@ import {
   SubNavBarComponent,
   MobileNavComponent,
   UnescapePipe,
-  BypassSecurityPipe
+  BypassSecurityPipe,
+  PagesScrollCardsComponent,
+  SearchScrollCardsComponent,
+  PageCardComponent
 } from './shared/shared';
 
 
@@ -35,7 +38,10 @@ import {
     MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe,
-
+    DashboardComponent,
+    PagesScrollCardsComponent,
+    SearchScrollCardsComponent,
+    PageCardComponent
   ],
   imports: [
     FormsModule,
@@ -54,6 +60,9 @@ import {
       },{
         "path": ':pageURL',
         component: PageComponent
+      },{
+        "path": '',
+        component: DashboardComponent
       }
     ])
 

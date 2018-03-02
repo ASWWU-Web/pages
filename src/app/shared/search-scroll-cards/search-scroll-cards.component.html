@@ -1,0 +1,9 @@
+<div class="card-columns row">
+  <div *ngFor="let item of requestData" class="card p-4 text-center col-3">
+    <div class="card-block">
+      <!-- TODO: proper search link generation -->
+      <h4 class="card-title"><a [routerLink]="['/search', searchKey, '=', item[searchKey]]">{{item[searchKey]}}</a></h4>
+      <p class="card-text">{{item['description']}}</p>
+    </div>
+  </div>
+</div>
