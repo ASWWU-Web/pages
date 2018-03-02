@@ -8,8 +8,8 @@
     <!-- metadata -->
     <div *ngIf="showMeta == true" class="card-block">
       <hr />
-      <p>{{page['author']}}</p>
-      <p>{{page['created']}}</p>
+      <p>By: {{getAuthor(page)}}</p>
+      <p>Date: {{getDateCreated(page)}}</p>
     </div>
   </div>
 </div>
