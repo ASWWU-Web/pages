@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row mt-5">
+  <div class="row mt-3 pl-2 pr-2">
     <div class="mx-auto col-sm-12 col-md-6">
       <form (ngSubmit)="onSubmit()">
         
@@ -14,11 +14,9 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">aswwu.com/page/</span>
             </div>
-            <input type="text" class="form-control" placeholder="url" aria-label="url" aria-describedby="basic-addon1" [(ngModel)]="newPage.url" (keyup)="urlEdit()" name="url">
+            <input type="text" class="form-control" placeholder="url" aria-label="url" aria-describedby="basic-addon1" [ngStyle]="{'background-color':urlInvalid ? '#ff8080' : '' }" [(ngModel)]="newPage.url" (keyup)="urlEdit()" name="url">
+            <small class="form-text" style="width:100%;" [ngClass]="{'text-danger':urlInvalid,'text-muted':!urlInvalid}">Use only lowercase alphanumeric characters and hyphens.</small>
             <small class="form-text text-muted" style="width:100%;">The URL cannot be changed once the page is created.</small>
-            <small class="form-text text-danger"><span *ngIf="urlInvalid">The URL you entered is not valid!</span>&nbsp;</small>
-            <!-- GC -- this &nbsp; is to prevent the layout from shifting when urlInvalid toggles -->
-            <!-- GC -- the invalid url indicator toggles when you press shift the number of times that there are invalid characters in the input field -->
           </div>
         </div>
 

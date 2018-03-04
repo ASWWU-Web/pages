@@ -15,49 +15,50 @@ export class AdminCreateComponent implements OnInit {
   departments: any;
 
   urlIsEdited = false;
-  regex = /[^a-z0-9-]/g;
+  regex = /[^a-z0-9-]/;
+  regexGlobal = /[^a-z0-9-]/g;
   urlInvalid = false;
 
   constructor( private request: RequestService, private router: Router ) {  }
 
   onSubmit() {
-    this.request.post( ('/pages/admin'), this.newPage,
-      (data) => {
-        if ( data.status !== undefined ) {
-          if (data.status === 'page created') {
-            this.router.navigate(['admin/edit' , this.newPage.url ]);
+    if (!this.urlInvalid) {
+      this.request.post( ('/pages/admin'), this.newPage,
+        (data) => {
+          if ( data.status !== undefined ) {
+            if (data.status === 'page created') {
+              this.router.navigate(['admin/edit' , this.newPage.url ]);
+            } else {
+              alert(data.status);
+            }
           } else {
-            alert(data.status);
+            alert( 'Unable to connect' );
           }
-        } else {
-          alert( 'Unable to connect' );
+        },
+        (error) => {
+          console.log(error);
+            if (error.status === 409) {
+              alert( 'The URL you\'ve selected is already in use' );
+            } else {
+              alert( error.message + '\n' + error.statusText );
+            }
         }
-      },
-      (error) => {
-        console.log(error);
-          if (error.status === 409) {
-            alert( 'The URL you\'ve selected is already in use' );
-          } else {
-            alert( error.message + '\n' + error.statusText );
-          }
-      }
-    );
+      );
+    } else {
+      alert('The URL you entered is invalid.\nUse only lowercase alphanumeric characters and hyphens.');
+    }
   }
 
   titleEdit () {
     if (!this.urlIsEdited) {
-      // GC -- I'm removing ```(this.newPage.title !== undefined) && ``` check since this is run on a keyup,
-      // GC -- so title would never be undefined when this code runs.
-      const titleBasedUrl = this.newPage.title.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, ''); // .replace(regex)
+      const titleBasedUrl = this.newPage.title.toLowerCase().replace(/ /g, '-').replace(this.regexGlobal, ''); // .replace(regex)
       this.newPage.url = titleBasedUrl;
-      this.urlCheck();
-      // GC -- this use of urlCheck() is just a double check and isn't necessary.
     }
   }
 
   urlEdit() {
     this.urlIsEdited = true;
-    // GC -- Ryan: is it bad to have this set urlIsEdited on every keyup?
+    // GC -- Is it bad to have this set urlIsEdited on every keyup?
     // GC -- I'm not sure how I'd do it on just the first keyup and it seems spammy to do it on every single one.
     this.urlCheck();
   }
