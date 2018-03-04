@@ -5,9 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
-import { PageComponent, EditComponent, RevisionsComponent, AdminComponent, AdminCreateComponent } from './routes/routes';
+import {
+  PageComponent,
+  EditComponent,
+  RevisionsComponent,
+  AdminComponent,
+  AdminCreateComponent,
+  DashboardComponent,
+} from './routes/routes';
 import {
   ProfileSmComponent,
   NavBarComponent,
@@ -15,7 +24,10 @@ import {
   SubNavBarComponent,
   MobileNavComponent,
   UnescapePipe,
-  BypassSecurityPipe
+  BypassSecurityPipe,
+  PagesScrollCardsComponent,
+  SearchScrollCardsComponent,
+  PageCardComponent
 } from './shared/shared';
 
 
@@ -33,14 +45,20 @@ import {
     MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe,
+    DashboardComponent,
+    PagesScrollCardsComponent,
+    SearchScrollCardsComponent,
+    PageCardComponent,
     AdminComponent,
-    AdminCreateComponent
+    AdminCreateComponent,
 
   ],
   imports: [
     FormsModule,
     BrowserModule,
     HttpClientModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
@@ -60,6 +78,9 @@ import {
         // MUST BE LAST
         'path': ':pageURL',
         component: PageComponent
+      },{
+        "path": '',
+        component: DashboardComponent
       }
     ])
 
