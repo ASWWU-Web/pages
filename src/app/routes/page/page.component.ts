@@ -17,8 +17,7 @@ export class PageComponent implements OnInit {
         this.page = {
           'title': 'Something went wrong',
           'content': '<h3> There was a problem getting that page for you 🤷 </h3> ' + error.message,
-        };
-      } );
+        }; });
     });
   }
 

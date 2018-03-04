@@ -8,9 +8,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 import { TagInputModule } from 'ngx-chips';
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
-import { PageComponent, EditComponent, RevisionsComponent, DashboardComponent } from './routes/routes';
+import {
+  PageComponent,
+  EditComponent,
+  RevisionsComponent,
+  AdminComponent,
+  AdminCreateComponent,
+  DashboardComponent,
+} from './routes/routes';
 import {
   ProfileSmComponent,
   NavBarComponent,
@@ -19,7 +28,9 @@ import {
   MobileNavComponent,
   UnescapePipe,
   BypassSecurityPipe,
-  ScrollCardsComponent
+  PagesScrollCardsComponent,
+  SearchScrollCardsComponent,
+  PageCardComponent
 } from './shared/shared';
 
 
@@ -38,7 +49,12 @@ import {
     UnescapePipe,
     BypassSecurityPipe,
     DashboardComponent,
-    ScrollCardsComponent,
+    PagesScrollCardsComponent,
+    SearchScrollCardsComponent,
+    PageCardComponent,
+    AdminComponent,
+    AdminCreateComponent,
+
   ],
   imports: [
     FormsModule,
@@ -47,16 +63,26 @@ import {
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FroalaViewModule.forRoot(),
+    FroalaEditorModule.forRoot(),
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
-        "path": "admin/edit/:pageURL/revisions",
-        component: RevisionsComponent
-      },{
-        "path": "admin/edit/:pageURL",
+        // MUST BE FIRST
+        'path': 'admin',
+        component: AdminComponent
+      }, {
+        'path': 'admin/edit/:pageURL',
         component: EditComponent
-      },{
-        "path": ':pageURL',
+      }, {
+        'path': 'admin/create',
+        component: AdminCreateComponent
+      }, {
+        'path': 'admin/edit/:pageURL/revisions',
+        component: RevisionsComponent
+      }, {
+        // MUST BE LAST
+        'path': ':pageURL',
         component: PageComponent
       },{
         "path": '',
