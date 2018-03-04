@@ -9,7 +9,14 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
-import { PageComponent, EditComponent, RevisionsComponent, DashboardComponent } from './routes/routes';
+import {
+  PageComponent,
+  EditComponent,
+  RevisionsComponent,
+  AdminComponent,
+  AdminCreateComponent,
+  DashboardComponent,
+} from './routes/routes';
 import {
   ProfileSmComponent,
   NavBarComponent,
@@ -41,7 +48,10 @@ import {
     DashboardComponent,
     PagesScrollCardsComponent,
     SearchScrollCardsComponent,
-    PageCardComponent
+    PageCardComponent,
+    AdminComponent,
+    AdminCreateComponent,
+
   ],
   imports: [
     FormsModule,
@@ -52,13 +62,21 @@ import {
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
-        "path": "admin/edit/:pageURL/revisions",
-        component: RevisionsComponent
-      },{
-        "path": "admin/edit/:pageURL",
+        // MUST BE FIRST
+        'path': 'admin',
+        component: AdminComponent
+      }, {
+        'path': 'admin/edit/:pageURL',
         component: EditComponent
-      },{
-        "path": ':pageURL',
+      }, {
+        'path': 'admin/create',
+        component: AdminCreateComponent
+      }, {
+        'path': 'admin/edit/:pageURL/revisions',
+        component: RevisionsComponent
+      }, {
+        // MUST BE LAST
+        'path': ':pageURL',
         component: PageComponent
       },{
         "path": '',
