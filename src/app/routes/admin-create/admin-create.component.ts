@@ -14,6 +14,10 @@ export class AdminCreateComponent implements OnInit {
   categories: any;
   departments: any;
 
+  urlIsEdited = false;
+  regex = /[^a-z0-9-]/g;
+  urlInvalid = false;
+
   constructor( private request: RequestService, private router: Router ) {  }
 
   onSubmit() {
@@ -41,10 +45,25 @@ export class AdminCreateComponent implements OnInit {
   }
 
   titleEdit () {
-    if (this.newPage.title !== undefined) {
-      const titleBasedUrl = this.newPage.title.toLowerCase().replace(/ /g, '-'); // .replace(regex)
+    if (!this.urlIsEdited) {
+      // GC -- I'm removing ```(this.newPage.title !== undefined) && ``` check since this is run on a keyup,
+      // GC -- so title would never be undefined when this code runs.
+      const titleBasedUrl = this.newPage.title.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, ''); // .replace(regex)
       this.newPage.url = titleBasedUrl;
+      this.urlCheck();
+      // GC -- this use of urlCheck() is just a double check and isn't necessary.
     }
+  }
+
+  urlEdit() {
+    this.urlIsEdited = true;
+    // GC -- Ryan: is it bad to have this set urlIsEdited on every keyup?
+    // GC -- I'm not sure how I'd do it on just the first keyup and it seems spammy to do it on every single one.
+    this.urlCheck();
+  }
+
+  urlCheck() {
+    this.urlInvalid = this.regex.test(this.newPage.url);
   }
 
   ngOnInit() {

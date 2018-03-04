@@ -3,23 +3,26 @@
     <div class="mx-auto col-sm-12 col-md-6">
       <form (ngSubmit)="onSubmit()">
         
-        <div class="form-group mb-3"> <!-- Title input -->
+        <div class="form-group mb-3 row"> <!-- Title input -->
           <label for="title">Title</label>
           <input type="text" class="form-control" placeholder="title" aria-label="title" aria-describedby="basic-addon1" [(ngModel)]="newPage.title" (keyup)="titleEdit()" name="title">
         </div>
 
-        <div class="form-group mb-3"> <!-- URL input -->
+        <div class="form-group mb-3 row"> <!-- URL input -->
           <label for="title">URL</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">aswwu.com/page/</span>
             </div>
-            <input type="text" class="form-control" placeholder="url" aria-label="url" aria-describedby="basic-addon1" [(ngModel)]="newPage.url" name="url">
-            <small class="form-text text-muted">The URL cannot be changed once the page is created.</small>
+            <input type="text" class="form-control" placeholder="url" aria-label="url" aria-describedby="basic-addon1" [(ngModel)]="newPage.url" (keyup)="urlEdit()" name="url">
+            <small class="form-text text-muted" style="width:100%;">The URL cannot be changed once the page is created.</small>
+            <small class="form-text text-danger"><span *ngIf="urlInvalid">The URL you entered is not valid!</span>&nbsp;</small>
+            <!-- GC -- this &nbsp; is to prevent the layout from shifting when urlInvalid toggles -->
+            <!-- GC -- the invalid url indicator toggles when you press shift the number of times that there are invalid characters in the input field -->
           </div>
         </div>
 
-        <div class="form-group mb-3"> <!-- Category dropdown -->
+        <div class="form-group mb-3 row"> <!-- Category dropdown -->
           <label for="title">Category</label>
           <!-- <input type="text" class="form-control" placeholder="category" aria-label="category" aria-describedby="basic-addon1" [(ngModel)]="newPage.category" name="category"> -->
           <select class="form-control"[(ngModel)]="newPage.category" name="category">
@@ -27,7 +30,7 @@
           </select>
         </div>
 
-        <div class="form-group mb-3"> <!-- Department dropdown -->
+        <div class="form-group mb-3 row"> <!-- Department dropdown -->
           <label for="title">Department</label>
           <!-- <input type="text" class="form-control" placeholder="department" aria-label="department" aria-describedby="basic-addon1" [(ngModel)]="newPage.department" name="department"> -->
           <select class="form-control"[(ngModel)]="newPage.department" name="department">
@@ -35,7 +38,7 @@
           </select>
         </div>
         
-        <div class="row mx-auto"> <!-- Submit button -->
+        <div class="row mx-auto row"> <!-- Submit button -->
           <button type="submit" class="btn btn-primary">Create</button>
         </div>
       </form>
