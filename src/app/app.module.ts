@@ -30,7 +30,7 @@ import {
   BypassSecurityPipe,
   PagesScrollCardsComponent,
   SearchScrollCardsComponent,
-  PageCardComponent
+  PageCardComponent,
 } from './shared/shared';
 
 
@@ -54,7 +54,6 @@ import {
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
-
   ],
   imports: [
     FormsModule,

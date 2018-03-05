@@ -22,16 +22,19 @@
     <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <label for="Editor">Editor(s)</label>
-        <input [(ngModel)]="page.editors" type="text" class="form-control" id="Editor">
-        <small class="form-text text-muted">A CSV of usernames.</small>
+        <tag-input [(ngModel)]='page.editors' theme='bootstrap' modelAsStrings="true">
+        </tag-input>
+        <small class="form-text text-muted">A list of usernames.</small>
       </div>
     </div>
     <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <label for="tags">Tags</label>
         <!-- <input [(ngModel)]="page.tags" type="text" class="form-control" id="tags"> -->
-        <tag-input [(ngModel)]='page.tags' theme='bootstrap'></tag-input>
-        <small class="form-text text-muted">A CSV of tagnames.</small>
+        <tag-input [(ngModel)]='page.tags' theme='bootstrap' modelAsStrings="true">
+          <tag-input-dropdown [autocompleteItems]="tags">
+          </tag-input-dropdown>
+        </tag-input>
       </div>
     </div>
     <div class="col-sm-12 col-md-6">
