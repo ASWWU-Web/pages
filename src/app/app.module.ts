@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed for TagInputModule
+
+import { TagInputModule } from 'ngx-chips';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
@@ -27,7 +30,7 @@ import {
   BypassSecurityPipe,
   PagesScrollCardsComponent,
   SearchScrollCardsComponent,
-  PageCardComponent
+  PageCardComponent,
 } from './shared/shared';
 
 
@@ -51,14 +54,16 @@ import {
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
-
   ],
   imports: [
     FormsModule,
     BrowserModule,
+    TagInputModule,
     HttpClientModule,
-    FroalaEditorModule.forRoot(),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     FroalaViewModule.forRoot(),
+    FroalaEditorModule.forRoot(),
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
