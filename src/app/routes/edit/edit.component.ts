@@ -12,7 +12,7 @@ export class EditComponent implements OnInit {
   page: any = {};
   departments: string[] = [];
   categories: string[] = [];
-  tags: string[] = [];     // TODO: get a list of string from server.
+  tags: string[] = [];     // TODO: get a list of tags from the server.
 
   public options: Object = {
     imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
