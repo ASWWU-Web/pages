@@ -38,11 +38,11 @@ export class SearchComponent {
   }
 
   search() {
-    // TODO: there is probably a better way to assemble query strings
-    let newQuery = '';
-    for(let criterion of this.criteria) {
-      newQuery = newQuery.concat(criterion[0].replace(/ /g, '+'), '=', criterion[1].replace(/ /g, '+').replace(' ', '+'), '&');
+    let tempstring = '';
+    for(let value of this.criteria) {
+      tempstring += value[0] + "=" + value[1] + ";";
     }
-    this.query = newQuery;
+    tempstring.slice(0, -1);
+    this.query = tempstring;
   }
 }
