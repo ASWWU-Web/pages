@@ -19,7 +19,8 @@ import {
   AdminComponent,
   AdminCreateComponent,
   DashboardComponent,
-  SearchComponent
+  SearchComponent,
+  DepartmentsComponent
 } from './routes/routes';
 import {
   ProfileSmComponent,
@@ -57,7 +58,8 @@ import {
     AdminComponent,
     AdminCreateComponent,
     SearchComponent,
-    PageResultsComponent
+    PageResultsComponent,
+    DepartmentsComponent
   ],
   imports: [
     FormsModule,
@@ -89,6 +91,9 @@ import {
       }, {
         "path": 'search:queryComponent',
         component: SearchComponent
+      }, {
+        "path": 'departments',
+        component: DepartmentsComponent
       }, {
         // MUST BE LAST
         'path': ':pageURL',
