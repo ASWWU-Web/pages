@@ -33,7 +33,8 @@ import {
   PagesScrollCardsComponent,
   SearchScrollCardsComponent,
   PageResultsComponent,
-  PageCardComponent
+  PageCardComponent,
+  FieldResultsComponent
 } from './shared/shared';
 
 
@@ -59,7 +60,8 @@ import {
     AdminCreateComponent,
     SearchComponent,
     PageResultsComponent,
-    DepartmentsComponent
+    DepartmentsComponent,
+    FieldResultsComponent,
   ],
   imports: [
     FormsModule,
