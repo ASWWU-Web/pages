@@ -7,3 +7,4 @@ export * from './search/search.component';
 export * from './dashboard/dashboard.component';
 export * from './departments/departments.component';
 export * from './events/events.component';
+export * from './collegian/collegian.component';

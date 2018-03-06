@@ -21,7 +21,8 @@ import {
   DashboardComponent,
   SearchComponent,
   DepartmentsComponent,
-  EventsComponent
+  EventsComponent,
+  CollegianComponent
 } from './routes/routes';
 import {
   ProfileSmComponent,
@@ -64,6 +65,7 @@ import {
     DepartmentsComponent,
     FieldResultsComponent,
     EventsComponent,
+    CollegianComponent,
   ],
   imports: [
     FormsModule,
@@ -101,6 +103,9 @@ import {
       }, {
         "path": 'events',
         component: EventsComponent
+      }, {
+        "path": 'collegian',
+        component: CollegianComponent
       }, {
         // MUST BE LAST
         'path': ':pageURL',
