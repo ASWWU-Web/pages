@@ -23,16 +23,9 @@ export class SearchComponent {
       for (let key of params.keys) {
         this.criteria.push([key, params.get(key)]);
       }
-<<<<<<< HEAD
       if (this.criteria.length == 0) {
         this.criteria.push([GENERAL_SEARCH_FIELD, '']);
       } else {
-=======
-      if(this.criteria.length == 0) {
-        this.criteria.push([GENERAL_SEARCH_FIELD, '']);
-      }
-      else {
->>>>>>> 85ea4f55a3457d5a6348e580a99479c905b8681b
         this.search();
       }
     });
