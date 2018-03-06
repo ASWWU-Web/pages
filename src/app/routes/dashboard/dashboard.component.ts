@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { RequestService } from "../../RequestService/requests";
-import { SEARCHABLE_FIELDS } from "../../shared/fields";
+import { GENERAL_SEARCH_FIELD } from "../../shared/fields";
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -36,7 +36,7 @@ export class DashboardComponent {
 
   queryJson() {
     let json = {};
-    json[SEARCHABLE_FIELDS[0]] = this.searchText;
+    json[GENERAL_SEARCH_FIELD] = this.searchText;
     return json;
   }
 }
