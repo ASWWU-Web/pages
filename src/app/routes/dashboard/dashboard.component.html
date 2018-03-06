@@ -2,7 +2,7 @@
 <!-- search -->
 <h2>Search</h2>
 <input [(ngModel)]="searchText" />
-<a [routerLink]="['/search']" [queryParams]="{general: searchText}"><button>Search</button></a>
+<a [routerLink]="['/search']" [queryParams]="queryJson()"><button>Search</button></a>
 
 <!-- featureds -->
 <div *ngIf="featureds.length > 0">
