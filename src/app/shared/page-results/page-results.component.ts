@@ -20,15 +20,10 @@ export class PageResultsComponent {
   @Input() query: string;
 
   results: any[] = [];
-  shownResults: any[] = [];
-  shown: number = 0;
-  searching: boolean = false;
 
   constructor (private requestService: RequestService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnChanges() {
-    this.shownResults = [];
-    this.shown = 0;
     this.update();
   }
 
@@ -39,17 +34,9 @@ export class PageResultsComponent {
   }
 
   update() {
-    this.requestService.get('/pages/search', (data) => {
+    console.log(this.query);
+    this.requestService.get('/pages/search?' + this.query, (data) => {
       this.results = data.results;
     }, null)
-  }
-
-  showMore() {
-    var cIndex = this.shown;
-    var nIndex = cIndex + 24;
-    this.shownResults = this.shownResults.concat(this.results.slice(cIndex,nIndex));
-    this.shown = nIndex;
-    // Set searching to false
-    this.searching = false;
   }
 }
