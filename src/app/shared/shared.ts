@@ -10,3 +10,4 @@ export * from './page-card/page-card.component'
 export * from './unescape';
 export * from './bypassSecurityPipe';
 export * from './fields';
+export * from './footer/footer.component';

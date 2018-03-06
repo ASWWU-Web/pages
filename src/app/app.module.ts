@@ -27,7 +27,8 @@ import {
   BypassSecurityPipe,
   PagesScrollCardsComponent,
   SearchScrollCardsComponent,
-  PageCardComponent
+  PageCardComponent,
+  FooterComponent
 } from './shared/shared';
 
 
@@ -51,6 +52,7 @@ import {
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
+    FooterComponent,
 
   ],
   imports: [
@@ -78,8 +80,8 @@ import {
         // MUST BE LAST
         'path': ':pageURL',
         component: PageComponent
-      },{
-        "path": '',
+      }, {
+        'path': '',
         component: DashboardComponent
       }
     ])
