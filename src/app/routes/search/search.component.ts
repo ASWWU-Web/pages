@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { RequestService } from "../../RequestService/requests";
-import { SEARCHABLE_FIELDS } from '../../shared/fields';
+import { GENERAL_SEARCH_FIELD, SEARCHABLE_FIELDS } from '../../shared/fields';
 
 @Component({
   templateUrl: 'search.component.html',
@@ -10,6 +10,7 @@ import { SEARCHABLE_FIELDS } from '../../shared/fields';
 })
 
 export class SearchComponent {
+  searchableFields: string[] = SEARCHABLE_FIELDS;
   criteria: string[][] = [];
   categories: string[] = [];
   departments: string[] = [];
@@ -23,7 +24,7 @@ export class SearchComponent {
         this.criteria.push([key, params.get(key)]);
       }
       if(this.criteria.length == 0) {
-        this.criteria.push([SEARCHABLE_FIELDS[0], '']);
+        this.criteria.push([GENERAL_SEARCH_FIELD, '']);
       }
       else {
         this.search();
@@ -32,14 +33,14 @@ export class SearchComponent {
 
     // get categories and departments
     this.requestService.get('/pages/categories', (data) => {
-      for(let category of data.categories) {
-        this.categories.push(category['category'])
-      }
+      this.categories = data.categories.map((category) => {
+        return category.category;
+      });
     }, null)
     this.requestService.get('/pages/departments', (data) => {
-      for(let department of data.departments) {
-        this.departments.push(department['department'])
-      }
+      this.departments = data.departments.map((department) => {
+        return department.department;
+      });
     }, null)
 }
 
