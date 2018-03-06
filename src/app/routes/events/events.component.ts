@@ -12,7 +12,7 @@ export class EventsComponent {
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     this.requestService.get('/pages/search?category=Event', (data) => {
-      this.events = data.results;
+      this.events = data.results.reverse();
     }, null)
   }
 }
