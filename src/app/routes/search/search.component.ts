@@ -61,7 +61,7 @@ export class SearchComponent {
 
     // run search
     this.requestService.get('/pages/search?' + query, (data) => {
-      this.searchResults = data.results;
+      this.searchResults = data.results.reverse();
     }, null)
   }
 }
