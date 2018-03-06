@@ -20,7 +20,8 @@ import {
   AdminCreateComponent,
   DashboardComponent,
   SearchComponent,
-  DepartmentsComponent
+  DepartmentsComponent,
+  EventsComponent
 } from './routes/routes';
 import {
   ProfileSmComponent,
@@ -62,6 +63,7 @@ import {
     PageResultsComponent,
     DepartmentsComponent,
     FieldResultsComponent,
+    EventsComponent,
   ],
   imports: [
     FormsModule,
@@ -96,6 +98,9 @@ import {
       }, {
         "path": 'departments',
         component: DepartmentsComponent
+      }, {
+        "path": 'events',
+        component: EventsComponent
       }, {
         // MUST BE LAST
         'path': ':pageURL',

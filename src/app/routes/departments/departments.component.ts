@@ -4,7 +4,6 @@ import { Router, Routes, ActivatedRoute } from '@angular/router';
 import { RequestService } from "../../RequestService/requests";
 
 @Component({
-  selector: 'app-departments',
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.css']
 })
