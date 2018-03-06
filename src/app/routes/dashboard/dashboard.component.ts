@@ -8,6 +8,7 @@ import { RequestService } from "../../RequestService/requests";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  searchText: string;
   featureds: any = [];
   events: any = [];
   categories: any = [];

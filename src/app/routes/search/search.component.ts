@@ -24,7 +24,7 @@ export class SearchComponent {
         this.criteria.push([key, params.get(key)]);
       }
       if(this.criteria.length == 0) {
-        this.criteria.push(['','']);
+        this.criteria.push([this.searchableFields[0], '']);
       }
       else {
         this.search();

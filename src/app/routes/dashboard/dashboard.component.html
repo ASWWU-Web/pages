@@ -1,8 +1,8 @@
 <h1>Dashboard</h1>
 <!-- search -->
 <h2>Search</h2>
-<input />
-<button>Search</button>
+<input [(ngModel)]="searchText" />
+<a [routerLink]="['/search']" [queryParams]="{general: searchText}"><button>Search</button></a>
 
 <!-- featureds -->
 <div *ngIf="featureds.length > 0">
