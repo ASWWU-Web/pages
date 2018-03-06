@@ -11,6 +11,7 @@ import { RequestService } from "../../RequestService/requests";
 export class CollegianComponent {
   archives: any[];
   thisWeek: any[] = [];
+  searchText: string;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     // get all pages

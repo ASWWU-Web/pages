@@ -4,6 +4,6 @@
 <h2>This Week</h2>
 <page-scroll-cards [requestData]="thisWeek" showMeta="1"></page-scroll-cards>
 <h2>Archives</h2>
-<input />
-<button>Search</button>
+<input [(ngModel)]="searchText" />
+<a [routerLink]="['/search']" [queryParams]="{'department': 'Collegian', 'title': searchText}"><button>Search</button></a>
 <page-scroll-cards [requestData]="archives" showMeta="1"></page-scroll-cards>
