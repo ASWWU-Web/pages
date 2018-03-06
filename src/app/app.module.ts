@@ -1,15 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed for TagInputModule
+
+import { TagInputModule } from 'ngx-chips';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
-import { PageComponent, EditComponent, RevisionsComponent, SearchComponent, DashboardComponent } from './routes/routes';
+import {
+  PageComponent,
+  EditComponent,
+  RevisionsComponent,
+  AdminComponent,
+  AdminCreateComponent,
+  DashboardComponent,
+  SearchComponent
+} from './routes/routes';
 import {
   ProfileSmComponent,
   NavBarComponent,
@@ -43,30 +54,43 @@ import {
     PagesScrollCardsComponent,
     SearchScrollCardsComponent,
     PageCardComponent,
+    AdminComponent,
+    AdminCreateComponent,
     SearchComponent,
-    PageResultsComponent,
+    PageResultsComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
+    TagInputModule,
     HttpClientModule,
-    FroalaEditorModule.forRoot(),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     FroalaViewModule.forRoot(),
+    FroalaEditorModule.forRoot(),
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
-        "path": "admin/edit/:pageURL/revisions",
-        component: RevisionsComponent
-      },{
-        "path": "admin/edit/:pageURL",
+        // MUST BE FIRST
+        'path': 'admin',
+        component: AdminComponent
+      }, {
+        'path': 'admin/edit/:pageURL',
         component: EditComponent
-      },{
+      }, {
+        'path': 'admin/create',
+        component: AdminCreateComponent
+      }, {
+        'path': 'admin/edit/:pageURL/revisions',
+        component: RevisionsComponent
+      }, {
         "path": 'search',
         component: SearchComponent
-      },{
-        "path": ':pageURL',
+      }, {
+        // MUST BE LAST
+        'path': ':pageURL',
         component: PageComponent
-      },{
+      }, {
         "path": '',
         component: DashboardComponent
       }

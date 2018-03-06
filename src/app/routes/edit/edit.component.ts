@@ -2,7 +2,6 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { environment } from "../../../environments/environment";
-import { DEPARTMENTS, CATEGORIES } from '../../shared/shared';
 import { RequestService } from "../../RequestService/requests";
 
 @Component({
@@ -13,6 +12,8 @@ export class EditComponent implements OnInit {
   page: any = {};
   departments: string[] = [];
   categories: string[] = [];
+  tags: string[] = [];     // TODO: get a list of tags from the server.
+
   public options: Object = {
     imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
     imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images'
@@ -35,11 +36,14 @@ export class EditComponent implements OnInit {
   }
 
   save(onSucessfulSave) {
+    // Remove unwanted attributes from JSON.
     let ignoredKeys = ["updated_at", "current", "created", "url"];
     let filteredPage = Object.assign({}, this.page);
     for(let i in ignoredKeys){
       delete filteredPage[ignoredKeys[i]];
     }
+
+    // Send New Page to server.
     this.requestService.post('/pages/admin/' + this.page.url, filteredPage, (data)=> {
       if(onSucessfulSave && typeof(onSucessfulSave) == "function") {
         onSucessfulSave()
