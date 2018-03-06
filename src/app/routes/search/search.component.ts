@@ -10,7 +10,6 @@ import { SEARCHABLE_FIELDS } from '../../shared/fields';
 })
 
 export class SearchComponent {
-  searchableFields: string[] = SEARCHABLE_FIELDS
   criteria: string[][] = [];
   categories: string[] = [];
   departments: string[] = [];
@@ -24,7 +23,7 @@ export class SearchComponent {
         this.criteria.push([key, params.get(key)]);
       }
       if(this.criteria.length == 0) {
-        this.criteria.push([this.searchableFields[0], '']);
+        this.criteria.push([SEARCHABLE_FIELDS[0], '']);
       }
       else {
         this.search();
