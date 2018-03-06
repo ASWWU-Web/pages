@@ -87,6 +87,9 @@ import {
         "path": 'search',
         component: SearchComponent
       }, {
+        "path": 'search:queryComponent',
+        component: SearchComponent
+      }, {
         // MUST BE LAST
         'path': ':pageURL',
         component: PageComponent

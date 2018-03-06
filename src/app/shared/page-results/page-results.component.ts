@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/Observable';
 import { RequestService } from '../../RequestService/request.service';
 import { ProfileSmComponent } from '../shared';
 import { CURRENT_YEAR } from '../../config';
-import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'page-results',
@@ -28,13 +27,12 @@ export class PageResultsComponent {
   }
 
   ngOnInit() {
-    if(!this.query){
+    if(!this.query) {
       this.query = "";
     }
   }
 
   update() {
-    console.log(this.query);
     this.requestService.get('/pages/search?' + this.query, (data) => {
       this.results = data.results;
     }, null)

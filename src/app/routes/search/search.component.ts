@@ -17,16 +17,25 @@ export class SearchComponent {
   query: string;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
-  this.requestService.get('/pages/categories', (data) => {
-    for(let category of data.categories) {
-      this.categories.push(category['category'])
-    }
-  }, null)
-  this.requestService.get('/pages/departments', (data) => {
-    for(let department of data.departments) {
-      this.departments.push(department['department'])
-    }
-  }, null)
+    // check for query params in url
+    this.route.queryParamMap.subscribe( params => {
+      this.criteria = [];
+      for(let key of params.keys) {
+        this.criteria.push([key, params.get(key)]);
+      }
+    });
+
+    // get categories and departments
+    this.requestService.get('/pages/categories', (data) => {
+      for(let category of data.categories) {
+        this.categories.push(category['category'])
+      }
+    }, null)
+    this.requestService.get('/pages/departments', (data) => {
+      for(let department of data.departments) {
+        this.departments.push(department['department'])
+      }
+    }, null)
 }
 
   addField() {
