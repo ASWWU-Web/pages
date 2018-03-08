@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <page class="col" requestURL="{{revisionURL}}"></page>
-    <div class="col ">
-      <div *ngFor="let revision of revisions">
+    <div class="col">
+      <div *ngFor="let revision of revisions" class="card p-4">
         <button *ngIf="!revision.current" (click)="loadRevision(revision.id)">{{revision.last_updated}}</button>
-        <button *ngIf="revision.current" (click)="loadRevision(revision.id)">Current</button>
+        <button *ngIf="revision.current" (click)="loadRevision(null)">Current</button>
       </div>
     </div>
   </div>
-  <button (click)="restoreRevision()">Restore</button>
+  <button (click)="restoreRevision()" [disabled]="current">Restore</button>
 </div>
