@@ -17,7 +17,6 @@ export class PageComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.requestURL);
     this.request.get( (this.requestURL), (data) => this.page = data, (error) => {
       this.page = {
         'title': 'Something went wrong',

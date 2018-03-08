@@ -1,8 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-6 offset-md-3 text-center">
-      <h1>Revisions</h1>
+    <page class="col" requestURL="{{revisionURL}}"></page>
+    <div class="col ">
+      <div *ngFor="let revision of revisions">
+        <button *ngIf="!revision.current" (click)="loadRevision(revision.id)">{{revision.last_updated}}</button>
+        <button *ngIf="revision.current" (click)="loadRevision(revision.id)">Current</button>
+      </div>
     </div>
   </div>
-
+  <button (click)="restoreRevision()">Restore</button>
 </div>

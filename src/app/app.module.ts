@@ -34,7 +34,6 @@ import {
   SearchScrollCardsComponent,
   PageResultsComponent,
   PageCardComponent,
-  PageCardComponent,
   FooterComponent
 } from './shared/shared';
 
