@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { RequestService } from "../../RequestService/requests";
+import { GENERAL_SEARCH_FIELD } from "../../shared/fields";
 
 @Component({
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  searchText: string;
   featureds: any = [];
   events: any = [];
   categories: any = [];
@@ -30,5 +32,11 @@ export class DashboardComponent {
     this.requestService.get('/pages/departments', (data) => {
       this.departments = data.departments;
     }, null)
+  }
+
+  queryJson() {
+    let json = {};
+    json[GENERAL_SEARCH_FIELD] = this.searchText;
+    return json;
   }
 }

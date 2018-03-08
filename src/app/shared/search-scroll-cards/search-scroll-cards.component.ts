@@ -9,4 +9,10 @@ import { Component, Input } from '@angular/core';
 export class SearchScrollCardsComponent {
   @Input() requestData: any;
   @Input() searchKey: string;
+
+  queryJson(item) {
+    let json = {};
+    json[this.searchKey] = item[this.searchKey];
+    return json;
+  }
 }
