@@ -18,8 +18,11 @@ import {
   RevisionsComponent,
   AdminComponent,
   AdminCreateComponent,
-  DashboardComponent,
-  SearchComponent
+  DirectoryComponent,
+  SearchComponent,
+  DepartmentsComponent,
+  EventsComponent,
+  CollegianComponent
 } from './routes/routes';
 import {
   ProfileSmComponent,
@@ -29,10 +32,11 @@ import {
   MobileNavComponent,
   UnescapePipe,
   BypassSecurityPipe,
-  PagesScrollCardsComponent,
-  SearchScrollCardsComponent,
+  PageScrollCardsComponent,
+  FieldScrollCardsComponent,
   PageResultsComponent,
-  PageCardComponent
+  PageCardComponent,
+  FieldResultsComponent
 } from './shared/shared';
 
 
@@ -50,14 +54,18 @@ import {
     MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe,
-    DashboardComponent,
-    PagesScrollCardsComponent,
-    SearchScrollCardsComponent,
+    DirectoryComponent,
+    PageScrollCardsComponent,
+    FieldScrollCardsComponent,
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
     SearchComponent,
-    PageResultsComponent
+    PageResultsComponent,
+    DepartmentsComponent,
+    FieldResultsComponent,
+    EventsComponent,
+    CollegianComponent,
   ],
   imports: [
     FormsModule,
@@ -90,12 +98,21 @@ import {
         "path": 'search:queryComponent',
         component: SearchComponent
       }, {
+        "path": 'departments',
+        component: DepartmentsComponent
+      }, {
+        "path": 'events',
+        component: EventsComponent
+      }, {
+        "path": 'collegian',
+        component: CollegianComponent
+      }, {
         // MUST BE LAST
         'path': ':pageURL',
         component: PageComponent
       }, {
         "path": '',
-        component: DashboardComponent
+        component: DirectoryComponent
       }
     ])
 
