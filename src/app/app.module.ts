@@ -19,6 +19,7 @@ import {
   AdminComponent,
   AdminCreateComponent,
   DashboardComponent,
+  SearchComponent
 } from './routes/routes';
 import {
   ProfileSmComponent,
@@ -30,7 +31,8 @@ import {
   BypassSecurityPipe,
   PagesScrollCardsComponent,
   SearchScrollCardsComponent,
-  PageCardComponent,
+  PageResultsComponent,
+  PageCardComponent
 } from './shared/shared';
 
 
@@ -54,6 +56,8 @@ import {
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
+    SearchComponent,
+    PageResultsComponent
   ],
   imports: [
     FormsModule,
@@ -80,10 +84,16 @@ import {
         'path': 'admin/edit/:pageURL/revisions',
         component: RevisionsComponent
       }, {
+        "path": 'search',
+        component: SearchComponent
+      }, {
+        "path": 'search:queryComponent',
+        component: SearchComponent
+      }, {
         // MUST BE LAST
         'path': ':pageURL',
         component: PageComponent
-      },{
+      }, {
         "path": '',
         component: DashboardComponent
       }
