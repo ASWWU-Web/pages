@@ -3,6 +3,8 @@ import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { environment } from "../../../environments/environment";
 import { RequestService } from "../../RequestService/requests";
+import { CURRENT_YEAR } from "../../config";
+declare var $: any;
 
 @Component({
   templateUrl: './edit.component.html',
@@ -16,7 +18,8 @@ export class EditComponent implements OnInit {
 
   public options: Object = {
     imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
-    imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images'
+    imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images',
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'insert_profile'],
   };
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
@@ -32,7 +35,139 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+        // Define popup template.
+    $.extend($.FroalaEditor.POPUP_TEMPLATES, {
+      'customPlugin.popup': '[_BUTTONS_][_CUSTOM_LAYER_]'
+    });
+    // Define popup buttons.
+    $.extend($.FroalaEditor.DEFAULTS, {
+      popupButtons: ['popupClose', '|', 'insertProfileButton'],
+    });
 
+    $.FroalaEditor.PLUGINS.customPlugin = function (editor) {
+      // Create custom popup.
+      function initPopup () {
+        // Load popup template.
+        var template = $.FroalaEditor.POPUP_TEMPLATES.customPopup;
+        if (typeof template == 'function') template = template.apply(editor);
+
+        // Popup buttons.
+        var popup_buttons = '';
+
+        // Create the list of buttons.
+        if (editor.opts.popupButtons.length > 1) {
+          popup_buttons += '<div class="fr-buttons">';
+          popup_buttons += editor.button.buildList(editor.opts.popupButtons);
+          popup_buttons += '</div>';
+        }
+
+        // Load popup template.
+        template = {
+          buttons: popup_buttons,
+          custom_layer: '<div class="custom-layer">Input Username: <input type="text" id="username"></div>'
+        };
+
+        // Create popup.
+        var $popup = editor.popups.create('customPlugin.popup', template);
+
+        return $popup;
+      }
+
+      // Show the popup
+      function showPopup () {
+        // Get the popup object defined above.
+        var $popup = editor.popups.get('customPlugin.popup');
+
+        // If popup doesn't exist then create it.
+        // To improve performance it is best to create the popup when it is first needed
+        // and not when the editor is initialized.
+        if (!$popup) $popup = initPopup();
+
+        // Set the editor toolbar as the popup's container.
+        editor.popups.setContainer('customPlugin.popup', editor.$tb);
+
+        // This custom popup is opened by pressing a button from the editor's toolbar.
+        // Get the button's object in order to place the popup relative to it.
+        var $btn = editor.$tb.find('.fr-command[data-cmd="insert_profile"]');
+
+        // Compute the popup's position.
+        var left = $btn.offset().left + $btn.outerWidth() / 2;
+        var top = $btn.offset().top + (editor.opts.toolbarBottom ? 10 : $btn.outerHeight() - 10);
+
+        // Show the custom popup.
+        // The button's outerHeight is required in case the popup needs to be displayed above it.
+        editor.popups.show('customPlugin.popup', left, top, $btn.outerHeight());
+      }
+
+      // Hide the custom popup.
+      function hidePopup () {
+        editor.popups.hide('customPlugin.popup');
+      }
+
+      // Methods visible outside the plugin.
+      return {
+        showPopup: showPopup,
+        hidePopup: hidePopup
+      }
+    }
+
+    // Define an icon and command for the button that opens the custom popup.
+    $.FroalaEditor.DefineIcon('insert_profile', { NAME: 'plus'})
+    $.FroalaEditor.RegisterCommand('insert_profile', {
+      title: 'Insert Profile',
+      undo: false,
+      focus: false,
+      popup: true,
+      // Buttons which are included in the editor toolbar should have the plugin property set.
+      plugin: 'customPlugin',
+      callback: function () {
+        if (!this.popups.isVisible('customPlugin.popup')) {
+          this.customPlugin.showPopup();
+        }
+        else {
+          if (this.$el.find('.fr-marker')) {
+            this.events.disableBlur();
+            this.selection.restore();
+          }
+          this.popups.hide('customPlugin.popup');
+        }
+      }
+    });
+
+    // Define custom popup close button icon and command.
+    $.FroalaEditor.DefineIcon('popupClose', { NAME: 'times' });
+    $.FroalaEditor.RegisterCommand('popupClose', {
+      title: 'Close',
+      undo: false,
+      focus: false,
+      callback: function () {
+        this.customPlugin.hidePopup();
+      }
+    });
+
+    // Define custom popup 1.
+    $.FroalaEditor.DefineIcon('insertProfileButton', { NAME: 'plus' });
+    $.FroalaEditor.RegisterCommand('insertProfileButton', {
+      title: 'Insert Profile',
+      undo: false,
+      focus: false,
+      callback: function () {
+        $.get("http://localhost:8888/profile/1718/" + $('#username').val(), (data) => {
+            console.log(data);
+            let return_str = `
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="https://aswwu.com/media/img-sm/${data["photo"]}" alt="Profile Photo>
+              <div class="card-body">
+               <h5 class="card-title text-center"><b>${data["full_name"]}</b></h5>
+               <a class="card-link text-center" href="mailto:${data["email"]}">${data["email"]}</a>
+              </div>
+            </div>
+            `;
+            this.html.insert(return_str);
+          }
+        );
+      }
+    });
   }
 
   save(onSucessfulSave) {
