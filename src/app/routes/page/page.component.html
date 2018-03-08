@@ -1,12 +1,23 @@
-<div *ngIf="page" class="container-fluid">
-  <div> <!-- TITLE SECTION -->
-    <h1>
+<div *ngIf="page" class="container-fluid p-0">
+  <div class="w-100 bg-success " style="height:15rem;"> <!-- TITLE SECTION -->
+    <h1 class="text-center text-light text-uppercase m-0" style="line-height:15rem;">
       {{ page.title }}
     </h1>
   </div>
   
-  <div id="content" class="container"> <!-- CONTENT SECTION -->
+  <div id="content" class="bg-secondary container"> <!-- CONTENT SECTION -->
     {{ loadContent() }}
+  </div>
+
+  <div class="w-100 bg-success " style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->
+    <h1 class="text-center m-0" style="line-height:15rem;"></h1>
+  </div>
+
+  <div class="container bg-info pl-md-5 pr-md-5" style="height:5rem;"> <!-- AUTHOR SECTION -->
+    <div class="row h-100">
+      <div class="col col-md-1 offset-md-3 align-middle bg-danger"><div class="mx-auto" style="height:50px;width:50px;border-style:solid;border-color:black;border-radius:50%;"> <!-- AUTHOR'S IMAGE--> </div></div>
+      <div class="col col-md-5 bg-warning"><p> --- is the author of this page</p></div>
+    </div>
   </div>
   
 </div>
