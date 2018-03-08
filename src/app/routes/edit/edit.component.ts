@@ -64,7 +64,10 @@ export class EditComponent implements OnInit {
         // Load popup template.
         template = {
           buttons: popup_buttons,
-          custom_layer: '<div class="custom-layer">Input Username: <input type="text" id="username"></div>'
+          custom_layer: `<div class="form-group custom-layer" style="margin-top:5px;">
+                           <label for="usr"><b>Username:</b></label>
+                           <input type="text" class="form-control" id="usr">
+                         </div>`
         };
 
         // Create popup.
@@ -152,8 +155,11 @@ export class EditComponent implements OnInit {
       undo: false,
       focus: false,
       callback: function () {
-        $.get("http://localhost:8888/profile/1718/" + $('#username').val(), (data) => {
-            console.log(data);
+        $.get("http://localhost:8888/profile/1718/" + $('#usr').val(), (data, status) => {
+            if (! data.hasOwnProperty('username')) {
+              alert("Profile not found!")
+              return;
+            }
             let return_str = `
             <div class="card" style="width: 18rem;">
               <img class="card-img-top" src="https://aswwu.com/media/img-sm/${data["photo"]}" alt="Profile Photo>
