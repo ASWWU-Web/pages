@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'page-results',
@@ -6,7 +6,19 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./page-results.component.css'],
 })
 
-export class PageResultsComponent {
+export class PageResultsComponent implements OnChanges {
   @Input() requestData: any;
   @Input() showMeta: boolean;
+  @Input() sort: boolean = false;
+
+  ngOnChanges() {
+    // sort data based on title
+    if (this.requestData.length > 0 && this.sort) {
+      this.requestData = this.requestData.sort((a, b) => {
+        if(a['title'] < b['title']) return -1;
+        if(a['title'] > b['title']) return 1;
+        return 0;
+      });
+    }
+  }
 }

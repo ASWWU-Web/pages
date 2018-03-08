@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'field-results',
@@ -6,9 +6,21 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./field-results.component.css']
 })
 
-export class FieldResultsComponent {
+export class FieldResultsComponent implements OnChanges {
   @Input() requestData: any;
   @Input() searchKey: string;
+  @Input() sort: boolean = false;
+
+  ngOnChanges() {
+    // sort data based on searchKey
+    if (this.requestData.length > 0 && this.sort) {
+      this.requestData = this.requestData.sort((a, b) => {
+        if(a[this.searchKey] < b[this.searchKey]) return -1;
+        if(a[this.searchKey] > b[this.searchKey]) return 1;
+        return 0;
+      });
+    }
+  }
 
   queryJson(item) {
     let json = {};
