@@ -18,11 +18,11 @@ export class DashboardComponent {
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     // get featureds data
     this.requestService.get('/pages/featureds', (data) => {
-      this.featureds = data.featureds;
+      this.featureds = data.featureds.reverse();
     }, null)
     // get events data
     this.requestService.get('/pages/search?category=Event', (data) => {
-      this.events = data.results;
+      this.events = data.results.reverse();
     }, null)
     // get categories data
     this.requestService.get('/pages/categories', (data) => {

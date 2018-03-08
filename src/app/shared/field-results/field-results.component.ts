@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './field-results.component.html',
   styleUrls: ['./field-results.component.css']
 })
+
 export class FieldResultsComponent {
   @Input() requestData: any;
   @Input() searchKey: string;
