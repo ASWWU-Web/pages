@@ -1,3 +1,4 @@
+export * from './page/page.component';
 export * from './profile-sm/profile-sm.component';
 export * from './profile.model';
 export * from './nav-bar/nav-bar.component';
