@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { Router, Routes, ActivatedRoute } from '@angular/router';
+import { Router, Routes, ActivatedRoute, RouterModule, NavigationExtras } from '@angular/router';
 
 import { RequestService } from "../../RequestService/requests";
+import { GENERAL_SEARCH_FIELD } from "../../shared/fields";
 
 @Component({
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './directory.component.html',
+  styleUrls: ['./directory.component.css']
 })
-export class DashboardComponent {
+export class DirectoryComponent {
+  searchText: string;
   featureds: any = [];
   events: any = [];
   categories: any = [];
@@ -16,11 +18,11 @@ export class DashboardComponent {
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     // get featureds data
     this.requestService.get('/pages/featureds', (data) => {
-      this.featureds = data.featureds;
+      this.featureds = data.featureds.reverse();
     }, null)
     // get events data
     this.requestService.get('/pages/search?category=Event', (data) => {
-      this.events = data.results;
+      this.events = data.results.reverse();
     }, null)
     // get categories data
     this.requestService.get('/pages/categories', (data) => {
@@ -30,5 +32,13 @@ export class DashboardComponent {
     this.requestService.get('/pages/departments', (data) => {
       this.departments = data.departments;
     }, null)
+  }
+
+  search() {
+    let json = {};
+    json[GENERAL_SEARCH_FIELD] = this.searchText;
+    this.router.navigate(['/search'], {
+      queryParams: json
+    });
   }
 }

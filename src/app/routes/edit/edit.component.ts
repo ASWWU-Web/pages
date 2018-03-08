@@ -42,12 +42,12 @@ export class EditComponent implements OnInit {
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe( params => {
-      this.requestService.get( ('/pages/' + params.pageURL), (data) => this.page = data, null );
+      this.requestService.get( ('/pages/admin/' + params.pageURL), (data) => this.page = data, null );
     });
-    this.requestService.get('/pages/category', (data)=> {
+    this.requestService.get('/pages/categories', (data)=> {
       this.categories = data.categories;
     }, null)
-    this.requestService.get('/pages/department', (data)=> {
+    this.requestService.get('/pages/departments', (data)=> {
       this.departments = data.departments;
     }, null)
   }

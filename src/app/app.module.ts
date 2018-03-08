@@ -13,14 +13,19 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 import {
-  PageComponent,
+  ViewPageComponent,
   EditComponent,
   RevisionsComponent,
   AdminComponent,
   AdminCreateComponent,
-  DashboardComponent,
+  DirectoryComponent,
+  SearchComponent,
+  DepartmentsComponent,
+  EventsComponent,
+  CollegianComponent
 } from './routes/routes';
 import {
+  PageComponent,
   ProfileSmComponent,
   NavBarComponent,
   UserBubbleComponent,
@@ -28,9 +33,12 @@ import {
   MobileNavComponent,
   UnescapePipe,
   BypassSecurityPipe,
-  PagesScrollCardsComponent,
-  SearchScrollCardsComponent,
+  FooterComponent,
+  PageScrollCardsComponent,
+  FieldScrollCardsComponent,
+  PageResultsComponent,
   PageCardComponent,
+  FieldResultsComponent
 } from './shared/shared';
 
 
@@ -48,12 +56,20 @@ import {
     MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe,
-    DashboardComponent,
-    PagesScrollCardsComponent,
-    SearchScrollCardsComponent,
+    DirectoryComponent,
+    PageScrollCardsComponent,
+    FieldScrollCardsComponent,
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
+    SearchComponent,
+    PageResultsComponent,
+    DepartmentsComponent,
+    FieldResultsComponent,
+    EventsComponent,
+    CollegianComponent,
+    FooterComponent,
+    ViewPageComponent,
   ],
   imports: [
     FormsModule,
@@ -80,12 +96,26 @@ import {
         'path': 'admin/edit/:pageURL/revisions',
         component: RevisionsComponent
       }, {
-        // MUST BE LAST
+        "path": 'search',
+        component: SearchComponent
+      }, {
+        "path": 'search:queryComponent',
+        component: SearchComponent
+      }, {
+        "path": 'departments',
+        component: DepartmentsComponent
+      }, {
+        "path": 'events',
+        component: EventsComponent
+      }, {
+        "path": 'collegian',
+        component: CollegianComponent
+      }, {
         'path': ':pageURL',
-        component: PageComponent
-      },{
+        component: ViewPageComponent
+      }, {
         "path": '',
-        component: DashboardComponent
+        component: DirectoryComponent
       }
     ])
 

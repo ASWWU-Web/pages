@@ -68,8 +68,8 @@ export class AdminCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.request.get( ('/pages/category'), (data) => this.categories = data.categories, (error) => console.log(error) );
-    this.request.get( ('/pages/department'), (data) => this.departments = data.departments, (error) => console.log(error) );
+    this.request.get( ('/pages/categories'), (data) => this.categories = data.categories, (error) => console.log(error) );
+    this.request.get( ('/pages/departments'), (data) => this.departments = data.departments, (error) => console.log(error) );
   }
 
 }
