@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed for TagInputModule
+
+import { TagInputModule } from 'ngx-chips';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
@@ -15,7 +18,11 @@ import {
   RevisionsComponent,
   AdminComponent,
   AdminCreateComponent,
-  DashboardComponent,
+  DirectoryComponent,
+  SearchComponent,
+  DepartmentsComponent,
+  EventsComponent,
+  CollegianComponent
 } from './routes/routes';
 import {
   PageComponent,
@@ -26,10 +33,12 @@ import {
   MobileNavComponent,
   UnescapePipe,
   BypassSecurityPipe,
-  PagesScrollCardsComponent,
-  SearchScrollCardsComponent,
+  FooterComponent,
+  PageScrollCardsComponent,
+  FieldScrollCardsComponent,
+  PageResultsComponent,
   PageCardComponent,
-  FooterComponent
+  FieldResultsComponent
 } from './shared/shared';
 
 
@@ -47,21 +56,30 @@ import {
     MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe,
-    DashboardComponent,
-    PagesScrollCardsComponent,
-    SearchScrollCardsComponent,
+    DirectoryComponent,
+    PageScrollCardsComponent,
+    FieldScrollCardsComponent,
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
+    SearchComponent,
+    PageResultsComponent,
+    DepartmentsComponent,
+    FieldResultsComponent,
+    EventsComponent,
+    CollegianComponent,
     FooterComponent,
     ViewPageComponent,
   ],
   imports: [
     FormsModule,
     BrowserModule,
+    TagInputModule,
     HttpClientModule,
-    FroalaEditorModule.forRoot(),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     FroalaViewModule.forRoot(),
+    FroalaEditorModule.forRoot(),
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
@@ -78,12 +96,26 @@ import {
         'path': 'admin/edit/:pageURL/revisions',
         component: RevisionsComponent
       }, {
-        // MUST BE LAST
+        "path": 'search',
+        component: SearchComponent
+      }, {
+        "path": 'search:queryComponent',
+        component: SearchComponent
+      }, {
+        "path": 'departments',
+        component: DepartmentsComponent
+      }, {
+        "path": 'events',
+        component: EventsComponent
+      }, {
+        "path": 'collegian',
+        component: CollegianComponent
+      }, {
         'path': ':pageURL',
         component: ViewPageComponent
       }, {
-        'path': '',
-        component: DashboardComponent
+        "path": '',
+        component: DirectoryComponent
       }
     ])
 
