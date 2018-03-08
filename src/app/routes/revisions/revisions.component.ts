@@ -22,7 +22,7 @@ export class RevisionsComponent {
     this.getAllRevisions();
   }
 
-  getDateTimeCreated(datetime) {
+  getDateTime(datetime) {
     let date = new Date(datetime);
     return date.toLocaleString();
   }
