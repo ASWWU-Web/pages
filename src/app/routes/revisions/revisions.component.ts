@@ -11,7 +11,8 @@ export class RevisionsComponent {
   revisions: any;
   pageURL: string;
   revisionURL: string;
-  current: boolean = true;
+  currentSelected: boolean = true;
+  loadedID: string;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     // get page URL
@@ -29,10 +30,12 @@ export class RevisionsComponent {
 
   loadRevision(id) {
     if (id == null) {
-      this.current = true;
+      this.loadedID = null;
+      this.currentSelected = true;
       this.revisionURL = '/pages/' + this.pageURL;
     } else {
-      this.current = false;
+      this.loadedID = id;
+      this.currentSelected = false;
       this.revisionURL = '/pages/admin/' + this.pageURL + '/revision/' + id;
     }
   }
@@ -45,8 +48,8 @@ export class RevisionsComponent {
 
   restoreRevision() {
     this.requestService.post(this.revisionURL, {}, (data)=> {
-      console.log(data);
       this.getAllRevisions();
+      this.loadRevision(null);
     }, (error) => {
       alert(error.message);
     });
