@@ -1,4 +1,3 @@
-export * from './page/page.component';
 export * from './admin/admin.component';
 export * from './admin-create/admin-create.component';
 export * from './edit/edit.component';
@@ -8,3 +7,4 @@ export * from './directory/directory.component';
 export * from './departments/departments.component';
 export * from './events/events.component';
 export * from './collegian/collegian.component';
+export * from './view-page/view-page.component';

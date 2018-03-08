@@ -13,7 +13,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 import {
-  PageComponent,
+  ViewPageComponent,
   EditComponent,
   RevisionsComponent,
   AdminComponent,
@@ -25,6 +25,7 @@ import {
   CollegianComponent
 } from './routes/routes';
 import {
+  PageComponent,
   ProfileSmComponent,
   NavBarComponent,
   UserBubbleComponent,
@@ -32,6 +33,7 @@ import {
   MobileNavComponent,
   UnescapePipe,
   BypassSecurityPipe,
+  FooterComponent,
   PageScrollCardsComponent,
   FieldScrollCardsComponent,
   PageResultsComponent,
@@ -66,6 +68,8 @@ import {
     FieldResultsComponent,
     EventsComponent,
     CollegianComponent,
+    FooterComponent,
+    ViewPageComponent,
   ],
   imports: [
     FormsModule,
@@ -107,9 +111,8 @@ import {
         "path": 'collegian',
         component: CollegianComponent
       }, {
-        // MUST BE LAST
         'path': ':pageURL',
-        component: PageComponent
+        component: ViewPageComponent
       }, {
         "path": '',
         component: DirectoryComponent
