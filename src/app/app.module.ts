@@ -18,7 +18,7 @@ import {
   RevisionsComponent,
   AdminComponent,
   AdminCreateComponent,
-  DashboardComponent,
+  DirectoryComponent,
   SearchComponent,
   DepartmentsComponent,
   EventsComponent,
@@ -54,7 +54,7 @@ import {
     MobileNavComponent,
     UnescapePipe,
     BypassSecurityPipe,
-    DashboardComponent,
+    DirectoryComponent,
     PageScrollCardsComponent,
     FieldScrollCardsComponent,
     PageCardComponent,
@@ -112,7 +112,7 @@ import {
         component: PageComponent
       }, {
         "path": '',
-        component: DashboardComponent
+        component: DirectoryComponent
       }
     ])
 

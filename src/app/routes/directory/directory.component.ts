@@ -5,10 +5,10 @@ import { RequestService } from "../../RequestService/requests";
 import { GENERAL_SEARCH_FIELD } from "../../shared/fields";
 
 @Component({
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './directory.component.html',
+  styleUrls: ['./directory.component.css']
 })
-export class DashboardComponent {
+export class DirectoryComponent {
   searchText: string;
   featureds: any = [];
   events: any = [];
