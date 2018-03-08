@@ -14,7 +14,7 @@ export class SearchComponent {
   criteria: string[][] = [];
   categories: string[] = [];
   departments: string[] = [];
-  query: string;
+  searchResults: any;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     // check for query params in url
@@ -52,11 +52,16 @@ export class SearchComponent {
   }
 
   search() {
-    let tempstring = '';
+    // build query string
+    let query = '';
     for (let value of this.criteria) {
-      tempstring += value[0] + "=" + value[1] + ";";
+      query += value[0] + "=" + value[1] + ";";
     }
-    tempstring.slice(0, -1);
-    this.query = tempstring;
+    query.slice(0, -1);
+
+    // run search
+    this.requestService.get('/pages/search?' + query, (data) => {
+      this.searchResults = data.results.reverse();
+    }, null)
   }
 }

@@ -1,0 +1,22 @@
+<h1>Directory</h1>
+<!-- search -->
+<h2>Search</h2>
+<input [(ngModel)]="searchText" (keyUp.enter)="search()" />
+<button (click)="search()">Search</button>
+
+<!-- featureds -->
+<div *ngIf="featureds.length > 0">
+  <h2>Featured</h2>
+  <page-scroll-cards [requestData]=featureds showMeta="1"></page-scroll-cards>
+</div>
+<!-- events -->
+<div *ngIf="events.length > 0">
+  <h2>Events</h2>
+  <page-scroll-cards [requestData]=events showMeta="0"></page-scroll-cards>
+</div>
+<!-- categories -->
+<h2>Categories</h2>
+<field-scroll-cards [requestData]=categories searchKey="category" [sort]="true"></field-scroll-cards>
+<!-- departments -->
+<h2>Departments</h2>
+<field-scroll-cards [requestData]=departments searchKey="department" [sort]="true"></field-scroll-cards>
