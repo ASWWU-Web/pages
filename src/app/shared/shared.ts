@@ -1,3 +1,4 @@
+export * from './page/page.component';
 export * from './profile-sm/profile-sm.component';
 export * from './profile.model';
 export * from './nav-bar/nav-bar.component';
@@ -11,3 +12,4 @@ export * from './page-card/page-card.component'
 export * from './unescape';
 export * from './bypassSecurityPipe';
 export * from './fields';
+export * from './footer/footer.component';

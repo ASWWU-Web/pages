@@ -13,7 +13,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { RequestService } from './RequestService/requests';
 import { AppComponent } from './app.component';
 import {
-  PageComponent,
+  ViewPageComponent,
   EditComponent,
   RevisionsComponent,
   AdminComponent,
@@ -22,6 +22,7 @@ import {
   SearchComponent
 } from './routes/routes';
 import {
+  PageComponent,
   ProfileSmComponent,
   NavBarComponent,
   UserBubbleComponent,
@@ -32,7 +33,9 @@ import {
   PagesScrollCardsComponent,
   SearchScrollCardsComponent,
   PageResultsComponent,
-  PageCardComponent
+  PageCardComponent,
+  PageCardComponent,
+  FooterComponent
 } from './shared/shared';
 
 
@@ -56,6 +59,8 @@ import {
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
+    FooterComponent,
+    ViewPageComponent,
     SearchComponent,
     PageResultsComponent
   ],
@@ -92,9 +97,9 @@ import {
       }, {
         // MUST BE LAST
         'path': ':pageURL',
-        component: PageComponent
+        component: ViewPageComponent
       }, {
-        "path": '',
+        'path': '',
         component: DashboardComponent
       }
     ])
