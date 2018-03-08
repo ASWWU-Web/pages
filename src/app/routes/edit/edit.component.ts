@@ -19,7 +19,25 @@ export class EditComponent implements OnInit {
   public options: Object = {
     imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
     imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images',
-    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'insert_profile'],
+    toolbarButtons: [
+      'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough',
+      'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color',
+      'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align',
+      'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink',
+      'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|',
+      'emoticons', 'specialCharacters', 'insertHR', 'selectAll',
+      'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo',
+      '|', 'insert_profile'
+    ],
+    toolbarButtonsSM: [
+      'fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize',
+      'insertLink', 'insertImage', 'insertTable', 'undo', 'redo',
+      '|', 'insert_profile'
+    ],
+    toolbarButtonsXS: [
+      'bold', 'italic', 'fontFamily', 'fontSize', 'undo', 'redo',
+      '|', 'insert_profile'
+    ],
   };
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
