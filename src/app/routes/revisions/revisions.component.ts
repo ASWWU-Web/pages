@@ -22,6 +22,11 @@ export class RevisionsComponent {
     this.getAllRevisions();
   }
 
+  getDateTimeCreated(datetime) {
+    let date = new Date(datetime);
+    return date.toLocaleString();
+  }
+
   loadRevision(id) {
     if (id == null) {
       this.current = true;
