@@ -21,14 +21,23 @@ export class CollegianComponent {
 
       // get pages from the past week
       let currentTime = Date.now();
-      for (let page of this.archives) {
-        let pageTime = Date.parse(page.created);
-        if (currentTime - pageTime < 604800000) { // 1 week is 604800000 milliseconds
-          this.thisWeek.push(page);
+      for (let i = 0; i < this.archives.length; i++) {
+        let pageTime = Date.parse(this.archives[i].created);
+        if (currentTime - pageTime < 604800000) {  // 1 week is 604800000 milliseconds
+          this.thisWeek.push(this.archives[i]);
         } else {
+          this.archives.splice(0, i);
           break;
         }
       }
     }, null)
+  }
+
+  search() {
+    this.router.navigate(['/search'], {
+      queryParams: {
+        'department': 'Collegian', 'title': this.searchText
+      }
+    });
   }
 }

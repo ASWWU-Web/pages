@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, Routes, ActivatedRoute } from '@angular/router';
+import { Router, Routes, ActivatedRoute, RouterModule, NavigationExtras } from '@angular/router';
 
 import { RequestService } from "../../RequestService/requests";
 import { GENERAL_SEARCH_FIELD } from "../../shared/fields";
@@ -34,9 +34,11 @@ export class DashboardComponent {
     }, null)
   }
 
-  queryJson() {
+  search() {
     let json = {};
     json[GENERAL_SEARCH_FIELD] = this.searchText;
-    return json;
+    this.router.navigate(['/search'], {
+      queryParams: json
+    });
   }
 }
