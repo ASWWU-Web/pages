@@ -13,7 +13,7 @@ export class PageResultsComponent implements OnChanges {
 
   ngOnChanges() {
     // sort data based on title
-    if (this.requestData.length > 0 && this.sort) {
+    if (this.requestData != null && this.sort) {
       this.requestData = this.requestData.sort((a, b) => {
         if(a['title'] < b['title']) return -1;
         if(a['title'] > b['title']) return 1;

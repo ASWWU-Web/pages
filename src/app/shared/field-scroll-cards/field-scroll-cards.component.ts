@@ -13,7 +13,7 @@ export class FieldScrollCardsComponent implements OnChanges {
 
   ngOnChanges() {
     // sort data based on searchKey
-    if (this.requestData.length > 0 && this.sort) {
+    if (this.requestData != null && this.sort) {
       this.requestData = this.requestData.sort((a, b) => {
         if(a[this.searchKey] < b[this.searchKey]) return -1;
         if(a[this.searchKey] > b[this.searchKey]) return 1;
