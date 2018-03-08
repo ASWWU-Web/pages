@@ -7,7 +7,7 @@
     </select>
 
     <!-- input field -->
-    <input *ngIf="criteria[i][0] != 'category' && criteria[i][0] != 'department'" [(ngModel)]="criteria[i][1]" />
+    <input *ngIf="criteria[i][0] != 'category' && criteria[i][0] != 'department'" [(ngModel)]="criteria[i][1]" (keyUp.enter)="search()" />
     <select *ngIf="criteria[i][0] == 'category'" [(ngModel)]="criteria[i][1]">
       <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
     </select>
