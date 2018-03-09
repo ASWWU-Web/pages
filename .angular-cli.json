@@ -22,7 +22,8 @@
         "styles.css",
         "../node_modules/froala-editor/css/froala_editor.pkgd.min.css",
         "../node_modules/froala-editor/css/froala_style.min.css",
-        "../node_modules/font-awesome/css/font-awesome.css"
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "assets/font-awesome-4.7.0/css/font-awesome.min"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
