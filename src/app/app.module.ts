@@ -111,6 +111,7 @@ import {
         "path": 'collegian',
         component: CollegianComponent
       }, {
+        // MUST BE LAST
         'path': ':pageURL',
         component: ViewPageComponent
       }, {
