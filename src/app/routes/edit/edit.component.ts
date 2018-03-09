@@ -53,6 +53,10 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Set CURRENT_YEAR and SERVER_URL variable in local storage
+    localStorage.setItem("CURRENT_YEAR", CURRENT_YEAR);
+    localStorage.setItem("SERVER_URL", environment.SERVER_URL);
+
         // Define popup template.
     $.extend($.FroalaEditor.POPUP_TEMPLATES, {
       'customPlugin.popup': '[_BUTTONS_][_CUSTOM_LAYER_]'
@@ -173,7 +177,7 @@ export class EditComponent implements OnInit {
       undo: false,
       focus: false,
       callback: function () {
-        $.get("http://localhost:8888/profile/1718/" + $('#usr').val(), (data, status) => {
+        $.get(localStorage.getItem("SERVER_URL") + "/profile/" + localStorage.getItem("CURRENT_YEAR") + "/" + $('#usr').val(), (data, status) => {
             if (! data.hasOwnProperty('username')) {
               alert("Profile not found!")
               return;
