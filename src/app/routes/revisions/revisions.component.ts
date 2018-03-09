@@ -8,7 +8,7 @@ import { RequestService } from "../../RequestService/requests";
   styleUrls: ['./revisions.component.css']
 })
 export class RevisionsComponent {
-  revisions: any;
+  revisions: any[];
   pageURL: string;
   revisionURL: string;
   currentSelected: boolean = true;
@@ -47,11 +47,17 @@ export class RevisionsComponent {
   }
 
   restoreRevision() {
-    this.requestService.post(this.revisionURL, {}, (data)=> {
-      this.getAllRevisions();
-      this.loadRevision(null);
-    }, (error) => {
-      alert(error.message);
-    });
+    if(confirm("Are you sure you want to revert to this page?")) {
+      this.requestService.post(this.revisionURL, {}, (data)=> {
+        if (data.status === "Revision Restored") {
+          this.getAllRevisions();
+          this.loadRevision(null);
+        } else {
+          alert("Something went wrong.");
+        }
+      }, (error) => {
+        alert("Something went wrong.");
+      });
+    }
   }
 }
