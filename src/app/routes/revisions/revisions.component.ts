@@ -60,4 +60,8 @@ export class RevisionsComponent {
       });
     }
   }
+
+  backToEdit() {
+    this.router.navigate(['/admin/edit/', this.pageURL]);
+  }
 }
