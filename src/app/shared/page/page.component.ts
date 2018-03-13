@@ -28,6 +28,7 @@ export class PageComponent implements OnChanges {
       this.page = {
         'title': 'Something went wrong',
         'content': '<h3> There was a problem getting that page for you 🤷 </h3> ' + error.message,
+        'owner': 'error',
       };
     });
   }
@@ -36,7 +37,15 @@ export class PageComponent implements OnChanges {
     if (this.continue) {
       document.getElementById('content').innerHTML = this.page.content;
       this.continue = false;
-      this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.page.owner), (data) => this.owner = data, null );
+      if ( this.page.owner !== 'error') {
+        this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.page.owner), (data) => this.owner = data, null );
+      } else {
+        this.owner = {
+          'full_name': 'The ASWWU Web Team',
+          'photo': 'images/mask_unknown.png',
+          'email': 'aswwu.webmaster@wallawalla.edu',
+        };
+      }
     }
     return null;
   }
