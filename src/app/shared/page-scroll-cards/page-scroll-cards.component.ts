@@ -1,12 +1,12 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
-  selector: 'page-results',
-  templateUrl: './page-results.component.html',
-  styleUrls: ['./page-results.component.css'],
+  selector: 'page-scroll-cards',
+  templateUrl: './page-scroll-cards.component.html',
+  styleUrls: ['./page-scroll-cards.component.css']
 })
 
-export class PageResultsComponent implements OnChanges {
+export class PageScrollCardsComponent {
   @Input() requestData: any;
   @Input() showMeta: boolean;
   @Input() sort: boolean = false;

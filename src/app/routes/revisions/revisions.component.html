@@ -1,8 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-6 offset-md-3 text-center">
-      <h1>Revisions</h1>
+    <page class="col" requestURL="{{revisionURL}}"></page>
+    <div class="col">
+      <div *ngFor="let revision of revisions">
+        <i *ngIf="(revision.id == loadedID) || (revision.current && currentSelected)" class="fas fa-arrow-right"></i>
+        <button *ngIf="!revision.current" (click)="loadRevision(revision.id)">{{getDateTime(revision.last_updated)}}</button>
+        <button *ngIf="revision.current" (click)="loadRevision(null)">Current</button>
+      </div>
     </div>
   </div>
-
+  <button (click)="restoreRevision()" [disabled]="currentSelected">Restore</button>
 </div>
