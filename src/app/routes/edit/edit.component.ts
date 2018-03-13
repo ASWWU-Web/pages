@@ -55,7 +55,7 @@ export class EditComponent implements OnInit {
     this.requestService.get('/pages/departments', (data)=> {
       this.departments = data.departments;
     }, null)
-    this.requestService.get('/pages/tags/', (data) => this.allTags = data, null);
+    this.requestService.get('/pages/tags', (data) => this.allTags = data.tags, null);
     this.requestService.get('/search/all', (data) => {
       this.allUsers = data.results.map((user)=> {
         user.value = user.username;
