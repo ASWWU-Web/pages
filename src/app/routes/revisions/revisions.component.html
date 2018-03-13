@@ -3,14 +3,18 @@
   <div class="row">
     <page class="col-9" requestURL="{{revisionURL}}"></page>
     <div class="col-3 list-group">
-      <button [ngStyle]="getStyle(currentRevisionID)" (click)="loadRevision(currentRevisionID)" class="list-group-item list-group-item-action">Current</button>
-      <button [ngStyle]="getStyle(revision.id)" *ngFor="let revision of revisions" (click)="loadRevision(revision.id)" class="list-group-item list-group-item-action">{{getDateTime(revision.last_updated)}}</button>
+      <button [ngStyle]="getStyle(currentRevisionID)" (click)="loadRevision(currentRevisionID)" class="list-group-item list-group-item-action">
+        Current
+      </button>
+      <button [ngStyle]="getStyle(revision.id)" *ngFor="let revision of revisions" (click)="loadRevision(revision.id)" class="list-group-item list-group-item-action">
+        {{getDateTime(revision.last_updated)}}
+      </button>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12 w-100">
-      <a [routerLink]="['/admin/edit', pageURL]" class="btn btn-light">Back to Edit</a>
-      <button (click)="restoreRevision()" [disabled]="viewingRevisionID == currentRevisionID" class="btn btn-success float-right">Restore</button>
+      <a [routerLink]="['/admin/edit', pageURL]" class="btn btn-light">Edit Page</a>
+      <button (click)="restoreRevision()" [disabled]="viewingRevisionID == currentRevisionID" class="btn btn-success float-right">Restore Revision</button>
     </div>
   </div>
 </div>

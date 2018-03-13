@@ -24,7 +24,8 @@ export class RevisionsComponent {
 
   getDateTime(datetime) {
     let date = new Date(datetime);
-    return date.toLocaleString();
+    let options = { 'month': 'long', 'day': 'numeric', 'year': 'numeric', 'hour': 'numeric', 'minute': 'numeric' };
+    return date.toLocaleString('en-US', options);
   }
 
   reloadRevisions() {
