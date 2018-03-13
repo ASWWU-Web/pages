@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0",
     "angular-froala-wysiwyg": "^2.7.5",
     "core-js": "^2.4.1",
+    "font-awesome": "^4.7.0",
     "ngx-chips": "^1.6.5",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.19"
