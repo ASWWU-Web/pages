@@ -1,22 +1,28 @@
 <div *ngIf="page" class="container-fluid p-0">
-  <div class="w-100" style="height:15rem;"> <!-- TITLE SECTION -->
+  <div class="w-100 bg-success" style="height:15rem;"> <!-- TITLE SECTION -->
     <h1 class="text-center text-light text-uppercase m-0" style="line-height:15rem;">
       {{ page.title }}
     </h1>
   </div>
   
-  <div id="content" class=" container"> <!-- CONTENT SECTION -->
+  <div id="content" class=" mt-3 container"> <!-- CONTENT SECTION -->
     {{ loadContent() }}
   </div>
 
-  <div class="w-100 " style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->
+  <div class="w-100 bg-success" style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->
     <h1 class="text-center m-0" style="line-height:15rem;"></h1>
   </div>
 
-  <div class="container pl-md-5 pr-md-5" style="height:5rem;"> <!-- AUTHOR SECTION -->
-    <div class="row h-100">
-      <div class="col col-md-1 offset-md-3 align-middle"><div class="mx-auto" style="height:50px;width:50px;border-style:solid;border-color:black;border-radius:50%;"> <!-- AUTHOR'S IMAGE--> </div></div>
-      <div class="col col-md-5"><p> --- is the author of this page</p></div>
+  <div class="container" style=""> <!-- AUTHOR SECTION -->
+    <div class="row pt-3 pb-3" style="">
+      <div class="col">
+        <div class="float-left h-100"><div class="mr-3 d-inline-block" style="height:50px;width:50px;border-radius:50%;overflow:hidden;"><img class="" src="{{ MEDIA_XS + '/' + owner.photo }}"></div></div>
+        <div class="d-inline-block align-middle">
+          <h6 class="m-0">{{ owner.full_name }}</h6>
+          <a class="m-0" href="mailto:">{{ owner.email }}</a>
+        </div>
+        
+      </div>
     </div>
   </div>
   
