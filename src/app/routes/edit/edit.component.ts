@@ -218,7 +218,7 @@ export class EditComponent implements OnInit {
 
   preview() {
     this.save(() => {
-      this.router.navigate([this.page.url]);
+      this.router.navigate(['admin/' + this.page.url]);
     })
   }
 }
