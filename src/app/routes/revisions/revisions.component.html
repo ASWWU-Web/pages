@@ -1,14 +1,15 @@
 <div class="container">
-  <button (click)="backToEdit()">Back to Edit</button>
+  <h1>Revisions</h1>
   <div class="row">
-    <page class="col" requestURL="{{revisionURL}}"></page>
-    <div class="col">
-      <div *ngFor="let revision of revisions">
-        <i *ngIf="(revision.id == loadedID) || (revision.current && currentSelected)" class="fas fa-arrow-right"></i>
-        <button *ngIf="!revision.current" (click)="loadRevision(revision.id)">{{getDateTime(revision.last_updated)}}</button>
-        <button *ngIf="revision.current" (click)="loadRevision(null)">Current</button>
-      </div>
+    <page class="col-9" requestURL="{{revisionURL}}"></page>
+    <div class="col-3 list-group">
+      <a *ngFor="let revision of revisions" (click)="loadRevision(revision.id)" class="list-group-item list-group-item-action list-group-item-primary">{{getDateTime(revision.last_updated)}}</a>
     </div>
   </div>
-  <button (click)="restoreRevision()" [disabled]="currentSelected">Restore</button>
+  <div class="row">
+    <div class="col-sm-12 w-100">
+      <a [routerLink]="['/admin/edit', pageURL]" class="btn btn-light">Back to Edit</a>
+      <button (click)="restoreRevision()" [disabled]="viewingRevisionID == currentRevisionID" class="btn btn-success float-right">Restore</button>
+    </div>
+  </div>
 </div>

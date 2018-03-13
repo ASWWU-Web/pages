@@ -11,16 +11,15 @@ export class RevisionsComponent {
   revisions: any[];
   pageURL: string;
   revisionURL: string;
-  currentSelected: boolean = true;
-  loadedID: string;
+  viewingRevisionID: string;
+  currentRevisionID: string;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     // get page URL
     this.route.params.subscribe((params) => {
       this.pageURL = params.pageURL;
-      this.loadRevision(null);
     });
-    this.getAllRevisions();
+    this.reloadRevisions();
   }
 
   getDateTime(datetime) {
@@ -28,30 +27,25 @@ export class RevisionsComponent {
     return date.toLocaleString();
   }
 
-  loadRevision(id) {
-    if (id == null) {
-      this.loadedID = null;
-      this.currentSelected = true;
-      this.revisionURL = '/pages/' + this.pageURL;
-    } else {
-      this.loadedID = id;
-      this.currentSelected = false;
-      this.revisionURL = '/pages/admin/' + this.pageURL + '/revision/' + id;
-    }
-  }
-
-  getAllRevisions() {
+  reloadRevisions() {
     this.requestService.get('/pages/admin/' + this.pageURL + '/revision', (data) => {
       this.revisions = data.results.reverse();
+      this.viewingRevisionID = this.revisions[0].id;
+      this.currentRevisionID = this.revisions[0].id;
+      this.loadRevision(this.currentRevisionID);
     }, null);
+  }
+
+  loadRevision(id) {
+    this.viewingRevisionID = id;
+    this.revisionURL = '/pages/admin/' + this.pageURL + '/revision/' + id;
   }
 
   restoreRevision() {
     if(confirm("Are you sure you want to revert to this page?")) {
       this.requestService.post(this.revisionURL, {}, (data)=> {
         if (data.status === "Revision Restored") {
-          this.getAllRevisions();
-          this.loadRevision(null);
+          this.reloadRevisions();
         } else {
           alert("Something went wrong.");
         }
@@ -59,9 +53,5 @@ export class RevisionsComponent {
         alert("Something went wrong.");
       });
     }
-  }
-
-  backToEdit() {
-    this.router.navigate(['/admin/edit/', this.pageURL]);
   }
 }
