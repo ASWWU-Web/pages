@@ -18,6 +18,7 @@ import {
   RevisionsComponent,
   AdminComponent,
   AdminCreateComponent,
+  AdminViewComponent,
   DirectoryComponent,
   SearchComponent,
   DepartmentsComponent,
@@ -62,6 +63,7 @@ import {
     PageCardComponent,
     AdminComponent,
     AdminCreateComponent,
+    AdminViewComponent,
     SearchComponent,
     PageResultsComponent,
     DepartmentsComponent,
@@ -95,6 +97,9 @@ import {
       }, {
         'path': 'admin/edit/:pageURL/revisions',
         component: RevisionsComponent
+      }, {
+        'path': 'admin/:pageURL',
+        component: AdminViewComponent
       }, {
         "path": 'search',
         component: SearchComponent
