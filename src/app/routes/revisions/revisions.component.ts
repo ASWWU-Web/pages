@@ -32,6 +32,7 @@ export class RevisionsComponent {
       this.revisions = data.results.reverse();
       this.viewingRevisionID = this.revisions[0].id;
       this.currentRevisionID = this.revisions[0].id;
+      this.revisions.splice(0, 1);
       this.loadRevision(this.currentRevisionID);
     }, null);
   }
@@ -52,6 +53,20 @@ export class RevisionsComponent {
       }, (error) => {
         alert("Something went wrong.");
       });
+    }
+  }
+
+  getStyle(id) {
+    if (id == this.viewingRevisionID) {
+      return {
+        'color': 'white',
+        'background-color': '#007bff',
+        'z-index': 1
+      };
+    } else {
+      return {
+        'z-index': 0
+      };
     }
   }
 }
