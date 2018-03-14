@@ -8,3 +8,4 @@ export * from './departments/departments.component';
 export * from './events/events.component';
 export * from './collegian/collegian.component';
 export * from './view-page/view-page.component';
+export * from './admin-view/admin-view.component';
