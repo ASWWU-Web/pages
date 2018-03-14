@@ -67,6 +67,40 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.froalaSetup()
+  }
+
+  save(onSucessfulSave) {
+    // Remove unwanted attributes from JSON.
+    let ignoredKeys = ["updated_at", "current", "created", "url", "editors"];
+    let filteredPage = Object.assign({}, this.page);
+    for(let i in ignoredKeys){
+      delete filteredPage[ignoredKeys[i]];
+    }
+
+    //Add editors as an array of username strings.
+    filteredPage.editors = this.editors.map((user: any) => {
+      if (typeof(user) == "string") { return user }
+      return user.username;
+    })
+
+    // Send New Page to server.
+    this.requestService.post('/pages/admin/' + this.page.url, filteredPage, (data)=> {
+      if(onSucessfulSave && typeof(onSucessfulSave) == "function") {
+        onSucessfulSave()
+      }
+    }, (error) => {
+      alert(error.message);
+    });
+  }
+
+  preview() {
+    this.save(() => {
+      this.router.navigate([this.page.url]);
+    })
+  }
+  
+  froalaSetup() {
     // Set CURRENT_YEAR and SERVER_URL variable in local storage
     localStorage.setItem("CURRENT_YEAR", CURRENT_YEAR);
     localStorage.setItem("SERVER_URL", environment.SERVER_URL);
@@ -210,35 +244,5 @@ export class EditComponent implements OnInit {
         );
       }
     });
-  }
-
-  save(onSucessfulSave) {
-    // Remove unwanted attributes from JSON.
-    let ignoredKeys = ["updated_at", "current", "created", "url", "editors"];
-    let filteredPage = Object.assign({}, this.page);
-    for(let i in ignoredKeys){
-      delete filteredPage[ignoredKeys[i]];
-    }
-
-    //Add editors as an array of username strings.
-    filteredPage.editors = this.editors.map((user: any) => {
-      if (typeof(user) == "string") { return user }
-      return user.username;
-    })
-
-    // Send New Page to server.
-    this.requestService.post('/pages/admin/' + this.page.url, filteredPage, (data)=> {
-      if(onSucessfulSave && typeof(onSucessfulSave) == "function") {
-        onSucessfulSave()
-      }
-    }, (error) => {
-      alert(error.message);
-    });
-  }
-
-  preview() {
-    this.save(() => {
-      this.router.navigate(['admin/' + this.page.url]);
-    })
   }
 }
