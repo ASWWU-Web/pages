@@ -1,3 +1,8 @@
-button {
+.revision-list {
+  max-width: 300px;
+}
+
+.revision-list > button {
   outline: none;
+  cursor: pointer;
 }
