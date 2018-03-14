@@ -48,6 +48,7 @@ export class RevisionsComponent {
       this.requestService.post(this.revisionURL, {}, (data)=> {
         if (data.status === "Revision Restored") {
           this.reloadRevisions();
+          alert("Revision restored.")
         } else {
           alert("Something went wrong.");
         }
