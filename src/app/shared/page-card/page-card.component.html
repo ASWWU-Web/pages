@@ -1,4 +1,4 @@
-<div class="card p-4 text-center col-3">
+<div class="card p-4 text-center mb-4">
   <!-- title and description -->
   <div class="card-block">
     <h4 class="card-title"><a routerLink="/{{page.url}}">{{page['title']}}</a></h4>
@@ -8,7 +8,7 @@
   <div *ngIf="showMeta == 1" class="card-block">
     <hr />
     <!-- TODO: show author photo thumbnail -->
-    <p>By: {{getAuthor()}}</p>
-    <p>Date: {{getDateCreated()}}</p>
+    <p class="text-left text-muted">{{getAuthor()}}</p>
+    <p class="text-right text-muted">{{getDateCreated()}}</p>
   </div>
 </div>

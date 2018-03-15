@@ -1,5 +1,5 @@
-<div class="card-columns row">
-  <div *ngFor="let item of requestData" class="card p-4 text-center col-3">
+<div class="card-deck">
+  <div *ngFor="let item of requestData" class="card p-4 text-center col-4 mb-4">
     <div class="card-block">
       <h4 class="card-title"><a [routerLink]="['/search']" [queryParams]="queryJson(item)">{{item[searchKey]}}</a></h4>
       <p class="card-text">{{item['description']}}</p>

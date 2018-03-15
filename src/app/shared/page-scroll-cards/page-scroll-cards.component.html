@@ -1,3 +1,3 @@
-<div class="card-columns row">
-  <page-card *ngFor="let page of requestData" [page]="page" [showMeta]="showMeta"></page-card>
+<div class="card-deck">
+  <page-card *ngFor="let page of requestData" [page]="page" [showMeta]="showMeta" class="col-4"></page-card>
 </div>
