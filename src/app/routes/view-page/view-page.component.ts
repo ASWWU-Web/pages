@@ -12,7 +12,7 @@ export class ViewPageComponent implements OnInit {
   constructor( private route: ActivatedRoute ) {
     this.route.params.subscribe( (params) => this.pageURL = params.pageURL );
 
-   }
+  }
 
   ngOnInit() {
   }
