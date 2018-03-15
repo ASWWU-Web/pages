@@ -81,18 +81,18 @@
         </select>
       </div>
     </div>
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-6 mb-3">
       <label for="coverImage">Cover Image</label>
       <div class="custom-file">
         <input type="file" class="custom-file-input" accept="image/*" (change)="imageHandler($event)" id="coverImage">
         <label class="custom-file-label" for="customFile">Choose file</label>
       </div>
-      <img id="coverImagePreview" [src]="serverURL + '/' + page.cover_image" />
+      <img *ngIf="page.cover_image" id="coverImagePreview" class="img-fluid rounded mt-3" src="{{getCoverImage(page.cover_image, media_sm)}}" />
     </div>
     <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea [(ngModel)]="page.description" type="text" class="form-control" id="description"></textarea>
+        <textarea [(ngModel)]="page.description" type="text" class="form-control" rows="1" id="description"></textarea>
       </div>
     </div>
   </div>
