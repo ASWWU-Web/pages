@@ -1,7 +1,8 @@
 import { Component, OnChanges, Input } from '@angular/core';
-import { RequestService } from '../../RequestService/requests';
+import { Router } from '@angular/router';
 
 import { ViewPageComponent } from '../../routes/routes';
+import { RequestService } from '../../RequestService/requests';
 import { CURRENT_YEAR, MEDIA_XS } from '../../config';
 
 @Component({
@@ -14,16 +15,22 @@ export class PageComponent implements OnChanges {
 
   page: any;
   continue = true;
-  owner: any;
-  MEDIA_XS = MEDIA_XS;
+  owner = {
+    'full_name': 'ASWWU',
+    'photo': 'images/mask_unknown.png',
+    'email': 'aswwu.webmaster@wallawalla.edu',
+  };
+  MEDIA = MEDIA_XS;
+  isEditor = false;
 
-  constructor( private request: RequestService ) {
+  constructor( private request: RequestService, private router: Router ) {
   }
 
   ngOnChanges() {
     this.request.get( (this.requestURL), (data) => {
       this.page = data;
       this.continue = true;
+      this.setIsEditor();
     }, (error) => {
       this.page = {
         'title': 'Something went wrong',
@@ -38,7 +45,13 @@ export class PageComponent implements OnChanges {
       document.getElementById('content').innerHTML = this.page.content;
       this.continue = false;
       if ( this.page.owner !== 'error') {
-        this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.page.owner), (data) => this.owner = data, null );
+        this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.page.owner), (data) => this.owner = data, (error) => {
+          this.owner = {
+            'full_name': this.page.owner.replace(/./g, ' '),
+            'photo': 'images/mask_unknown.png',
+            'email': 'aswwu.webmaster@wallawalla.edu',
+          };
+        } );
       } else {
         this.owner = {
           'full_name': 'The ASWWU Web Team',
@@ -48,6 +61,14 @@ export class PageComponent implements OnChanges {
       }
     }
     return null;
+  }
+
+  goToEdit() {
+    this.router.navigate(['admin/edit', this.page.url]);
+  }
+
+  setIsEditor() {
+    this.request.verify( (data) => this.isEditor = this.page.editors.includes(data.username) || (this.page.owner === data.username));
   }
 
 }
