@@ -21,6 +21,7 @@ export class PageComponent implements OnChanges {
     'email': 'aswwu.webmaster@wallawalla.edu',
   };
   MEDIA = MEDIA_XS;
+  MASK = 'https://aswwu.com/#/profile';
   isEditor = false;
 
   constructor( private request: RequestService, private router: Router ) {
