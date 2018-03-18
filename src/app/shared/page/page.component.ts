@@ -23,6 +23,8 @@ export class PageComponent implements OnChanges {
   MEDIA = MEDIA_XS;
   MASK = 'https://aswwu.com/#/profile';
   isEditor = false;
+  pageProfile: string;
+  errorPage = false;
 
   constructor( private request: RequestService, private router: Router ) {
   }
@@ -36,15 +38,17 @@ export class PageComponent implements OnChanges {
       this.page = {
         'title': 'Something went wrong',
         'content': '<h3> There was a problem getting that page for you 🤷 </h3> ' + error.message,
-        'owner': 'error',
       };
+      this.errorPage = true;
     });
   }
 
   loadContent() {
     if (this.continue) {
       document.getElementById('content').innerHTML = this.page.content;
+      this.setPageProfile();
       this.continue = false;
+
       if ( this.page.owner !== 'error') {
         this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.page.owner), (data) => this.owner = data, (error) => {
           this.owner = {
@@ -72,4 +76,15 @@ export class PageComponent implements OnChanges {
     this.request.verify( (data) => this.isEditor = this.page.editors.includes(data.username) || (this.page.owner === data.username));
   }
 
+  setPageProfile () {
+    if (!this.errorPage) {
+      if (this.page.category === 'article') {
+        this.pageProfile = this.page.author;
+      } else {
+        this.pageProfile = this.page.owner;
+      }
+    } else {
+      this.pageProfile = undefined;
+    }
+  }
 }
