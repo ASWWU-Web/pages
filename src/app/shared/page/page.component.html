@@ -1,14 +1,13 @@
 <div *ngIf="page" class="container-fluid p-0">
-  
   <div class="w-100 bg-success" style="height:15rem;"> <!-- TITLE SECTION -->
     <button *ngIf="isEditor" (click)="goToEdit()" type="button" class="btn btn-primary position-absolute m-3">Edit</button>
     <h1 class="text-center text-light text-uppercase m-0" style="line-height:15rem;">
       {{ page.title }}
     </h1>
   </div>
-  
-  <div id="content" class="mb-3 mt-3 container"> <!-- CONTENT SECTION -->
-    {{ loadContent() }}
+
+  <div id="content" class="mb-3 mt-3 container" [innerHTML]="page?.content | bypassSecurity: 'html'"> <!-- CONTENT SECTION -->
+    <!-- {{ loadContent() }} -->
   </div>
 
   <div id="author" class="container mb-3 mt-5 pl-md-5"> <!-- AUTHOR SECTION -->
@@ -18,6 +17,5 @@
   <div class="w-100 bg-success" style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->
     <h1 class="text-center m-0" style="line-height:15rem;"></h1>
   </div>
-  
-</div>
 
+</div>

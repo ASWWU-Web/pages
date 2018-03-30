@@ -2,6 +2,7 @@ import { Component, OnChanges, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ViewPageComponent } from '../../routes/routes';
+import { BypassSecurityPipe } from '../bypassSecurityPipe';
 import { RequestService } from '../../RequestService/requests';
 import { CURRENT_YEAR, MEDIA_XS } from '../../config';
 
