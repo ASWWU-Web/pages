@@ -4,7 +4,6 @@
     align-items: center;
     overflow: hidden;
     max-height: 150px;
-    border-radius: 50%;
 }
 #coverImagePreview img {
     flex-shrink: 0;
