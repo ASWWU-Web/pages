@@ -1,10 +1,12 @@
 import { Component, OnChanges, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgStyle } from '@angular/common';
 
 import { ViewPageComponent } from '../../routes/routes';
 import { BypassSecurityPipe } from '../bypassSecurityPipe';
 import { RequestService } from '../../RequestService/requests';
-import { CURRENT_YEAR, MEDIA_XS } from '../../config';
+import { CURRENT_YEAR, MEDIA_XS, MEDIA_LG, MEDIA_MD } from '../../config';
+import { resolveCoverImage } from '../../shared/shared';
 
 @Component({
   selector: 'page',
@@ -14,6 +16,7 @@ import { CURRENT_YEAR, MEDIA_XS } from '../../config';
 export class PageComponent implements OnChanges {
   @Input() requestURL: string;
 
+  coverImage: any;
   page: any;
   continue = true;
   owner = {
@@ -21,7 +24,9 @@ export class PageComponent implements OnChanges {
     'photo': 'images/mask_unknown.png',
     'email': 'aswwu.webmaster@wallawalla.edu',
   };
-  MEDIA = MEDIA_XS;
+  MEDIA_XS = MEDIA_XS;
+  MEDIA_LG = MEDIA_LG;
+  MEDIA_MD = MEDIA_MD;
   MASK = 'https://aswwu.com/#/profile';
   isEditor = false;
   pageProfile: string;
@@ -34,7 +39,9 @@ export class PageComponent implements OnChanges {
     this.request.get( (this.requestURL), (data) => {
       this.page = data;
       this.continue = true;
+      this.coverImage = resolveCoverImage(this.page.cover_image, this.MEDIA_LG);
       this.setIsEditor();
+      this.setPageProfile();
     }, (error) => {
       this.page = {
         'title': 'Something went wrong',

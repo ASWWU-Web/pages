@@ -132,6 +132,16 @@ export class RequestService {
       );
   }
 
+  uploadImage(file:File, callback:Function, catchError:Function) {
+    let data = new FormData;
+    data.append('file', file, file.name);
+    let request = this.createRequest("/pages/media/upload_image");
+    this.http.post(request.url, data).subscribe(
+      data => callback(data),
+      err => (catchError ? catchError(err) : console.log(err))
+    );
+  }
+
   isLoggedOn(): boolean {
     //Returns true if authUser is defined, false otherwise.
     return this.isLoggedIn;

@@ -3,7 +3,8 @@ import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { environment } from "../../../environments/environment";
 import { RequestService } from "../../RequestService/requests";
-import { CURRENT_YEAR } from "../../config";
+import { resolveCoverImage } from "../../shared/shared";
+import { CURRENT_YEAR, MEDIA_SM } from "../../config";
 declare var $: any;
 
 @Component({
@@ -17,6 +18,8 @@ export class EditComponent implements OnInit {
   allTags: string[] = [];     // TODO: get a list of tags from the server.
   editors: string[] = [];
   allUsers: any[] = [];
+  media_sm: string = MEDIA_SM;
+  public getCoverImage: any = resolveCoverImage;
 
   public options: Object = {
     imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
@@ -99,7 +102,16 @@ export class EditComponent implements OnInit {
       this.router.navigate([this.page.url]);
     })
   }
-  
+
+  imageHandler(event) {
+    var files = event.target.files;
+    if (files.length >= 1){
+      this.requestService.uploadImage(event.target.files[0], (data) => {
+        this.page.cover_image = data.media_URI;
+      }, (er) => console.log(er));
+    }
+  }
+
   froalaSetup() {
     // Set CURRENT_YEAR and SERVER_URL variable in local storage
     localStorage.setItem("CURRENT_YEAR", CURRENT_YEAR);

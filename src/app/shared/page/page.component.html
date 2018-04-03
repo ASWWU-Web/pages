@@ -1,5 +1,5 @@
 <div *ngIf="page" class="container-fluid p-0">
-  <div class="w-100 bg-success" style="height:15rem;"> <!-- TITLE SECTION -->
+  <div class="w-100 " [ngStyle]="{'background': ( 'url(' + coverImage + ')' )}" style="height:15rem;"> <!-- TITLE SECTION -->
     <button *ngIf="isEditor" (click)="goToEdit()" type="button" class="btn btn-primary position-absolute m-3">Edit</button>
     <h1 class="text-center text-light text-uppercase m-0" style="line-height:15rem;">
       {{ page.title }}
