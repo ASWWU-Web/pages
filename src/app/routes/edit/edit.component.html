@@ -7,7 +7,7 @@
 
   <!-- Input -->
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <label for="title">Title</label>
         <input [(ngModel)]="page.title" type="text" class="form-control" id="title">
@@ -15,14 +15,28 @@
     </div>
     <div class="col-sm-12 col-md-6">
       <div class="form-group">
+        <label for="isVisible">Visibility</label>
+        <select class="form-control" [(ngModel)]="page.is_visible" id="isVisible">
+          <option [ngValue]="false">Hidden (Not Published)</option>
+          <option [ngValue]="true">Visible (Published)</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
         <label for="Owner">Owner</label>
-        <input [(ngModel)]="page.owner" type="text" class="form-control" id="Owner">
+        <input [(ngModel)]="page.owner" list="users" class="form-control" id="Owner">
       </div>
     </div>
     <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <label for="author">Displayed Author</label>
-        <input [(ngModel)]="page.author" type="text" class="form-control" id="author">
+        <input [(ngModel)]="page.author" list="users" type="text" class="form-control" id="author">
+        <datalist id="users">
+          <option *ngFor="let user of allUsers" [value]="user.username" >
+            {{user.full_name}}
+          </option>
+        </datalist>
       </div>
     </div>
     <div class="col-sm-12 col-md-6">
@@ -67,34 +81,28 @@
         </select>
       </div>
     </div>
-    <div class="col-sm-12 col-md-6">
-      <div class="form-group">
-        <label for="isVisible">Visibility</label>
-        <select class="form-control" [(ngModel)]="page.is_visible" id="isVisible">
-          <option [ngValue]="false">Hidden (Not Published)</option>
-          <option [ngValue]="true">Visible (Published)</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-6 mb-3">
       <label for="coverImage">Cover Image</label>
       <div class="custom-file">
-        <input type="file" class="custom-file-input" id="coverImage">
+        <input type="file" class="custom-file-input" accept="image/*" (change)="imageHandler($event)" id="coverImage">
         <label class="custom-file-label" for="customFile">Choose file</label>
       </div>
     </div>
-  </div>
-
-  <!-- Description section -->
-  <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea [(ngModel)]="page.description" type="text" class="form-control" id="description"></textarea>
-        </div>
+        <textarea [(ngModel)]="page.description" type="text" class="form-control" rows="1" id="description"></textarea>
+      </div>
     </div>
   </div>
 
+  <div class="row">
+    <div id="coverImagePreview" class="ml-3 mr-3 rounded mb-3">
+      <img *ngIf="page.cover_image" class="img-fluid" src="{{getCoverImage(page.cover_image, media_sm)}}" />
+    </div>
+  </div>
+
+<!-- Froala Editor -->
   <div class="row">
     <div class="col-sm-12 mb-3">
       <div [(ngModel)]="page.content" [froalaEditor]="options"></div>
