@@ -1,5 +1,5 @@
 <div *ngIf="page" class="container-fluid p-0">
-  <div class="w-100 " [ngStyle]="{'background': ( 'url(' + coverImage + ')' )}" style="height:15rem;"> <!-- TITLE SECTION -->
+  <div class="w-100 bg-success" [ngStyle]="{'background': ( 'url(' + getCoverImage(page.cover_image, media_lg) + ')' )}" style="height:15rem;"> <!-- TITLE SECTION -->
     <button *ngIf="isEditor" (click)="goToEdit()" type="button" class="btn btn-primary position-absolute m-3">Edit</button>
     <h1 class="text-center text-light text-uppercase m-0" style="line-height:15rem;">
       {{ page.title }}
@@ -7,14 +7,13 @@
   </div>
 
   <div id="content" class="mb-3 mt-3 container" [innerHTML]="page?.content | bypassSecurity: 'html'"> <!-- CONTENT SECTION -->
-    <!-- {{ loadContent() }} -->
   </div>
 
   <div id="author" class="container mb-3 mt-5 pl-md-5"> <!-- AUTHOR SECTION -->
     <profile-info *ngIf="pageProfile" [profile]="pageProfile" [showPhoto]="true" [showEmail]="true" [fields]="['majors', 'minors']"></profile-info>
   </div>
 
-  <div class="w-100 bg-success" style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->
+  <div class="w-100 bg-success" [ngStyle]="{'background': ( 'url(' + getCoverImage(page.cover_image, media_lg) + ')' )}"style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->
     <h1 class="text-center m-0" style="line-height:15rem;"></h1>
   </div>
 

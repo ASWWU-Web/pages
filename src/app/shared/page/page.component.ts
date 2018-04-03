@@ -16,7 +16,7 @@ import { resolveCoverImage } from '../../shared/shared';
 export class PageComponent implements OnChanges {
   @Input() requestURL: string;
 
-  coverImage: any;
+  getCoverImage: any = resolveCoverImage;
   page: any;
   continue = true;
   owner = {
@@ -24,9 +24,9 @@ export class PageComponent implements OnChanges {
     'photo': 'images/mask_unknown.png',
     'email': 'aswwu.webmaster@wallawalla.edu',
   };
-  MEDIA_XS = MEDIA_XS;
-  MEDIA_LG = MEDIA_LG;
-  MEDIA_MD = MEDIA_MD;
+  media_sm = MEDIA_XS;
+  media_lg = MEDIA_LG;
+  media_md = MEDIA_MD;
   MASK = 'https://aswwu.com/#/profile';
   isEditor = false;
   pageProfile: string;
@@ -49,31 +49,6 @@ export class PageComponent implements OnChanges {
       };
       this.errorPage = true;
     });
-  }
-
-  loadContent() {
-    if (this.continue) {
-      document.getElementById('content').innerHTML = this.page.content;
-      this.setPageProfile();
-      this.continue = false;
-
-      if ( this.page.owner !== 'error') {
-        this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.page.owner), (data) => this.owner = data, (error) => {
-          this.owner = {
-            'full_name': this.page.owner.replace(/./g, ' '),
-            'photo': 'images/mask_unknown.png',
-            'email': 'aswwu.webmaster@wallawalla.edu',
-          };
-        } );
-      } else {
-        this.owner = {
-          'full_name': 'The ASWWU Web Team',
-          'photo': 'images/mask_unknown.png',
-          'email': 'aswwu.webmaster@wallawalla.edu',
-        };
-      }
-    }
-    return null;
   }
 
   goToEdit() {
