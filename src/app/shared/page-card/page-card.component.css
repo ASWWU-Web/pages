@@ -14,6 +14,9 @@
   color: #336699;
   cursor: pointer;
 }
+.clickable:hover {
+  cursor: pointer;
+}
 
 /* container */
 #bubbleicon {

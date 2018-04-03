@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from '../../RequestService/requests';
 import { MEDIA_SM, DEFAULT_PHOTO, CURRENT_YEAR } from '../../config';
+import { resolveCoverImage } from '../../shared/resolveCoverImage'
 
 @Component({
   selector: 'page-card',
@@ -14,6 +15,7 @@ export class PageCardComponent implements OnInit {
   @Input() showMeta: boolean;
   profile: any;
   router: any;
+  public getCoverImage: any = resolveCoverImage;
 
   constructor(private requestService: RequestService, private _router: Router) {
       this.router = _router;
@@ -59,5 +61,10 @@ export class PageCardComponent implements OnInit {
   getDateCreated() {
     let date = new Date(this.page['created']);
     return date.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  navigate(url) {
+    setTimeout(()=>{this.router.navigate(['/' + url]);}, 100);
+
   }
 }
