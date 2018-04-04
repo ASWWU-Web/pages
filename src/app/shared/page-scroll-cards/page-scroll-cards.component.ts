@@ -10,6 +10,7 @@ export class PageScrollCardsComponent {
   @Input() requestData: any;
   @Input() showMeta: boolean;
   @Input() sort: boolean = false;
+  uniqueID: string = Math.random().toString(36).substr(2, 9);
 
   ngOnChanges() {
     // sort data based on title
@@ -23,12 +24,14 @@ export class PageScrollCardsComponent {
   }
 
   scroll(negative) {
+    // get card widths
+    let cardWidth = 0
     try {
-      let cardWidth = document.getElementById('p0').offsetWidth;
+      cardWidth = document.getElementById('0-' + this.uniqueID).offsetWidth;
     } catch(err) {
       return
     }
-    let scroller = document.getElementById('scrolling-wrapper')
+    let scroller = document.getElementById('scrolling-wrapper-' + this.uniqueID)
     let scrollVal = 0
     // jump to assumed card
     if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
