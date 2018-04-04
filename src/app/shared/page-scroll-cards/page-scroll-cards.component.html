@@ -1,5 +1,5 @@
-<button type="button" (click)="scrollLeft()">Left</button>
-<button type="button" (click)="scrollRight()">Right</button>
+<button type="button" (click)="scroll(true)">Left</button>
+<button type="button" (click)="scroll(false)">Right</button>
 <div id="scrolling-wrapper">
   <page-card *ngFor="let page of requestData; let i=index;" id="p{{i}}" [page]="page" [showMeta]="showMeta" class="scroll-card col-4"></page-card>
 </div>

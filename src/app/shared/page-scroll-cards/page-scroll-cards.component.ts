@@ -10,7 +10,6 @@ export class PageScrollCardsComponent {
   @Input() requestData: any;
   @Input() showMeta: boolean;
   @Input() sort: boolean = false;
-  // scroller: number = 4;
 
   ngOnChanges() {
     // sort data based on title
@@ -23,15 +22,24 @@ export class PageScrollCardsComponent {
     }
   }
 
-  scrollRight() {
-    let cardWidth = document.getElementById('p0').offsetWidth * 2;
-    console.log(cardWidth);
-    document.getElementById('scrolling-wrapper').scrollBy({left: cardWidth, behavior: 'smooth'})
-  }
-
-  scrollLeft() {
-    let cardWidth = document.getElementById('p0').offsetWidth * 2;
-    console.log(cardWidth);
-    document.getElementById('scrolling-wrapper').scrollBy({left: -cardWidth, behavior: 'smooth'})
+  scroll(negative) {
+    try {
+      let cardWidth = document.getElementById('p0').offsetWidth;
+    } catch(err) {
+      return
+    }
+    let scroller = document.getElementById('scrolling-wrapper')
+    let scrollVal = 0
+    // jump to assumed card
+    if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
+      scrollVal = cardWidth * 2 - (scroller.scrollLeft % cardWidth);
+    } else {
+      scrollVal = cardWidth * 3 - (scroller.scrollLeft % cardWidth);
+    }
+    // scroll opposite direction
+    if (negative) {
+      scrollVal = -scrollVal
+    }
+    scroller.scrollBy({left: scrollVal, behavior: 'smooth'})
   }
 }
