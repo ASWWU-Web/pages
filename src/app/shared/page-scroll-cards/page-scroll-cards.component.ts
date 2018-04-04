@@ -10,6 +10,7 @@ export class PageScrollCardsComponent {
   @Input() requestData: any;
   @Input() showMeta: boolean;
   @Input() sort: boolean = false;
+  // scroller: number = 4;
 
   ngOnChanges() {
     // sort data based on title
@@ -20,5 +21,17 @@ export class PageScrollCardsComponent {
         return 0;
       });
     }
+  }
+
+  scrollRight() {
+    let cardWidth = document.getElementById('p0').offsetWidth * 2;
+    console.log(cardWidth);
+    document.getElementById('scrolling-wrapper').scrollBy({left: cardWidth, behavior: 'smooth'})
+  }
+
+  scrollLeft() {
+    let cardWidth = document.getElementById('p0').offsetWidth * 2;
+    console.log(cardWidth);
+    document.getElementById('scrolling-wrapper').scrollBy({left: -cardWidth, behavior: 'smooth'})
   }
 }

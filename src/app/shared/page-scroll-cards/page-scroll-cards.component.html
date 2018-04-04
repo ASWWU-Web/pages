@@ -1,3 +1,5 @@
-<div class="card-deck">
-  <page-card *ngFor="let page of requestData" [page]="page" [showMeta]="showMeta" class="col-4"></page-card>
+<button type="button" (click)="scrollLeft()">Left</button>
+<button type="button" (click)="scrollRight()">Right</button>
+<div id="scrolling-wrapper">
+  <page-card *ngFor="let page of requestData; let i=index;" id="p{{i}}" [page]="page" [showMeta]="showMeta" class="scroll-card col-4"></page-card>
 </div>
