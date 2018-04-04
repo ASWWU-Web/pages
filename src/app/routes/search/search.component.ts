@@ -62,6 +62,15 @@ export class SearchComponent {
     // run search
     this.requestService.get('/pages/search?' + query, (data) => {
       this.searchResults = data.results.reverse();
-    }, null)
+    }, null);
+  }
+
+  formatField(field) {
+    if (field == 'general') {
+      return 'General (All Fields )'
+    } else if (field == 'url') {
+      return 'URL';
+    }
+    return field.charAt(0).toUpperCase() + field.slice(1);
   }
 }
