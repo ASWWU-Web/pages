@@ -6,7 +6,8 @@
   </div>
   <div id="textdiv" class="d-inline-block align-middle">
     <h6 class="m-0">
-      <a href="{{ MASK }}/{{profileData.username}}">{{ profileData.full_name }}</a>
+      <a *ngIf="profileData.username" href="{{ MASK }}/{{profileData.username}}">{{ profileData.full_name }}</a>
+      <a *ngIf="!profileData.username">{{ profileData.full_name }}</a>
     </h6>
     <div *ngFor="let element of fields"><small >{{profileData[element]}}<br></small></div>
     <a *ngIf="showEmail" class="m-0" href="mailto:{{ profileData.email }}">

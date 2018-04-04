@@ -19,11 +19,29 @@ export class ProfileInfoComponent implements OnChanges {
 
   constructor( private request: RequestService ) { }
 
+  usernameFallback() {
+    this.showPhoto = false;
+    this.showEmail = false;
+    let author = null;
+    try { // this try-catch block originally from page-card.component
+      author = this.profileUserName.replace(/\./gi, ' ');
+      // https://stackoverflow.com/questions/4878756/how-to-capitalize-first-letter-of-each-word-like-a-2-word-city
+      author = author.replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
+    } catch (err) {
+      author = null;
+    }
+    this.profileData = {
+      'full_name': author,
+    };
+  }
+
   ngOnChanges () {
     this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.profileUserName), (data) => {
       this.profileData = data;
-      if (this.profileData.error === 'no profile found') {
-        this.profileData = null;
+      if (this.profileData.error) {
+        this.usernameFallback();
       }
       if (this.profileData.photo === 'None') {
         this.showPhoto = false;
@@ -31,10 +49,9 @@ export class ProfileInfoComponent implements OnChanges {
       if (this.profileData.email === 'None') {
         this.showEmail = false;
       }
-      if (this.profileData.full_name === 'None') {
-        this.profileData.full_name = this.profileData.username.replace(/\./g, ' ');
-      }
-    }, null );
+    }, error => {
+      this.usernameFallback();
+    });
   }
 
 }
