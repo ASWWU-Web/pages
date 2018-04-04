@@ -62,9 +62,9 @@ export class PageComponent implements OnChanges {
 
   setPageProfile () {
     if (this.page.author) {
-        this.pageProfile = this.page.author;
+      this.pageProfile = this.page.author;
     } else {
-      this.pageProfile = null;
+      this.pageProfile = this.page.owner;
     }
   }
 }

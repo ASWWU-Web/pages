@@ -1,14 +1,14 @@
-<div *ngIf="profileData" class="">
+<div id="profiledatadiv" *ngIf="profileData" style="display:block;overflow:auto;" class="">
   <div *ngIf="showPhoto" class="float-left h-100">
     <div class="mr-3 d-inline-block" style="height:50px;width:50px;border-radius:50%;overflow:hidden;">
-      <img class="" style="width:50px;height:auto;" src="{{ MEDIA_XS + '/' + profileData.photo }}">
+      <img class="" style="width:50px;height:auto;" src="{{ media_xs + '/' + profileData.photo }}">
     </div>
   </div>
-  <div class="d-inline-block align-middle">
+  <div id="textdiv" class="d-inline-block align-middle">
     <h6 class="m-0">
       <a href="{{ MASK }}/{{profileData.username}}">{{ profileData.full_name }}</a>
     </h6>
-    <div *ngFor="let element of fields"><small *ngIf="profileData[element] === None">{{profileData[element]}}<br></small></div>
+    <div *ngFor="let element of fields"><small >{{profileData[element]}}<br></small></div>
     <a *ngIf="showEmail" class="m-0" href="mailto:{{ profileData.email }}">
       {{ profileData.email }}
     </a>

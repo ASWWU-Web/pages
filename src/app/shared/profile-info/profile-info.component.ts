@@ -14,7 +14,7 @@ export class ProfileInfoComponent implements OnChanges {
   @Input() showEmail: boolean;
   @Input() fields: string[];
   profileData: any;
-  MEDIA_XS = MEDIA_XS; // ?
+  media_xs = MEDIA_XS;
   MASK = 'https://aswwu.com/#/profile';
 
   constructor( private request: RequestService ) { }
