@@ -10,7 +10,7 @@
   </div>
 
   <div id="author" class="container mb-3 mt-5 pl-md-5"> <!-- AUTHOR SECTION -->
-    <profile-info *ngIf="pageProfile" [profile]="pageProfile" [showPhoto]="true" [showEmail]="true" [fields]="['majors', 'minors']"></profile-info>
+    <profile-info *ngIf="pageProfile" [profileUserName]="pageProfile" [showPhoto]="true" [showEmail]="true" [fields]="['majors', 'minors']"></profile-info>
   </div>
 
   <div class="w-100 bg-success" [ngStyle]="{'background': ( 'url(' + getCoverImage(page.cover_image, media_lg) + ')' )}"style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->

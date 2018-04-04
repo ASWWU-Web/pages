@@ -8,7 +8,7 @@
     <h6 class="m-0">
       <a href="{{ MASK }}/{{profileData.username}}">{{ profileData.full_name }}</a>
     </h6>
-    <small *ngFor="let element of fields">{{profileData[element]}}<br></small>
+    <div *ngFor="let element of fields"><small *ngIf="profileData[element] === None">{{profileData[element]}}<br></small></div>
     <a *ngIf="showEmail" class="m-0" href="mailto:{{ profileData.email }}">
       {{ profileData.email }}
     </a>

@@ -17,6 +17,7 @@ export class PageComponent implements OnChanges {
   @Input() requestURL: string;
 
   getCoverImage: any = resolveCoverImage;
+  coverImage: any;
   page: any;
   continue = true;
   owner = {
@@ -39,7 +40,7 @@ export class PageComponent implements OnChanges {
     this.request.get( (this.requestURL), (data) => {
       this.page = data;
       this.continue = true;
-      this.coverImage = resolveCoverImage(this.page.cover_image, this.MEDIA_LG);
+      this.coverImage = resolveCoverImage(this.page.cover_image, this.media_lg);
       this.setIsEditor();
       this.setPageProfile();
     }, (error) => {
@@ -60,14 +61,10 @@ export class PageComponent implements OnChanges {
   }
 
   setPageProfile () {
-    if (!this.errorPage) {
-      if (this.page.category === 'article') {
+    if (this.page.author) {
         this.pageProfile = this.page.author;
-      } else {
-        this.pageProfile = this.page.owner;
-      }
     } else {
-      this.pageProfile = undefined;
+      this.pageProfile = null;
     }
   }
 }

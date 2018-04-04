@@ -9,7 +9,7 @@ import { CURRENT_YEAR, MEDIA_XS } from '../../config';
   styleUrls: ['./profile-info.component.css']
 })
 export class ProfileInfoComponent implements OnChanges {
-  @Input() profile: string;
+  @Input() profileUserName: string;
   @Input() showPhoto: boolean;
   @Input() showEmail: boolean;
   @Input() fields: string[];
@@ -20,7 +20,21 @@ export class ProfileInfoComponent implements OnChanges {
   constructor( private request: RequestService ) { }
 
   ngOnChanges () {
-    this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.profile), (data) => this.profileData = data, null );
+    this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.profileUserName), (data) => {
+      this.profileData = data;
+      if (this.profileData.error === 'no profile found') {
+        this.profileData = null;
+      }
+      if (this.profileData.photo === 'None') {
+        this.showPhoto = false;
+      }
+      if (this.profileData.email === 'None') {
+        this.showEmail = false;
+      }
+      if (this.profileData.full_name === 'None') {
+        this.profileData.full_name = this.profileData.username.replace(/\./g, ' ');
+      }
+    }, null );
   }
 
 }
