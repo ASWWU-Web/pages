@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { RequestService } from "../../RequestService/requests";
@@ -35,13 +35,17 @@ export class SearchComponent {
       this.categories = data.categories.map((category) => {
         return category.category;
       });
-    }, null)
+    }, null);
     this.requestService.get('/pages/departments', (data) => {
       this.departments = data.departments.map((department) => {
         return department.department;
       });
-    }, null)
-}
+    }, null);
+  }
+
+  ngOnInit() {
+    this.search();
+  }
 
   addField() {
     this.criteria.push(['', '']);

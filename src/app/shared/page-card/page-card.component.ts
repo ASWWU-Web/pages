@@ -64,7 +64,7 @@ export class PageCardComponent implements OnInit {
   }
 
   navigate(url) {
-    setTimeout(()=>{this.router.navigate(['/' + url]);}, 100);
-
+    // wait to navigate if author link was clicked
+    setTimeout(()=>{this.router.navigate(['/' + url]);}, 150);
   }
 }
