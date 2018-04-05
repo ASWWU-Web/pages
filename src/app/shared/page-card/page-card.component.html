@@ -1,6 +1,6 @@
 <div class="card mb-4 clickable" (click)="navigate(page.url)">
   <!-- image -->
-  <img class="card-img-top" src="{{getCoverImage(page.cover_image)}}"/>
+  <img *ngIf="page.cover_image != null" class="card-img-top" src="{{getCoverImage(page.cover_image)}}"/>
   <!-- card content -->
   <div class="p-4 text-center">
     <!-- title and description -->
