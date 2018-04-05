@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'field-results',
@@ -10,6 +11,11 @@ export class FieldResultsComponent implements OnChanges {
   @Input() requestData: any;
   @Input() searchKey: string;
   @Input() sort: boolean = false;
+  router: any;
+
+  constructor(private _router: Router) {
+    this.router = _router;
+  }
 
   ngOnChanges() {
     // sort data based on searchKey
@@ -20,11 +26,5 @@ export class FieldResultsComponent implements OnChanges {
         return 0;
       });
     }
-  }
-
-  queryJson(item) {
-    let json = {};
-    json[this.searchKey] = item[this.searchKey];
-    return json;
   }
 }

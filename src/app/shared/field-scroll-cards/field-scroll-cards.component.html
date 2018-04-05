@@ -1,8 +1,11 @@
-<div class="card-deck">
-  <div *ngFor="let item of requestData" class="card p-4 text-center col-4 mb-4">
-    <div class="card-block">
-      <h4 class="card-title"><a [routerLink]="['/search']" [queryParams]="queryJson(item)">{{item[searchKey]}}</a></h4>
-      <p class="card-text">{{item['description']}}</p>
-    </div>
+<div class="row">
+  <div class="col p-0">
+    <button class="scroll-button p-0" type="button" (click)="scroll(true)"><i class="fa fa-3x fa-caret-left"></i></button>
+  </div>
+  <div id="scrolling-wrapper-{{uniqueID}}" class="scrolling-wrapper col-11">
+    <field-card *ngFor="let item of requestData; let i = index;" id="{{i}}-{{uniqueID}}" class="scroll-card col-4" [item]="item" [searchKey]="searchKey"></field-card>
+  </div>
+  <div class="col p-0">
+    <button class="scroll-button button-outline-secondary p-0" type="button" (click)="scroll(false)"><i class="fa fa-3x fa-caret-right"></i></button>
   </div>
 </div>
