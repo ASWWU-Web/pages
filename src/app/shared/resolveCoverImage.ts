@@ -10,6 +10,8 @@ export function resolveCoverImage(cover_image_URI:string, media_link:string = ME
     if(cover_image_URI){
       var image = cover_image_URI.replace("cms", "");
       return (environment.SERVER_URL + "/pages/media/static" + image);
+    } else {
+      return '';
     }
   }
 }
