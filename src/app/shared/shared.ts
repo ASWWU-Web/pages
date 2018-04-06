@@ -14,4 +14,5 @@ export * from './unescape';
 export * from './bypassSecurityPipe';
 export * from './fields';
 export * from './footer/footer.component';
+export * from './profile-info/profile-info.component';
 export * from './resolveCoverImage';

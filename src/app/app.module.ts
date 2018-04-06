@@ -39,7 +39,8 @@ import {
   FieldScrollCardsComponent,
   PageResultsComponent,
   PageCardComponent,
-  FieldResultsComponent
+  FieldResultsComponent,
+  ProfileInfoComponent
 } from './shared/shared';
 
 
@@ -72,6 +73,7 @@ import {
     CollegianComponent,
     FooterComponent,
     ViewPageComponent,
+    ProfileInfoComponent,
   ],
   imports: [
     FormsModule,

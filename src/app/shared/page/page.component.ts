@@ -1,9 +1,12 @@
 import { Component, OnChanges, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgStyle } from '@angular/common';
 
 import { ViewPageComponent } from '../../routes/routes';
+import { BypassSecurityPipe } from '../bypassSecurityPipe';
 import { RequestService } from '../../RequestService/requests';
-import { CURRENT_YEAR, MEDIA_XS } from '../../config';
+import { CURRENT_YEAR, MEDIA_XS, MEDIA_LG, MEDIA_MD } from '../../config';
+import { resolveCoverImage } from '../../shared/shared';
 
 @Component({
   selector: 'page',
@@ -13,6 +16,8 @@ import { CURRENT_YEAR, MEDIA_XS } from '../../config';
 export class PageComponent implements OnChanges {
   @Input() requestURL: string;
 
+  getCoverImage: any = resolveCoverImage;
+  coverImage: any;
   page: any;
   continue = true;
   owner = {
@@ -20,9 +25,13 @@ export class PageComponent implements OnChanges {
     'photo': 'images/mask_unknown.png',
     'email': 'aswwu.webmaster@wallawalla.edu',
   };
-  MEDIA = MEDIA_XS;
+  media_sm = MEDIA_XS;
+  media_lg = MEDIA_LG;
+  media_md = MEDIA_MD;
   MASK = 'https://aswwu.com/#/profile';
   isEditor = false;
+  pageProfile: string;
+  errorPage = false;
 
   constructor( private request: RequestService, private router: Router ) {
   }
@@ -31,37 +40,16 @@ export class PageComponent implements OnChanges {
     this.request.get( (this.requestURL), (data) => {
       this.page = data;
       this.continue = true;
+      this.coverImage = resolveCoverImage(this.page.cover_image, this.media_lg);
       this.setIsEditor();
+      this.setPageProfile();
     }, (error) => {
       this.page = {
         'title': 'Something went wrong',
         'content': '<h3> There was a problem getting that page for you 🤷 </h3> ' + error.message,
-        'owner': 'error',
       };
+      this.errorPage = true;
     });
-  }
-
-  loadContent() {
-    if (this.continue) {
-      document.getElementById('content').innerHTML = this.page.content;
-      this.continue = false;
-      if ( this.page.owner !== 'error') {
-        this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.page.owner), (data) => this.owner = data, (error) => {
-          this.owner = {
-            'full_name': this.page.owner.replace(/./g, ' '),
-            'photo': 'images/mask_unknown.png',
-            'email': 'aswwu.webmaster@wallawalla.edu',
-          };
-        } );
-      } else {
-        this.owner = {
-          'full_name': 'The ASWWU Web Team',
-          'photo': 'images/mask_unknown.png',
-          'email': 'aswwu.webmaster@wallawalla.edu',
-        };
-      }
-    }
-    return null;
   }
 
   goToEdit() {
@@ -72,4 +60,11 @@ export class PageComponent implements OnChanges {
     this.request.verify( (data) => this.isEditor = this.page.editors.includes(data.username) || (this.page.owner === data.username));
   }
 
+  setPageProfile () {
+    if (this.page.author) {
+      this.pageProfile = this.page.author;
+    } else {
+      this.pageProfile = this.page.owner;
+    }
+  }
 }

@@ -51,7 +51,7 @@ export class AdminCreateComponent implements OnInit {
 
   titleEdit () {
     if (!this.urlIsEdited) {
-      const titleBasedUrl = this.newPage.title.toLowerCase().replace(/ /g, '-').replace(this.regexGlobal, ''); // .replace(regex)
+      const titleBasedUrl = this.newPage.title.toLowerCase().replace(/ /g, '-').replace(this.regexGlobal, '');
       this.newPage.url = titleBasedUrl;
     }
   }
