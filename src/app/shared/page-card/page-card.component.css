@@ -1,3 +1,8 @@
+.card-img-top {
+  width: 100%;
+  max-height: 15vw;
+  object-fit: cover;
+}
 .card {
   max-width: 300px;
   /* https://www.w3schools.com/css/css3_shadows.asp */

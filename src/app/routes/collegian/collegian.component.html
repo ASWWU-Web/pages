@@ -6,13 +6,13 @@
   <!-- content -->
   <div class="container">
     <!-- this week -->
-    <p class="text-center">Welcome to the Collegian, the ASWWU student news paper!</p>
+    <p class="text-center mb-3">Welcome to the Collegian, the ASWWU student news paper!</p>
     <hr />
-    <h2 class="text-center">This Week</h2>
+    <h2 class="text-center text-uppercase">This Week</h2>
     <page-results [requestData]="thisWeek" showMeta="1"></page-results>
     <hr />
     <!-- older articles -->
-    <h2 class="text-center mb-4">Older Articles</h2>
+    <h2 class="text-center text-uppercase mb-4">Older Articles</h2>
     <div class="input-group mb-5 w-75 mx-auto">
       <input type="text" class="form-control" [(ngModel)]="searchText" (keyUp.enter)="search()" placeholder="Search">
       <div class="input-group-append">
