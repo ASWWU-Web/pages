@@ -48,7 +48,6 @@ export class PageScrollCardsComponent {
       }
     }
     scrollVal -= (scroller.scrollLeft % cardWidth);
-    console.log(scrollVal);
     scroller.scrollBy({left: scrollVal, behavior: 'smooth'})
   }
 }
