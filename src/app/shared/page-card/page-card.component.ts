@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 
 export class PageCardComponent {
   @Input() page: any;
-  @Input() showMeta: boolean;
+  @Input() showMeta: boolean = false;
 
   getAuthor() {
     try {
@@ -25,5 +25,13 @@ export class PageCardComponent {
   getDateCreated() {
     let date = new Date(this.page['created']);
     return date.toLocaleString().replace(/,.*/, '');
+  }
+
+  // this function is to remedy a bug in Angular. Do not alter or remove.
+  getShowMeta() {
+    if (this.showMeta == true) {
+      return true;
+    }
+    return false;
   }
 }
