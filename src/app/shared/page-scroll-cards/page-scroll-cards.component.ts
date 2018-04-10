@@ -34,15 +34,21 @@ export class PageScrollCardsComponent {
     let scroller = document.getElementById('scrolling-wrapper-' + this.uniqueID)
     let scrollVal = 0
     // jump to assumed card
-    if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
-      scrollVal = cardWidth * 2 - (scroller.scrollLeft % cardWidth);
+    if (!negative) {
+      if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
+        scrollVal += cardWidth * 2;
+      } else {
+        scrollVal += cardWidth * 3;
+      }
     } else {
-      scrollVal = cardWidth * 3 - (scroller.scrollLeft % cardWidth);
+      if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
+        scrollVal -= cardWidth * 2;
+      } else {
+        scrollVal -= cardWidth;
+      }
     }
-    // scroll opposite direction
-    if (negative) {
-      scrollVal = -scrollVal
-    }
+    scrollVal -= (scroller.scrollLeft % cardWidth);
+    console.log(scrollVal);
     scroller.scrollBy({left: scrollVal, behavior: 'smooth'})
   }
 }
