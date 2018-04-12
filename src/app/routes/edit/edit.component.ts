@@ -15,35 +15,11 @@ export class EditComponent implements OnInit {
   page: any = {};
   departments: string[] = [];
   categories: string[] = [];
-  allTags: string[] = [];     // TODO: get a list of tags from the server.
+  allTags: string[] = [];
   editors: string[] = [];
   allUsers: any[] = [];
   media_sm: string = MEDIA_SM;
   public getCoverImage: any = resolveCoverImage;
-
-  public options: Object = {
-    imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
-    imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images',
-    toolbarButtons: [
-      'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough',
-      'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color',
-      'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align',
-      'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink',
-      'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|',
-      'emoticons', 'specialCharacters', 'insertHR', 'selectAll',
-      'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo',
-      '|', 'insert_profile'
-    ],
-    toolbarButtonsSM: [
-      'fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize',
-      'insertLink', 'insertImage', 'insertTable', 'undo', 'redo',
-      '|', 'insert_profile'
-    ],
-    toolbarButtonsXS: [
-      'bold', 'italic', 'fontFamily', 'fontSize', 'undo', 'redo',
-      '|', 'insert_profile'
-    ],
-  };
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe( params => {
@@ -111,6 +87,31 @@ export class EditComponent implements OnInit {
       }, (er) => console.log(er));
     }
   }
+
+  //The configuration object for Forala
+  public options: Object = {
+    imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
+    imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images',
+    toolbarButtons: [
+      'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough',
+      'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color',
+      'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align',
+      'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink',
+      'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|',
+      'emoticons', 'specialCharacters', 'insertHR', 'selectAll',
+      'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo',
+      '|', 'insert_profile'
+    ],
+    toolbarButtonsSM: [
+      'fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize',
+      'insertLink', 'insertImage', 'insertTable', 'undo', 'redo',
+      '|', 'insert_profile'
+    ],
+    toolbarButtonsXS: [
+      'bold', 'italic', 'fontFamily', 'fontSize', 'undo', 'redo',
+      '|', 'insert_profile'
+    ],
+  };
 
   froalaSetup() {
     // Set CURRENT_YEAR and SERVER_URL variable in local storage
