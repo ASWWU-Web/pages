@@ -5,7 +5,7 @@
     <p class="card-text">{{page['description']}}</p>
   </div>
   <!-- metadata -->
-  <div *ngIf="showMeta == 1" class="card-block">
+  <div *ngIf="getShowMeta()" class="card-block">
     <hr />
     <!-- TODO: show author photo thumbnail -->
     <p>By: {{getAuthor()}}</p>
