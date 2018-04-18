@@ -12,7 +12,7 @@ import { resolveCoverImage } from '../../shared/resolveCoverImage'
 
 export class PageCardComponent implements OnInit {
   @Input() page: any;
-  @Input() showMeta: boolean;
+  @Input() showMeta: boolean = false;
   profile: any;
   router: any;
   public getCoverImage: any = resolveCoverImage;
@@ -66,5 +66,13 @@ export class PageCardComponent implements OnInit {
   navigate(url) {
     // wait to navigate if author link was clicked
     setTimeout(()=>{this.router.navigate(['/' + url]);}, 150);
+  }
+
+  // this function is to remedy a bug in Angular. Do not alter or remove.
+  getShowMeta() {
+    if (this.showMeta == true) {
+      return true;
+    }
+    return false;
   }
 }
