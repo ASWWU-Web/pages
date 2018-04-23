@@ -1,3 +1,11 @@
-<div class="card-columns row">
-  <page-card *ngFor="let page of requestData" [page]="page" [showMeta]="showMeta"></page-card>
+<div class="row">
+  <div class="col p-0">
+    <button class="scroll-button p-0" type="button" (click)="scroll(true)"><i class="fa fa-3x fa-caret-left"></i></button>
+  </div>
+  <div id="scrolling-wrapper-{{uniqueID}}" class="scrolling-wrapper col-11">
+    <page-card *ngFor="let page of requestData; let i=index;" id="{{i}}-{{uniqueID}}" class="scroll-card col-4" [page]="page" [showMeta]="showMeta"></page-card>
+  </div>
+  <div class="col p-0">
+    <button class="scroll-button button-outline-secondary p-0" type="button" (click)="scroll(false)"><i class="fa fa-3x fa-caret-right"></i></button>
+  </div>
 </div>

@@ -10,6 +10,7 @@ export class PageScrollCardsComponent {
   @Input() requestData: any;
   @Input() showMeta: boolean;
   @Input() sort: boolean = false;
+  uniqueID: string = Math.random().toString(36).substr(2, 9);
 
   ngOnChanges() {
     // sort data based on title
@@ -20,5 +21,33 @@ export class PageScrollCardsComponent {
         return 0;
       });
     }
+  }
+
+  scroll(negative) {
+    // get card widths
+    let cardWidth = 0
+    try {
+      cardWidth = document.getElementById('0-' + this.uniqueID).offsetWidth;
+    } catch(err) {
+      return
+    }
+    let scroller = document.getElementById('scrolling-wrapper-' + this.uniqueID)
+    let scrollVal = 0
+    // jump to assumed card
+    if (!negative) {
+      if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
+        scrollVal += cardWidth * 2;
+      } else {
+        scrollVal += cardWidth * 3;
+      }
+    } else {
+      if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
+        scrollVal -= cardWidth * 2;
+      } else {
+        scrollVal -= cardWidth;
+      }
+    }
+    scrollVal -= (scroller.scrollLeft % cardWidth);
+    scroller.scrollBy({left: scrollVal, behavior: 'smooth'})
   }
 }

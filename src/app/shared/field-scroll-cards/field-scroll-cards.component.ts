@@ -10,6 +10,7 @@ export class FieldScrollCardsComponent implements OnChanges {
   @Input() requestData: any;
   @Input() searchKey: string;
   @Input() sort: boolean = false;
+  uniqueID: string = Math.random().toString(36).substr(2, 9);
 
   ngOnChanges() {
     // sort data based on searchKey
@@ -22,9 +23,26 @@ export class FieldScrollCardsComponent implements OnChanges {
     }
   }
 
-  queryJson(item) {
-    let json = {};
-    json[this.searchKey] = item[this.searchKey];
-    return json;
+  scroll(negative) {
+    // get card widths
+    let cardWidth = 0
+    try {
+      cardWidth = document.getElementById('0-' + this.uniqueID).offsetWidth;
+    } catch(err) {
+      return
+    }
+    let scroller = document.getElementById('scrolling-wrapper-' + this.uniqueID)
+    let scrollVal = 0
+    // jump to assumed card
+    if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
+      scrollVal = cardWidth * 2 - (scroller.scrollLeft % cardWidth);
+    } else {
+      scrollVal = cardWidth * 3 - (scroller.scrollLeft % cardWidth);
+    }
+    // scroll opposite direction
+    if (negative) {
+      scrollVal = -scrollVal
+    }
+    scroller.scrollBy({left: scrollVal, behavior: 'smooth'})
   }
 }

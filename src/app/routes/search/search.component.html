@@ -1,27 +1,38 @@
-<div>
-  <h1>Search</h1>
-  <div *ngFor="let criterion of criteria; let i = index;">
-    <!-- searchable fields -->
-    <select [(ngModel)]="criteria[i][0]">
-      <option *ngFor="let field of searchableFields" value="{{field}}">{{field}}</option>
-    </select>
+<div class="page-container mb-3">
+  <!-- header -->
+  <div class="w-100 bg-success mb-5 p-4">
+    <h1 class="text-center text-light text-uppercase m-0" style="line-height:6.3rem;">Search</h1>
+    <!-- content -->
+    <div class="container">
+      <div class="input-group mb-3" *ngFor="let criterion of criteria; let i = index;">
+        <!-- searchable fields -->
+        <select class="input-group-prepend custom-select col-2" [(ngModel)]="criteria[i][0]">
+          <option *ngFor="let field of searchableFields" value="{{field}}">{{formatField(field)}}</option>
+        </select>
 
-    <!-- input field -->
-    <input *ngIf="criteria[i][0] != 'category' && criteria[i][0] != 'department'" [(ngModel)]="criteria[i][1]" (keyUp.enter)="search()" />
-    <select *ngIf="criteria[i][0] == 'category'" [(ngModel)]="criteria[i][1]">
-      <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
-    </select>
-    <select *ngIf="criteria[i][0] == 'department'" [(ngModel)]="criteria[i][1]">
-      <option *ngFor="let department of departments" value="{{department}}">{{department}}</option>
-    </select>
+        <!-- input field -->
+          <input class="form-control" *ngIf="criteria[i][0] != 'category' && criteria[i][0] != 'department'" [(ngModel)]="criteria[i][1]" (keyUp.enter)="search()" />
+          <select class="custom-select" *ngIf="criteria[i][0] == 'category'" [(ngModel)]="criteria[i][1]">
+            <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+          </select>
+          <select class="custom-select" *ngIf="criteria[i][0] == 'department'" [(ngModel)]="criteria[i][1]">
+            <option *ngFor="let department of departments" value="{{department}}">{{department}}</option>
+          </select>
 
-    <!-- removal button -->
-    <button (click)="removeField(i)">Remove Field</button>
+        <!-- removal button -->
+        <div class="input-group-append">
+          <button class="btn btn-secondary" (click)="removeField(i)"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="search()">Search</button>
+        <button class="btn bt-light" (click)="addField()">Add Field</button>
+      </div>
+    </div>
   </div>
-
-  <button (click)="search()">Search</button>
-  <button (click)="addField()">Add Field</button>
-
   <!-- results -->
-  <page-results [requestData]="searchResults" showMeta="1"></page-results>
+  <div class="container">
+    <page-results [requestData]="searchResults" showMeta="1"></page-results>
+  </div>
 </div>

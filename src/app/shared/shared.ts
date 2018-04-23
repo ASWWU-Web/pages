@@ -10,6 +10,7 @@ export * from './field-scroll-cards/field-scroll-cards.component';
 export * from './page-results/page-results.component';
 export * from './page-card/page-card.component';
 export * from './field-results/field-results.component';
+export * from './field-card/field-card.component';
 export * from './unescape';
 export * from './bypassSecurityPipe';
 export * from './fields';
