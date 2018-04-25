@@ -6,7 +6,7 @@ import { ViewPageComponent } from '../../routes/routes';
 import { BypassSecurityPipe } from '../bypassSecurityPipe';
 import { RequestService } from '../../RequestService/requests';
 import { CURRENT_YEAR, MEDIA_XS, MEDIA_LG, MEDIA_MD } from '../../config';
-import { resolveCoverImage } from '../../shared/shared';
+import { resolveCoverImage } from '../resolveCoverImage';
 
 @Component({
   selector: 'page',
