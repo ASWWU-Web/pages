@@ -71,7 +71,7 @@ export class SearchComponent {
 
   formatField(field) {
     if (field == 'general') {
-      return 'General (All Fields )'
+      return 'All Fields'
     } else if (field == 'url') {
       return 'URL';
     }
