@@ -24,8 +24,13 @@ export class PageScrollCardsComponent {
   }
 
   scroll(negative) {
+    // only scroll one card if on mobile
+    let scrollNum = 2;
+    if (window.innerWidth < 768) {
+      scrollNum = 1;
+    }
     // get card widths
-    let cardWidth = 0
+    let cardWidth = 0;
     try {
       cardWidth = document.getElementById('0-' + this.uniqueID).offsetWidth;
     } catch(err) {
@@ -36,15 +41,15 @@ export class PageScrollCardsComponent {
     // jump to assumed card
     if (!negative) {
       if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
-        scrollVal += cardWidth * 2;
+        scrollVal += cardWidth * scrollNum;
       } else {
-        scrollVal += cardWidth * 3;
+        scrollVal += cardWidth * (scrollNum + 1);
       }
     } else {
       if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
-        scrollVal -= cardWidth * 2;
+        scrollVal -= cardWidth * scrollNum;
       } else {
-        scrollVal -= cardWidth;
+        scrollVal -= cardWidth * (scrollNum - 1);
       }
     }
     scrollVal -= (scroller.scrollLeft % cardWidth);
