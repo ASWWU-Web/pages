@@ -1,7 +1,7 @@
 <div *ngIf="page" class="container-fluid p-0">
-  <div class="w-100 bg-success" [ngStyle]="{'background': ( 'url(' + getCoverImage(page.cover_image, media_lg) + ')' )}" style="height:15rem;"> <!-- TITLE SECTION -->
+  <div id="header" class="w-100 bg-success" [ngStyle]="{'background': ( 'url(' + getCoverImage(page.cover_image, media_lg) + ')' ), 'background-size': 'cover'}"> <!-- TITLE SECTION -->
     <button *ngIf="isEditor" (click)="goToEdit()" type="button" class="btn btn-primary position-absolute m-3">Edit</button>
-    <h1 class="text-center text-light text-uppercase m-0" style="line-height:15rem;">
+    <h1 class="text-center text-light text-uppercase m-0">
       {{ page.title }}
     </h1>
   </div>
