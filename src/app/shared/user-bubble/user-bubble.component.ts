@@ -12,8 +12,8 @@ import { MEDIA_SM, DEFAULT_PHOTO, CURRENT_YEAR } from '../../config';
     template: `<div *ngIf="isLoggedIn" class="contain">
                     <div id="bubble-popup" ngbDropdown placement="bottom-right">
                         <button id="bubbleicon" ngbDropdownToggle>
-                            <div *ngIf="(profile?.photo == 'images/mask_unknown.png' || profile?.photo == 'None' || !profile?.photo)" (click)="displayUserOptions()" class="btn btn-default btn-circle">{{profile?.username.charAt(0).toUpperCase()}}</div>
-                            <img *ngIf="!(profile?.photo == 'images/mask_unknown.png' || profile?.photo == 'None' || !profile?.photo)" (click)="displayUserOptions()" class="btn btn-default btn-circle" src="{{getPhotoLink(profile.photo)}}">
+                            <img *ngIf="(profile?.photo == 'images/mask_unknown.png' || profile?.photo == 'None' || !profile?.photo)" class="btn btn-default btn-circle" src="{{MEDIA_SM + '/images/mask_unknown.png'}}"/>
+                            <img *ngIf="!(profile?.photo == 'images/mask_unknown.png' || profile?.photo == 'None' || !profile?.photo)" (click)="displayUserOptions()" class="btn btn-default btn-circle" src="{{getPhotoLink(profile.photo)}}"/>
                         </button>
                         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="bubbleicon">
                             <a class="btn btn-default dropdown-item" href="https://aswwu.com/mask/profile/{{profile?.username}}">View Profile</a>
@@ -33,6 +33,7 @@ export class UserBubbleComponent implements OnInit {
     profile: any;
     router: any;
     isLoggedIn: boolean = false;
+    public MEDIA_SM: string = MEDIA_SM;
 
     constructor(private requestService: RequestService, private _router: Router) {
         this.router = _router;
