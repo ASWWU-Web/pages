@@ -24,8 +24,13 @@ export class FieldScrollCardsComponent implements OnChanges {
   }
 
   scroll(negative) {
+    // only scroll one card if on mobile
+    let scrollNum = 2;
+    if (window.innerWidth < 768) {
+      scrollNum = 1;
+    }
     // get card widths
-    let cardWidth = 0
+    let cardWidth = 0;
     try {
       cardWidth = document.getElementById('0-' + this.uniqueID).offsetWidth;
     } catch(err) {
@@ -34,15 +39,20 @@ export class FieldScrollCardsComponent implements OnChanges {
     let scroller = document.getElementById('scrolling-wrapper-' + this.uniqueID)
     let scrollVal = 0
     // jump to assumed card
-    if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
-      scrollVal = cardWidth * 2 - (scroller.scrollLeft % cardWidth);
+    if (!negative) {
+      if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
+        scrollVal += cardWidth * scrollNum;
+      } else {
+        scrollVal += cardWidth * (scrollNum + 1);
+      }
     } else {
-      scrollVal = cardWidth * 3 - (scroller.scrollLeft % cardWidth);
+      if (scroller.scrollLeft % cardWidth < cardWidth / 2) {
+        scrollVal -= cardWidth * scrollNum;
+      } else {
+        scrollVal -= cardWidth * (scrollNum - 1);
+      }
     }
-    // scroll opposite direction
-    if (negative) {
-      scrollVal = -scrollVal
-    }
+    scrollVal -= (scroller.scrollLeft % cardWidth);
     scroller.scrollBy({left: scrollVal, behavior: 'smooth'})
   }
 }
