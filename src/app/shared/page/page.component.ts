@@ -5,7 +5,7 @@ import { NgStyle } from '@angular/common';
 import { ViewPageComponent } from '../../routes/routes';
 import { BypassSecurityPipe } from '../bypassSecurityPipe';
 import { RequestService } from '../../RequestService/requests';
-import { CURRENT_YEAR, MEDIA_XS, MEDIA_LG, MEDIA_MD } from '../../config';
+import { CURRENT_YEAR, MEDIA_XS, MEDIA_LG, MEDIA_MD, MEDIA_URI } from '../../config';
 import { resolveCoverImage } from '../resolveCoverImage';
 
 @Component({
@@ -28,6 +28,7 @@ export class PageComponent implements OnChanges {
   media_sm = MEDIA_XS;
   media_lg = MEDIA_LG;
   media_md = MEDIA_MD;
+  media_uri = MEDIA_URI;
   MASK = 'https://aswwu.com/#/profile';
   isEditor = false;
   pageProfile: string;

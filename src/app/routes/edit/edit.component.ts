@@ -4,7 +4,7 @@ import { Router, Routes, ActivatedRoute } from '@angular/router';
 import { environment } from "../../../environments/environment";
 import { RequestService } from "../../RequestService/requests";
 import { resolveCoverImage } from "../../shared/shared";
-import { CURRENT_YEAR, MEDIA_SM } from "../../config";
+import { CURRENT_YEAR, MEDIA_URI } from "../../config";
 declare var $: any;
 
 @Component({
@@ -18,7 +18,7 @@ export class EditComponent implements OnInit {
   allTags: string[] = [];
   editors: string[] = [];
   allUsers: any[] = [];
-  media_sm: string = MEDIA_SM;
+  MEDIA_URI: string = MEDIA_URI;
   public getCoverImage: any = resolveCoverImage;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {

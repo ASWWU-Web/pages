@@ -13,7 +13,7 @@
     <profile-info *ngIf="pageProfile" [profileUserName]="pageProfile" [showPhoto]="true" [showEmail]="true" [fields]="['majors', 'minors']"></profile-info>
   </div>
 
-  <div class="w-100 bg-success" [ngStyle]="{'background': ( 'url(' + getCoverImage(page.cover_image, media_lg) + ')' )}"style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->
+  <div class="w-100 bg-success" [ngStyle]="{'background': ( 'url(' + getCoverImage(page.cover_image, media_uri) + ')' )}"style="height:15rem;"> <!-- CONTENT FOOTER SECTION -->
     <h1 class="text-center m-0" style="line-height:15rem;"></h1>
   </div>
 
