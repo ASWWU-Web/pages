@@ -17,6 +17,9 @@ export class RequestService {
   authUser: User;
   private isLoggedIn: boolean = false;
 
+
+  constructor(private http: HttpClient) {}
+
   private setCurrentUser(user: any): void {
     if (user.hasOwnProperty("wwuid") && user.wwuid) {
       this.authUser = new User(user);
@@ -33,6 +36,8 @@ export class RequestService {
   * Also returns the user object to the callback function.
   */
   verify(cb?: any): void {
+    //TODO: Determine if the token really should be updated. (ie. Only if the
+    // token is older than 1 hour should a new one be generated.)
     if (document.cookie.search("token=") !== -1) {
       this.verifyGet("verify", data => {
         //Log in the user
@@ -49,9 +54,6 @@ export class RequestService {
       this.isLoggedIn = false;
     }
   }
-
-
-  constructor(private http: HttpClient) { }
 
 
   private createRequest(uri: string, contentType: string = "application/json"): any {
@@ -130,15 +132,14 @@ export class RequestService {
       );
   }
 
-  getWithSub(uri: string, afterRequest, catchError): Subscription {
-    let req = this.createRequest(uri);
-    this.verify();
-    let subscription = this.http.get(req.url, req.options)
-      .subscribe(
-        data => afterRequest(data),
-        err => (catchError ? catchError(err) : console.error(err))
-      );
-    return (subscription);
+  uploadImage(file:File, callback:Function, catchError:Function) {
+    let data = new FormData;
+    data.append('file', file, file.name);
+    let request = this.createRequest("/pages/media/upload_image");
+    this.http.post(request.url, data).subscribe(
+      data => callback(data),
+      err => (catchError ? catchError(err) : console.log(err))
+    );
   }
 
   isLoggedOn(): boolean {
