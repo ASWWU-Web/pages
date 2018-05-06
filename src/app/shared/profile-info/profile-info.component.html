@@ -2,7 +2,7 @@
   <div *ngIf="showPhoto" class="float-left h-100">
     <div class="mr-3 d-inline-block" style="height:50px;width:50px;border-radius:50%;overflow:hidden;">
       <a href="{{ MASK }}/{{profileData?.username}}">
-        <img style="width:50px;height:auto;" src="{{ media_xs + '/' + profileData.photo }}">
+        <img style="width:50px;height:auto;" src="{{ getPhotoLink(profileData.photo) }}">
       </a>
     </div>
   </div>
