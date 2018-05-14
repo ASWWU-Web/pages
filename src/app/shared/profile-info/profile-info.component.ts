@@ -15,7 +15,7 @@ export class ProfileInfoComponent implements OnChanges {
   @Input() fields: string[];
   profileData: any;
   media_xs = MEDIA_XS;
-  MASK = 'https://aswwu.com/#/profile';
+  MASK = 'https://aswwu.com/mask';
 
   constructor( private request: RequestService ) { }
 
