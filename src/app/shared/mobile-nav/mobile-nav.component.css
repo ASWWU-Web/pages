@@ -9,9 +9,10 @@
     width:60px;
     border-radius: 0px;
     border-style:none;
-    position: absolute;
+    position: fixed;
     left:0px;
     top:0px;
+    z-index: 3;
   }
 
   .mobile-hamburger:active {
@@ -47,7 +48,7 @@
 
 /* mobile-nav-menu */
   .mobile-scrollable-menu {
-    z-index: 2;
+    z-index: 3;
     height:100vh;
     overflow-y: auto;
     position: fixed;
