@@ -53,6 +53,8 @@
 @media only screen and (max-width: 768px) {
   nav {
     position: sticky !important;
+    position: -webkit-sticky !important;
+    position: -moz-sticky !important;
     top: 0 !important;
     z-index: 1 !important;
   }
