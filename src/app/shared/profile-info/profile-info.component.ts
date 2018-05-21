@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { RequestService } from '../../RequestService/requests';
-import { CURRENT_YEAR, MEDIA_XS } from '../../config';
+import { CURRENT_YEAR, MEDIA_XS, DEFAULT_PHOTO } from '../../config';
 
 @Component({
   selector: 'profile-info',
@@ -36,6 +36,14 @@ export class ProfileInfoComponent implements OnChanges {
       'full_name': author,
     };
   }
+
+  getPhotoLink(url: string){
+        if(url && url != "None"){
+            return MEDIA_XS + "/" + url;
+        } else {
+            return MEDIA_XS + "/" + DEFAULT_PHOTO;
+        }
+    }
 
   ngOnChanges () {
     this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.profileUserName), (data) => {
