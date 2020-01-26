@@ -89,7 +89,6 @@ export class EditComponent implements OnInit {
   }
 
   //The configuration object for Forala
-  // TODO create endpoint for fileUploadURL on server
   public options: Object = {
     imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
     fileUploadURL: environment.SERVER_URL + '/pages/media/upload_file',
