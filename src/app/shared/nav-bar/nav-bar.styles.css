@@ -46,14 +46,13 @@
   all: initial;
   color: grey;
   text-decoration: none;
-
 }
 
 nav {
   position: relative;
   width:100%;
   top: 0 !important;
-  z-index: 3 !important;
+  z-index: 1030 !important;
 }
 #nav-spacer {
   display: none;
