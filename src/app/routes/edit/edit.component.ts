@@ -91,6 +91,7 @@ export class EditComponent implements OnInit {
   //The configuration object for Forala
   public options: Object = {
     imageUploadURL: environment.SERVER_URL + '/pages/media/upload_image',
+    fileUploadURL: environment.SERVER_URL + '/pages/media/upload_file',
     imageManagerLoadURL: environment.SERVER_URL + '/pages/media/load_images',
     toolbarButtons: [
       'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough',
