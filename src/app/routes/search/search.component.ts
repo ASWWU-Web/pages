@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
-import { RequestService } from "../../RequestService/requests";
+import { RequestService } from '../../../shared-ng/services/request.service';
 import { GENERAL_SEARCH_FIELD, SEARCHABLE_FIELDS } from '../../shared/fields';
 
 @Component({
@@ -20,10 +20,10 @@ export class SearchComponent {
     // check for query params in url
     this.route.queryParamMap.subscribe( params => {
       this.criteria = [];
-      for (let key of params.keys) {
+      for (const key of params.keys) {
         this.criteria.push([key, params.get(key)]);
       }
-      if (this.criteria.length == 0) {
+      if (this.criteria.length === 0) {
         this.criteria.push([GENERAL_SEARCH_FIELD, '']);
       } else {
         this.search();
@@ -35,12 +35,12 @@ export class SearchComponent {
       this.categories = data.categories.map((category) => {
         return category.category;
       });
-    }, null);
+    });
     this.requestService.get('/pages/departments', (data) => {
       this.departments = data.departments.map((department) => {
         return department.department;
       });
-    }, null);
+    });
   }
 
   ngOnInit() {
@@ -58,21 +58,21 @@ export class SearchComponent {
   search() {
     // build query string
     let query = '';
-    for (let value of this.criteria) {
-      query += value[0] + "=" + value[1] + ";";
+    for (const value of this.criteria) {
+      query += value[0] + '=' + value[1] + ';';
     }
     query.slice(0, -1);
 
     // run search
     this.requestService.get('/pages/search?' + query, (data) => {
       this.searchResults = data.results.reverse();
-    }, null);
+    });
   }
 
   formatField(field) {
-    if (field == 'general') {
-      return 'All Fields'
-    } else if (field == 'url') {
+    if (field === 'general') {
+      return 'All Fields';
+    } else if (field === 'url') {
       return 'URL';
     }
     return field.charAt(0).toUpperCase() + field.slice(1);

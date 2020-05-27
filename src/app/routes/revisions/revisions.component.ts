@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
-import { RequestService } from "../../RequestService/requests";
+import { RequestService } from '../../../shared-ng/services/request.service';
 
 @Component({
   templateUrl: './revisions.component.html',
@@ -14,7 +14,7 @@ export class RevisionsComponent {
   viewingRevisionID: string;
   currentRevisionID: string;
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router) {
     // get page URL
     this.route.params.subscribe((params) => {
       this.pageURL = params.pageURL;
@@ -23,19 +23,22 @@ export class RevisionsComponent {
   }
 
   getDateTime(datetime) {
-    let date = new Date(datetime);
-    let options = { 'month': 'long', 'day': 'numeric', 'year': 'numeric', 'hour': 'numeric', 'minute': 'numeric' };
+    const date = new Date(datetime);
+    const options = { 'month': 'long', 'day': 'numeric', 'year': 'numeric', 'hour': 'numeric', 'minute': 'numeric' };
     return date.toLocaleString('en-US', options);
   }
 
   reloadRevisions() {
-    this.requestService.get('/pages/admin/' + this.pageURL + '/revision', (data) => {
+    console.log(this.pageURL);
+    this.rs.get('/pages/admin/' + this.pageURL + '/revision').subscribe((data) => {
+      console.log(data);
       this.revisions = data.results.reverse();
+      console.log(this.revisions);
       this.viewingRevisionID = this.revisions[0].id;
       this.currentRevisionID = this.revisions[0].id;
       this.revisions.splice(0, 1);
       this.loadRevision(this.currentRevisionID);
-    }, null);
+    });
   }
 
   loadRevision(id) {
@@ -44,22 +47,22 @@ export class RevisionsComponent {
   }
 
   restoreRevision() {
-    if(confirm("Are you sure you want to revert to this page?")) {
-      this.requestService.post(this.revisionURL, {}, (data)=> {
-        if (data.status === "Revision Restored") {
+    if (confirm('Are you sure you want to revert to this page?')) {
+      this.rs.post(this.revisionURL, {}, (data) => {
+        if (data.status === 'Revision Restored') {
           this.reloadRevisions();
-          alert("Revision restored.")
+          alert('Revision restored.');
         } else {
-          alert("Something went wrong.");
+          alert('Something went wrong.');
         }
       }, (error) => {
-        alert("Something went wrong.");
+        alert('Something went wrong.');
       });
     }
   }
 
   getStyle(id) {
-    if (id == this.viewingRevisionID) {
+    if (id === this.viewingRevisionID) {
       return {
         'color': 'white',
         'background-color': '#007bff',

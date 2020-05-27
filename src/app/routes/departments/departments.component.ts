@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
-import { RequestService } from "../../RequestService/requests";
+import { RequestService } from '../../../shared-ng/services/request.service';
 
 @Component({
   templateUrl: './departments.component.html',
@@ -14,6 +14,6 @@ export class DepartmentsComponent {
     // get departments data
     this.requestService.get('/pages/departments', (data) => {
       this.departments = data.departments;
-    }, null)
+    });
   }
 }

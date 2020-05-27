@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, Routes, ActivatedRoute, RouterModule, NavigationExtras } from '@angular/router';
 
-import { RequestService } from "../../RequestService/requests";
-import { GENERAL_SEARCH_FIELD } from "../../shared/fields";
+import { RequestService } from '../../../shared-ng/services/request.service';
+import { GENERAL_SEARCH_FIELD } from '../../shared/fields';
 
 @Component({
   templateUrl: './directory.component.html',
@@ -19,23 +19,24 @@ export class DirectoryComponent {
     // get featureds data
     this.requestService.get('/pages/featureds', (data) => {
       this.featureds = data.featureds.reverse();
-    }, null)
+    });
     // get events data
     this.requestService.get('/pages/search?category=Event', (data) => {
       this.events = data.results.reverse();
-    }, null)
+      console.log('HERE', this.events);
+    });
     // get categories data
     this.requestService.get('/pages/categories', (data) => {
-      this.categories = data.categories.filter((category) => category['category'] != 'Event');
-    }, null)
+      this.categories = data.categories.filter((category) => category['category'] !== 'Event');
+    });
     // get departments data
     this.requestService.get('/pages/departments', (data) => {
       this.departments = data.departments;
-    }, null)
+    });
   }
 
   search() {
-    let json = {};
+    const json = {};
     json[GENERAL_SEARCH_FIELD] = this.searchText;
     this.router.navigate(['/search'], {
       queryParams: json

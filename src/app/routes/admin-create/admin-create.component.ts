@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { RequestService } from '../../RequestService/requests';
+import { RequestService } from '../../../shared-ng/services/request.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -68,8 +68,8 @@ export class AdminCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.request.get( ('/pages/categories'), (data) => this.categories = data.categories, (error) => console.log(error) );
-    this.request.get( ('/pages/departments'), (data) => this.departments = data.departments, (error) => console.log(error) );
+    this.request.get( ('/pages/categories'), (data) => this.categories = data.categories);
+    this.request.get( ('/pages/departments'), (data) => this.departments = data.departments);
   }
 
 }

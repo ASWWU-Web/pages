@@ -4,9 +4,11 @@ import { NgStyle } from '@angular/common';
 
 import { ViewPageComponent } from '../../routes/routes';
 import { BypassSecurityPipe } from '../bypassSecurityPipe';
-import { RequestService } from '../../RequestService/requests';
+import { RequestService, AuthService } from '../../../shared-ng/services/services';
 import { CURRENT_YEAR, MEDIA_XS, MEDIA_LG, MEDIA_MD, MEDIA_URI } from '../../config';
 import { resolveCoverImage } from '../resolveCoverImage';
+import { User } from '../../../shared-ng/interfaces/user';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'page',
@@ -33,33 +35,38 @@ export class PageComponent implements OnChanges {
   isEditor = false;
   pageProfile: string;
   errorPage = false;
+  currentUser: User;
+  userInfoSubscription: Subscription;
+  buildLoginLink: () => string;
 
-  constructor( private request: RequestService, private router: Router ) {
+  constructor( private rs: RequestService, private as: AuthService, private router: Router ) {
   }
 
   ngOnChanges() {
-    this.request.get( (this.requestURL), (data) => {
-      this.page = data;
-      this.continue = true;
-      this.coverImage = resolveCoverImage(this.page.cover_image, this.media_lg);
-      this.setIsEditor();
-      this.setPageProfile();
-    }, (error) => {
-      this.page = {
-        'title': 'Something went wrong',
-        'content': '<h3> There was a problem getting that page for you 🤷 </h3> ' + error.message,
-      };
-      this.errorPage = true;
+    this.buildLoginLink = this.as.buildLoginLink;
+    this.userInfoSubscription = this.as.getUserInfo().subscribe((data: User) => {
+      // this.rs.get((this.requestURL))
+      this.currentUser = data;
+      console.log(this.currentUser);
+      // console.log(this.currentUser, this.requestURL);
     });
+    // this.request.get( (this.requestURL), (data) => {
+    //   console.log(data);
+    //   this.page = data;
+    //   this.continue = true;
+    //   this.coverImage = resolveCoverImage(this.page.cover_image, this.media_lg);
+    //   // this.setIsEditor();
+    //   this.setPageProfile();
+    // });
   }
 
   goToEdit() {
     this.router.navigate(['admin/edit', this.page.url]);
   }
 
-  setIsEditor() {
-    this.request.verify( (data) => this.isEditor = this.page.editors.includes(data.username) || (this.page.owner === data.username));
-  }
+  // setIsEditor() {
+  //   this.request.verify( (data) => this.isEditor = this.page.editors.includes(data.username) || (this.page.owner === data.username));
+  // }
 
   setPageProfile () {
     if (this.page.author) {

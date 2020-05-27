@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
-import { RequestService } from "../../RequestService/requests";
+import { RequestService } from '../../../shared-ng/services/request.service';
 
 @Component({
   templateUrl: './collegian.component.html',
@@ -20,9 +20,9 @@ export class CollegianComponent {
       this.archives = data.results.reverse();
 
       // get pages from the past week
-      let currentTime = Date.now();
+      const currentTime = Date.now();
       for (let i = 0; i < this.archives.length; i++) {
-        let pageTime = Date.parse(this.archives[i].created);
+        const pageTime = Date.parse(this.archives[i].created);
         if (currentTime - pageTime < 604800000) {  // 1 week is 604800000 milliseconds
           this.thisWeek.push(this.archives[i]);
         } else {
@@ -30,7 +30,7 @@ export class CollegianComponent {
           break;
         }
       }
-    }, null)
+    });
   }
 
   search() {
