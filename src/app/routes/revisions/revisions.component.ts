@@ -29,11 +29,8 @@ export class RevisionsComponent {
   }
 
   reloadRevisions() {
-    console.log(this.pageURL);
     this.rs.get('/pages/admin/' + this.pageURL + '/revision').subscribe((data) => {
-      console.log(data);
       this.revisions = data.results.reverse();
-      console.log(this.revisions);
       this.viewingRevisionID = this.revisions[0].id;
       this.currentRevisionID = this.revisions[0].id;
       this.revisions.splice(0, 1);
@@ -48,7 +45,7 @@ export class RevisionsComponent {
 
   restoreRevision() {
     if (confirm('Are you sure you want to revert to this page?')) {
-      this.rs.post(this.revisionURL, {}, (data) => {
+      this.rs.post(this.revisionURL, {}).subscribe((data) => {
         if (data.status === 'Revision Restored') {
           this.reloadRevisions();
           alert('Revision restored.');

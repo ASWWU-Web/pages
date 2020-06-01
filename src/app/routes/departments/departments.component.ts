@@ -10,9 +10,9 @@ import { RequestService } from '../../../shared-ng/services/request.service';
 export class DepartmentsComponent {
   departments: any = [];
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router) {
     // get departments data
-    this.requestService.get('/pages/departments', (data) => {
+    this.rs.get('/pages/departments').subscribe((data) => {
       this.departments = data.departments;
     });
   }

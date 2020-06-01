@@ -12,18 +12,18 @@ import { resolveCoverImage } from '../../shared/resolveCoverImage'
 
 export class PageCardComponent implements OnInit {
   @Input() page: any;
-  @Input() showMeta: boolean = false;
+  @Input() showMeta = false;
   profile: any;
   router: any;
   public getCoverImage: any = resolveCoverImage;
 
-  constructor(private requestService: RequestService, private _router: Router) {
+  constructor(private rs: RequestService, private _router: Router) {
       this.router = _router;
   }
 
   ngOnInit() {
     if (this.showMeta) {
-      this.requestService.get('/profile/' + CURRENT_YEAR + '/' + this.page['author'], (data) => {
+      this.rs.get('/profile/' + CURRENT_YEAR + '/' + this.page['author']).subscribe((data) => {
         this.profile = data;
       });
     }
@@ -55,7 +55,7 @@ export class PageCardComponent implements OnInit {
   }
 
   authorProfile() {
-    return 'https://aswwu.com/#/profile/' + this.page['author']
+    return 'https://aswwu.com/#/profile/' + this.page['author'];
   }
 
   getDateCreated() {

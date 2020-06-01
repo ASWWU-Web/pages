@@ -26,6 +26,7 @@ import {
 import {
   RequestService,
   HermesService,
+  PagesRequestService,
   AuthService
 } from '../shared-ng/services/services';
 
@@ -153,7 +154,8 @@ import {
   providers: [
     RequestService,
     HermesService,
-    AuthService
+    AuthService,
+    PagesRequestService
   ],
   bootstrap: [AppComponent]
 })

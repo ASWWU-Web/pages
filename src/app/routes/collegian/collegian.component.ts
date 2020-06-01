@@ -13,9 +13,9 @@ export class CollegianComponent {
   thisWeek: any[] = [];
   searchText: string;
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router) {
     // get all pages
-    this.requestService.get('/pages/search?department=Collegian', (data) => {
+    this.rs.get('/pages/search?department=Collegian').subscribe((data) => {
       // set archive pages
       this.archives = data.results.reverse();
 

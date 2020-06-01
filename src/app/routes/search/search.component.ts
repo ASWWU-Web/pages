@@ -9,14 +9,14 @@ import { GENERAL_SEARCH_FIELD, SEARCHABLE_FIELDS } from '../../shared/fields';
   styleUrls: ['search.component.css'],
 })
 
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   searchableFields: string[] = SEARCHABLE_FIELDS;
   criteria: string[][] = [];
   categories: string[] = [];
   departments: string[] = [];
   searchResults: any;
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router) {
     // check for query params in url
     this.route.queryParamMap.subscribe( params => {
       this.criteria = [];
@@ -31,12 +31,12 @@ export class SearchComponent {
     });
 
     // get categories and departments
-    this.requestService.get('/pages/categories', (data) => {
+    this.rs.get('/pages/categories').subscribe((data) => {
       this.categories = data.categories.map((category) => {
         return category.category;
       });
     });
-    this.requestService.get('/pages/departments', (data) => {
+    this.rs.get('/pages/departments').subscribe((data) => {
       this.departments = data.departments.map((department) => {
         return department.department;
       });
@@ -64,7 +64,7 @@ export class SearchComponent {
     query.slice(0, -1);
 
     // run search
-    this.requestService.get('/pages/search?' + query, (data) => {
+    this.rs.get('/pages/search?', query).subscribe((data) => {
       this.searchResults = data.results.reverse();
     });
   }

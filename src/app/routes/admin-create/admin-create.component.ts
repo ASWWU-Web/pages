@@ -19,11 +19,11 @@ export class AdminCreateComponent implements OnInit {
   regexGlobal = /[^a-z0-9-]/g;
   urlInvalid = false;
 
-  constructor( private request: RequestService, private router: Router ) {  }
+  constructor( private rs: RequestService, private router: Router ) {  }
 
   onSubmit() {
     if (!this.urlInvalid) {
-      this.request.post( ('/pages/admin'), this.newPage,
+      this.rs.post( ('/pages/admin'), this.newPage).subscribe(
         (data) => {
           if ( data.status !== undefined ) {
             if (data.status === 'page created') {
@@ -68,8 +68,8 @@ export class AdminCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.request.get( ('/pages/categories'), (data) => this.categories = data.categories);
-    this.request.get( ('/pages/departments'), (data) => this.departments = data.departments);
+    this.rs.get( ('/pages/categories')).subscribe((data) => this.categories = data.categories);
+    this.rs.get( ('/pages/departments')).subscribe((data) => this.departments = data.departments);
   }
 
 }

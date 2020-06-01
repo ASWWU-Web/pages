@@ -10,8 +10,8 @@ import { RequestService } from '../../../shared-ng/services/request.service';
 export class EventsComponent {
   events: any;
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
-    this.requestService.get('/pages/search?category=Event', (data) => {
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router) {
+    this.rs.get('/pages/search?category=Event').subscribe((data) => {
       this.events = data.results.reverse();
     });
   }

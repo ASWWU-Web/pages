@@ -1,8 +1,9 @@
+// tslint:disable:forin
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 import { environment } from '../../../environments/environment';
-import { RequestService } from '../../../shared-ng/services/request.service';
+import { RequestService, PagesRequestService } from '../../../shared-ng/services/services';
 import { resolveCoverImage } from '../../shared/shared';
 import { CURRENT_YEAR, MEDIA_URI } from '../../config';
 declare var $: any;
@@ -20,73 +21,6 @@ export class EditComponent implements OnInit {
   allUsers: any[] = [];
   MEDIA_URI: string = MEDIA_URI;
   public getCoverImage: any = resolveCoverImage;
-
-  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
-    this.route.params.subscribe( params => {
-      this.requestService.get( ('/pages/admin/' + params.pageURL), (data) => {
-        this.page = data;
-        this.editors = data.editors;
-      });
-    });
-    this.requestService.get('/pages/categories', (data) => {
-      this.categories = data.categories;
-    });
-    this.requestService.get('/pages/departments', (data) => {
-      this.departments = data.departments;
-    });
-    this.requestService.get('/pages/tags', (data) => this.allTags = data.tags);
-    this.requestService.get('/search/all', (data) => {
-      this.allUsers = data.results.map((user) => {
-        user.value = user.username;
-        user.display = user.full_name;
-        return user;
-      });
-    });
-
-  }
-
-  ngOnInit() {
-    this.froalaSetup()
-  }
-
-  save(onSucessfulSave) {
-    // Remove unwanted attributes from JSON.
-    const ignoredKeys = ['updated_at', 'current', 'created', 'url', 'editors'];
-    const filteredPage = Object.assign({}, this.page);
-    for (let i in ignoredKeys) {
-      delete filteredPage[ignoredKeys[i]];
-    }
-
-    // Add editors as an array of username strings.
-    filteredPage.editors = this.editors.map((user: any) => {
-      if (typeof(user) === 'string') { return user; }
-      return user.username;
-    });
-
-    // Send New Page to server.
-    this.requestService.post('/pages/admin/' + this.page.url, filteredPage, (data) => {
-      if(onSucessfulSave && typeof(onSucessfulSave) === 'function') {
-        onSucessfulSave();
-      }
-    }, (error) => {
-      alert(error.message);
-    });
-  }
-
-  preview() {
-    this.save(() => {
-      this.router.navigate(['admin', this.page.url]);
-    });
-  }
-
-  imageHandler(event) {
-    const files = event.target.files;
-    if (files.length >= 1){
-      this.requestService.uploadImage(event.target.files[0], (data) => {
-        this.page.cover_image = data.media_URI;
-      }, (er) => console.log(er));
-    }
-  }
 
   // The configuration object for Forala
   public options: Object = {
@@ -113,10 +47,78 @@ export class EditComponent implements OnInit {
     ],
   };
 
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router,
+              private pagesRS: PagesRequestService) {
+    this.route.params.subscribe( params => {
+      this.rs.get('/pages/admin/', params.pageURL).subscribe((data) => {
+        this.page = data;
+        this.editors = data.editors;
+      });
+    });
+    this.rs.get('/pages/categories').subscribe((data) => {
+      this.categories = data.categories;
+    });
+    this.rs.get('/pages/departments').subscribe((data) => {
+      this.departments = data.departments;
+    });
+    this.rs.get('/pages/tags').subscribe((data) => this.allTags = data.tags);
+    this.rs.get('/search/all').subscribe((data) => {
+      this.allUsers = data.results.map((user) => {
+        user.value = user.username;
+        user.display = user.full_name;
+        return user;
+      });
+    });
+
+  }
+
+  ngOnInit() {
+    this.froalaSetup();
+  }
+
+  save(onSucessfulSave) {
+    // Remove unwanted attributes from JSON.
+    const ignoredKeys = ['updated_at', 'current', 'created', 'url', 'editors'];
+    const filteredPage = Object.assign({}, this.page);
+    for (const i in ignoredKeys) {
+      delete filteredPage[ignoredKeys[i]];
+    }
+
+    // Add editors as an array of username strings.
+    filteredPage.editors = this.editors.map((user: any) => {
+      if (typeof(user) === 'string') { return user; }
+      return user.username;
+    });
+
+    // Send New Page to server.
+    this.rs.post('/pages/admin/', filteredPage, this.page.url).subscribe((data) => {
+      if (onSucessfulSave && typeof(onSucessfulSave) === 'function') {
+        onSucessfulSave();
+      }
+    }, (error) => {
+      alert(error.message);
+    });
+  }
+
+  preview() {
+    this.save(() => {
+      this.router.navigate(['admin', this.page.url]);
+    });
+  }
+
+  imageHandler(event) {
+    const files = event.target.files;
+    if (files.length >= 1) {
+      this.pagesRS.uploadImage(event.target.files[0], (data) => {
+        this.page.cover_image = data.media_URI;
+      }, (er) => console.log(er));
+    }
+  }
+
   froalaSetup() {
     // Set CURRENT_YEAR and SERVER_URL variable in local storage
-    localStorage.setItem("CURRENT_YEAR", CURRENT_YEAR);
-    localStorage.setItem("SERVER_URL", environment.SERVER_URL);
+    localStorage.setItem('CURRENT_YEAR', CURRENT_YEAR);
+    localStorage.setItem('SERVER_URL', environment.SERVER_URL);
 
         // Define popup template.
     $.extend($.FroalaEditor.POPUP_TEMPLATES, {
@@ -131,11 +133,13 @@ export class EditComponent implements OnInit {
       // Create custom popup.
       function initPopup () {
         // Load popup template.
-        var template = $.FroalaEditor.POPUP_TEMPLATES.customPopup;
-        if (typeof template == 'function') template = template.apply(editor);
+        let template = $.FroalaEditor.POPUP_TEMPLATES.customPopup;
+        if (typeof template === 'function') {
+          template = template.apply(editor);
+        }
 
         // Popup buttons.
-        var popup_buttons = '';
+        let popup_buttons = '';
 
         // Create the list of buttons.
         if (editor.opts.popupButtons.length > 1) {
@@ -154,7 +158,7 @@ export class EditComponent implements OnInit {
         };
 
         // Create popup.
-        var $popup = editor.popups.create('customPlugin.popup', template);
+        const $popup = editor.popups.create('customPlugin.popup', template);
 
         return $popup;
       }
@@ -162,23 +166,25 @@ export class EditComponent implements OnInit {
       // Show the popup
       function showPopup () {
         // Get the popup object defined above.
-        var $popup = editor.popups.get('customPlugin.popup');
+        let $popup = editor.popups.get('customPlugin.popup');
 
         // If popup doesn't exist then create it.
         // To improve performance it is best to create the popup when it is first needed
         // and not when the editor is initialized.
-        if (!$popup) $popup = initPopup();
+        if (!$popup) {
+          $popup = initPopup();
+        }
 
         // Set the editor toolbar as the popup's container.
         editor.popups.setContainer('customPlugin.popup', editor.$tb);
 
         // This custom popup is opened by pressing a button from the editor's toolbar.
         // Get the button's object in order to place the popup relative to it.
-        var $btn = editor.$tb.find('.fr-command[data-cmd="insert_profile"]');
+        const $btn = editor.$tb.find('.fr-command[data-cmd="insert_profile"]');
 
         // Compute the popup's position.
-        var left = $btn.offset().left + $btn.outerWidth() / 2;
-        var top = $btn.offset().top + (editor.opts.toolbarBottom ? 10 : $btn.outerHeight() - 10);
+        const left = $btn.offset().left + $btn.outerWidth() / 2;
+        const top = $btn.offset().top + (editor.opts.toolbarBottom ? 10 : $btn.outerHeight() - 10);
 
         // Show the custom popup.
         // The button's outerHeight is required in case the popup needs to be displayed above it.
@@ -194,11 +200,11 @@ export class EditComponent implements OnInit {
       return {
         showPopup: showPopup,
         hidePopup: hidePopup
-      }
-    }
+      };
+    };
 
     // Define an icon and command for the button that opens the custom popup.
-    $.FroalaEditor.DefineIcon('insert_profile', { NAME: 'plus'})
+    $.FroalaEditor.DefineIcon('insert_profile', { NAME: 'plus'});
     $.FroalaEditor.RegisterCommand('insert_profile', {
       title: 'Insert Profile',
       undo: false,
@@ -209,8 +215,7 @@ export class EditComponent implements OnInit {
       callback: function () {
         if (!this.popups.isVisible('customPlugin.popup')) {
           this.customPlugin.showPopup();
-        }
-        else {
+        } else {
           if (this.$el.find('.fr-marker')) {
             this.events.disableBlur();
             this.selection.restore();
@@ -238,17 +243,19 @@ export class EditComponent implements OnInit {
       undo: false,
       focus: false,
       callback: function () {
-        $.get(localStorage.getItem("SERVER_URL") + "/profile/" + localStorage.getItem("CURRENT_YEAR") + "/" + $('#usr').val(), (data, status) => {
+        $.get(localStorage.getItem('SERVER_URL') + '/profile/' +
+        localStorage.getItem('CURRENT_YEAR') +
+        '/' + $('#usr').val(), (data, status) => {
             if (! data.hasOwnProperty('username')) {
-              alert("Profile not found!")
+              alert('Profile not found!');
               return;
             }
-            let return_str = `
+            const return_str = `
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="https://aswwu.com/media/img-sm/${data["photo"]}" alt="Profile Photo>
+              <img class="card-img-top" src="https://aswwu.com/media/img-sm/${data['photo']}" alt="Profile Photo>
               <div class="card-body">
-               <h5 class="card-title text-center"><b>${data["full_name"]}</b></h5>
-               <a class="card-link text-center" href="mailto:${data["email"]}">${data["email"]}</a>
+               <h5 class="card-title text-center"><b>${data['full_name']}</b></h5>
+               <a class="card-link text-center" href="mailto:${data['email']}">${data['email']}</a>
               </div>
             </div>
             `;

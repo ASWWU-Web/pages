@@ -17,7 +17,7 @@ export class ProfileInfoComponent implements OnChanges {
   media_xs = MEDIA_XS;
   MASK = 'https://aswwu.com/mask/profile';
 
-  constructor( private request: RequestService ) { }
+  constructor( private rs: RequestService ) { }
 
   usernameFallback() {
     this.showPhoto = false;
@@ -46,7 +46,7 @@ export class ProfileInfoComponent implements OnChanges {
     }
 
   ngOnChanges () {
-    this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.profileUserName), (data) => {
+    this.rs.get('/profile/' + CURRENT_YEAR + '/' + this.profileUserName).subscribe((data) => {
       this.profileData = data;
       if (this.profileData.error) {
         this.usernameFallback();
