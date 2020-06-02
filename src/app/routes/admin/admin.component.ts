@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../../RequestService/requests';
+import { RequestService } from '../../../shared-ng/services/request.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,10 +11,10 @@ export class AdminComponent implements OnInit {
 
   admin: any = [];
 
-  constructor( private request: RequestService, private router: Router ) {  }
+  constructor( private rs: RequestService, private router: Router ) {  }
 
   ngOnInit() {
-    this.request.get( ('/pages/admin'), (data) => this.admin = data.results, null );
+    this.rs.get( ('/pages/admin')).subscribe((data) => this.admin = data.results);
    }
 
   shorten( text: string ) {
