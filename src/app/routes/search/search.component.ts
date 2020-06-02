@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
-import { RequestService } from '../../../shared-ng/services/request.service';
+import { RequestService, HermesService } from '../../../shared-ng/services/services';
 import { GENERAL_SEARCH_FIELD, SEARCHABLE_FIELDS } from '../../shared/fields';
 
 @Component({
@@ -16,7 +16,8 @@ export class SearchComponent implements OnInit {
   departments: string[] = [];
   searchResults: any;
 
-  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router,
+              private hs: HermesService) {
     // check for query params in url
     this.route.queryParamMap.subscribe( params => {
       this.criteria = [];
@@ -41,6 +42,13 @@ export class SearchComponent implements OnInit {
         return department.department;
       });
     });
+
+    // display header for page
+    this.hs.sendShowHeader(true);
+    this.hs.sendHeaderTitle('Search');
+    this.hs.sendHeaderInvert(true);
+    this.hs.sendHeaderImageUri('../../../assets/search.jpg');
+    this.hs.sendShowSubNav(true);
   }
 
   ngOnInit() {

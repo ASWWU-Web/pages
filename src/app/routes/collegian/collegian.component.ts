@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
-import { RequestService } from '../../../shared-ng/services/request.service';
+import { RequestService, HermesService } from '../../../shared-ng/services/services';
 
 @Component({
   templateUrl: './collegian.component.html',
@@ -13,7 +13,8 @@ export class CollegianComponent {
   thisWeek: any[] = [];
   searchText: string;
 
-  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router,
+              private hs: HermesService) {
     // get all pages
     this.rs.get('/pages/search?department=Collegian').subscribe((data) => {
       // set archive pages
@@ -31,6 +32,12 @@ export class CollegianComponent {
         }
       }
     });
+
+    this.hs.sendShowHeader(true);
+    this.hs.sendHeaderTitle('Collegian');
+    this.hs.sendHeaderImageUri('../../../assets/collegian.jpg');
+    this.hs.sendShowSubNav(true);
+    this.hs.sendHeaderInvert(true);
   }
 
   search() {

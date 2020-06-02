@@ -30,6 +30,11 @@ import {
   AuthService
 } from '../shared-ng/services/services';
 
+//  shared-ng interfaces
+import {
+  SubNavbarLink
+} from '../shared-ng/interfaces/interfaces';
+
 import { AppComponent } from './app.component';
 
 import {
@@ -160,7 +165,19 @@ import {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
+  constructor(private hs: HermesService) {
     library.add(faSearch);
+
+    // sub navbar links
+    const links: SubNavbarLink[] = [
+      {linkText: 'Directory', linkURI: ''},
+      {linkText: 'Search', linkURI: '/search'},
+      {linkText: 'Collegian', linkURI: '/collegian'},
+      {linkText: 'Events', linkURI: '/events'},
+      {linkText: 'Departments', linkURI: '/departments'}
+    ];
+
+    // send sub navbar links
+    this.hs.sendSubNavbarLinks(links);
   }
  }
