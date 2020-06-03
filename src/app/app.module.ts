@@ -5,13 +5,38 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed for TagInputModule
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { TagInputModule } from 'ngx-chips';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
-import { RequestService } from './RequestService/requests';
+// shared-ng components
+import {
+  NavBarComponent,
+  FooterComponent,
+  HeaderComponent,
+  UserBubbleComponent,
+  SharedNgContainerComponent,
+  ErrorPageComponent,
+} from '../shared-ng/components/components';
+
+// shared-ng services
+import {
+  RequestService,
+  HermesService,
+  PagesRequestService,
+  AuthService
+} from '../shared-ng/services/services';
+
+//  shared-ng interfaces
+import {
+  SubNavbarLink
+} from '../shared-ng/interfaces/interfaces';
+
 import { AppComponent } from './app.component';
+
 import {
   ViewPageComponent,
   EditComponent,
@@ -25,16 +50,14 @@ import {
   EventsComponent,
   CollegianComponent
 } from './routes/routes';
+
 import {
   PageComponent,
   ProfileSmComponent,
-  NavBarComponent,
-  UserBubbleComponent,
   SubNavBarComponent,
   MobileNavComponent,
   UnescapePipe,
   BypassSecurityPipe,
-  FooterComponent,
   PageScrollCardsComponent,
   FieldScrollCardsComponent,
   PageResultsComponent,
@@ -49,12 +72,16 @@ import {
 @NgModule({
   declarations: [
     AppComponent,
+    NavBarComponent,
+    FooterComponent,
+    HeaderComponent,
+    UserBubbleComponent,
+    SharedNgContainerComponent,
+    ErrorPageComponent,
     PageComponent,
     EditComponent,
     RevisionsComponent,
     ProfileSmComponent,
-    NavBarComponent,
-    UserBubbleComponent,
     SubNavBarComponent,
     MobileNavComponent,
     UnescapePipe,
@@ -72,7 +99,6 @@ import {
     FieldResultsComponent,
     EventsComponent,
     CollegianComponent,
-    FooterComponent,
     ViewPageComponent,
     FieldCardComponent,
     ProfileInfoComponent
@@ -105,34 +131,53 @@ import {
         'path': 'admin/:pageURL',
         component: AdminViewComponent
       }, {
-        "path": 'search',
+        'path': 'search',
         component: SearchComponent
       }, {
-        "path": 'search:queryComponent',
+        'path': 'search:queryComponent',
         component: SearchComponent
       }, {
-        "path": 'departments',
+        'path': 'departments',
         component: DepartmentsComponent
       }, {
-        "path": 'events',
+        'path': 'events',
         component: EventsComponent
       }, {
-        "path": 'collegian',
+        'path': 'collegian',
         component: CollegianComponent
       }, {
         // MUST BE LAST
         'path': ':pageURL',
         component: ViewPageComponent
       }, {
-        "path": '',
+        'path': '',
         component: DirectoryComponent
       }
     ])
 
   ],
   providers: [
-    RequestService
+    RequestService,
+    HermesService,
+    AuthService,
+    PagesRequestService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private hs: HermesService) {
+    library.add(faSearch);
+
+    // sub navbar links
+    const links: SubNavbarLink[] = [
+      {linkText: 'Directory', linkURI: ''},
+      {linkText: 'Search', linkURI: '/search'},
+      {linkText: 'Collegian', linkURI: '/collegian'},
+      {linkText: 'Events', linkURI: '/events'},
+      {linkText: 'Departments', linkURI: '/departments'}
+    ];
+
+    // send sub navbar links
+    this.hs.sendSubNavbarLinks(links);
+  }
+ }
