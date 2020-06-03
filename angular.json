@@ -19,10 +19,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              "src/shared-ng/favicon.ico",
               "src/assets"
             ],
             "styles": [
+              "src/shared-ng/bootstrap-overrides.scss",
+              "src/shared-ng/styles.scss",
               "src/styles.css"
             ],
             "scripts": [],

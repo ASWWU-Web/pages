@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 
-import { RequestService } from "../../RequestService/requests";
+import { RequestService, HermesService } from '../../../shared-ng/services/services';
 import { GENERAL_SEARCH_FIELD, SEARCHABLE_FIELDS } from '../../shared/fields';
 
 @Component({
@@ -9,21 +9,22 @@ import { GENERAL_SEARCH_FIELD, SEARCHABLE_FIELDS } from '../../shared/fields';
   styleUrls: ['search.component.css'],
 })
 
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   searchableFields: string[] = SEARCHABLE_FIELDS;
   criteria: string[][] = [];
   categories: string[] = [];
   departments: string[] = [];
   searchResults: any;
 
-  constructor(private requestService: RequestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private rs: RequestService, private route: ActivatedRoute, private router: Router,
+              private hs: HermesService) {
     // check for query params in url
     this.route.queryParamMap.subscribe( params => {
       this.criteria = [];
-      for (let key of params.keys) {
+      for (const key of params.keys) {
         this.criteria.push([key, params.get(key)]);
       }
-      if (this.criteria.length == 0) {
+      if (this.criteria.length === 0) {
         this.criteria.push([GENERAL_SEARCH_FIELD, '']);
       } else {
         this.search();
@@ -31,16 +32,23 @@ export class SearchComponent {
     });
 
     // get categories and departments
-    this.requestService.get('/pages/categories', (data) => {
+    this.rs.get('/pages/categories').subscribe((data) => {
       this.categories = data.categories.map((category) => {
         return category.category;
       });
-    }, null);
-    this.requestService.get('/pages/departments', (data) => {
+    });
+    this.rs.get('/pages/departments').subscribe((data) => {
       this.departments = data.departments.map((department) => {
         return department.department;
       });
-    }, null);
+    });
+
+    // display header for page
+    this.hs.sendShowHeader(true);
+    this.hs.sendHeaderTitle('Search');
+    this.hs.sendHeaderInvert(true);
+    this.hs.sendHeaderImageUri('../../../assets/search.jpg');
+    this.hs.sendShowSubNav(true);
   }
 
   ngOnInit() {
@@ -58,21 +66,21 @@ export class SearchComponent {
   search() {
     // build query string
     let query = '';
-    for (let value of this.criteria) {
-      query += value[0] + "=" + value[1] + ";";
+    for (const value of this.criteria) {
+      query += value[0] + '=' + value[1] + ';';
     }
     query.slice(0, -1);
 
     // run search
-    this.requestService.get('/pages/search?' + query, (data) => {
+    this.rs.get('/pages/search?', query).subscribe((data) => {
       this.searchResults = data.results.reverse();
-    }, null);
+    });
   }
 
   formatField(field) {
-    if (field == 'general') {
-      return 'All Fields'
-    } else if (field == 'url') {
+    if (field === 'general') {
+      return 'All Fields';
+    } else if (field === 'url') {
       return 'URL';
     }
     return field.charAt(0).toUpperCase() + field.slice(1);

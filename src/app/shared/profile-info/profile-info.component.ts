@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import { RequestService } from '../../RequestService/requests';
+import { RequestService } from '../../../shared-ng/services/request.service';
 import { CURRENT_YEAR, MEDIA_XS, DEFAULT_PHOTO } from '../../config';
 
 @Component({
@@ -17,7 +17,7 @@ export class ProfileInfoComponent implements OnChanges {
   media_xs = MEDIA_XS;
   MASK = 'https://aswwu.com/mask/profile';
 
-  constructor( private request: RequestService ) { }
+  constructor( private rs: RequestService ) { }
 
   usernameFallback() {
     this.showPhoto = false;
@@ -37,16 +37,16 @@ export class ProfileInfoComponent implements OnChanges {
     };
   }
 
-  getPhotoLink(url: string){
-        if(url && url != "None"){
-            return MEDIA_XS + "/" + url;
+  getPhotoLink(url: string) {
+        if (url && url !== 'None') {
+            return MEDIA_XS + '/' + url;
         } else {
-            return MEDIA_XS + "/" + DEFAULT_PHOTO;
+            return MEDIA_XS + '/' + DEFAULT_PHOTO;
         }
     }
 
   ngOnChanges () {
-    this.request.get( ('/profile/' + CURRENT_YEAR + '/' + this.profileUserName), (data) => {
+    this.rs.get('/profile/' + CURRENT_YEAR + '/' + this.profileUserName).subscribe((data) => {
       this.profileData = data;
       if (this.profileData.error) {
         this.usernameFallback();
@@ -57,8 +57,6 @@ export class ProfileInfoComponent implements OnChanges {
       if (this.profileData.email === 'None') {
         this.showEmail = false;
       }
-    }, error => {
-      this.usernameFallback();
     });
   }
 
